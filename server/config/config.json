@@ -4,20 +4,23 @@
     "password": "postgres",
     "database": "budget_app_development",
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "underscored": true
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
     "database": "database_test",
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "underscored": true
   },
   "production": {
     "username": "postgres",
     "password": "postgres",
     "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": "localhost",
+    "dialect": "postgres",
+    "underscored": true
   }
 }
