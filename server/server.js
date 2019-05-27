@@ -2,8 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { ApolloServer } from 'apollo-server-express';
-import {fileLoader, mergeTypes, mergeResolvers} from 'merge-graphql-schemas';
+import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import models from './models';
+// import { customScalarTypeDefs, customScalarResolvers } from './customScalars';
 
 // Force close connection, sometimes it persists
 // db.sequelize.close();
@@ -14,6 +15,9 @@ models.sequelize.sync({
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
+
+// console.log(customScalarTypeDefs);
+// console.log(customScalarResolvers);
 
 const runServer = async () => {
   const server = new ApolloServer({

@@ -1,11 +1,13 @@
 export default `
   type Query {
     user: User!
+    users: [User!]!
   }
 
   type Mutation {
     createUser(input: UserInput!): User!
-    updateUser(input: UserInput): User!
+    updateUser(id: ID!, input: UserInput): User!
+    deleteUser(id: ID!): Boolean!
   }
 
   type User {
@@ -22,6 +24,6 @@ export default `
     firstName: String
     lastName: String
     email: String
-    userRole: String!
+    userRole: String
   }
 `;

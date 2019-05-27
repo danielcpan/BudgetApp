@@ -3,14 +3,13 @@
 export default (sequelize, DataTypes) => {
   const User = sequelize.define("user", {
     id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
     firstName: {
       type: DataTypes.STRING(255),
-      unique: true,
       allowNull: false,
       field: 'first_name',
       validate: {
@@ -31,8 +30,11 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isEmail: true,
-        max: 254
-      }      
+      }
+    },
+    userRole: {
+      type: DataTypes.STRING(255),
+      defaultValue: "GUEST"
     }
   }, { underscored: true });
   
