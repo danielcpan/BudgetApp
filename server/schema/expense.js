@@ -1,7 +1,7 @@
 export default `
   type Query {
-    Expense: Expense!
-    Expenses: [Expense!]!
+    expense: Expense!
+    expenses: [Expense!]!
   }
 
   type Mutation {
@@ -12,12 +12,12 @@ export default `
 
   type Expense {
     id: ID!
-    value: Int!,
+    value: Int!
     note: String
   }
 
   input ExpenseInput {
-    value: Int!,
-    note: String,
+    value: Int!
+    note: String
   }
 `
