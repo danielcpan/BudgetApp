@@ -36,12 +36,23 @@ export default class User extends Sequelize.Model {
       },
       userRole: {
         type: DataTypes.STRING(255),
-        defaultValue: "GUEST"
+        defaultValue: "GUEST",
+        field: 'user_role',
       }
     }, { 
-      tableName: "User",
+      tableName: "users",
       underscored: true,
       sequelize
+    })
+  }
+
+  static associate(models) {
+    this.hasMany(models.Expense, {
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id',
+      },
+      onDelete: 'cascade'
     })
   }
 }
