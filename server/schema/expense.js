@@ -4,6 +4,11 @@ export default `
     Expenses: [Expense!]!
   }
 
+  type Mutation {
+    createExpense(input: ExpenseInput!): Expense!
+    updateExpense(id: ID!, input: ExpenseInput): Expense!
+    deleteExpense(id: ID!): Boolean!
+  }
 
   type Expense {
     id: ID!
@@ -15,4 +20,4 @@ export default `
     value: Int!,
     note: String,
   }
-`;
+`
