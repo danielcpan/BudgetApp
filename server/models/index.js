@@ -5,17 +5,19 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
+import User from './user';
+
 const models = {
-  User: sequelize.import('./user')
+  User: User.init(sequelize, Sequelize),
 };
 
-Object.keys(models).forEach((modelName) => {
-  if ('associate' in models[modelName]) {
-    models[modelName].associate(models);
-  }
-});
+Object.values(models)
+  .filter(model => typeof model.associate === "function")
+  .forEach(model => model.associate(models));
 
-models.sequelize = sequelize;
-models.Sequelize = Sequelize;
+const db = {
+  ...models,
+  sequelize
+};
 
-export default models;
+export default db;
