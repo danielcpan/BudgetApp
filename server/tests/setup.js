@@ -3,7 +3,7 @@ import models from '../models'
 // Set Up Global Varaibles
 global.isValid = require('./testHelpers').isValid
 global.expect = require('chai').expect
-global.Factory = require('factory-girl').factory
+global.factory = require('factory-girl').factory
 
 // Reset and sync the database models
 before(async () => {  
