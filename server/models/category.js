@@ -13,7 +13,10 @@ export default class Category extends Sequelize.Model {
       name: {
         type: DataTypes.STRING(255),
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          len: [2,23]
+        }        
       },
       icon: {
         type: DataTypes.STRING(255),
