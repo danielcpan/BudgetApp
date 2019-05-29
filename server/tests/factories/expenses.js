@@ -5,9 +5,6 @@ export default factory.define('Expense', models.Expense, {
   id: factory.seq('id'),
   value: faker.finance.amount(0, 200),
   note: faker.lorem.sentence(),
-  // categoryId: factory.assoc('Category', 'id'),
-  // userId: factory.assoc('User', 'id')
-  categoryId: factory.assocAttrs('Category', 'id'),
-  // categoryId: factory.assocAttrs(),
-  userId: factory.assocAttrs('User', 'id')
+  categoryId: factory.assoc('Category', 'id'),
+  userId: factory.assoc('User', 'id')
 })

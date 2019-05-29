@@ -2,7 +2,7 @@
 describe('User Model', () => {
   describe('Validations', () => {
 
-    it('is valid with correct fields', async () => {
+    it('has valid factory', async () => {
       expect(await isValid(await factory.build('User'))).to.be.true
     })
 

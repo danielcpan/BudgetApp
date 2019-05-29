@@ -11,7 +11,7 @@ export default class Expense extends Sequelize.Model {
         primaryKey: true,
       },
       value: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10,2),
         allowNull: false
       },
       note: {
