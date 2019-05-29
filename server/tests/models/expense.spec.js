@@ -2,7 +2,7 @@ describe('Expense Model', () => {
   describe('Validations', () => {
 
     it('has valid factory', async () => {
-      expect(await isValid(await factory.build('Expense'))).to.be.true
+      expect(await isValid(factory.build('Expense'))).to.be.true
     })
   })
 })

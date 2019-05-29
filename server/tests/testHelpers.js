@@ -1,8 +1,10 @@
 import Sequelize from 'sequelize'
 
 export const isValid = async (object) => {
+  let modelInstance = await object
   let errorsList = []
-  await object.validate().catch(Sequelize.ValidationError, (status) => {
+
+  await modelInstance.validate().catch(Sequelize.ValidationError, (status) => {
     errorsList = status.errors
   })
   
