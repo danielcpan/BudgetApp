@@ -1,8 +1,8 @@
 describe('User Resolver', () => {
 
-  before(async () => {
+  before(() => {
     let user1 = factory.create('User')
-    // let user2 = factory.create('User')
+    let user2 = factory.create('User')
   })
 
   describe('Queries', () => {
