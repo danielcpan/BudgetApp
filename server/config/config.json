@@ -10,10 +10,11 @@
   "test": {
     "username": "postgres",
     "password": "postgres",
-    "database": "database_test",
+    "database": "budget_app_test",
     "host": "localhost",
     "dialect": "postgres",
-    "underscored": true
+    "underscored": true,
+    "logging": false
   },
   "production": {
     "username": "postgres",
