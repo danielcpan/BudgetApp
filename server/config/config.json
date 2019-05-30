@@ -13,8 +13,7 @@
     "database": "budget_app_test",
     "host": "localhost",
     "dialect": "postgres",
-    "underscored": true,
-    "logging": false
+    "underscored": true
   },
   "production": {
     "username": "postgres",

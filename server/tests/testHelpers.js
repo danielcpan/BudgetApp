@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize'
+import models from '../models'
 
 export const isValid = async (object) => {
   let modelInstance = await object
@@ -9,4 +10,19 @@ export const isValid = async (object) => {
   })
   
   return !errorsList.length
+}
+
+export const truncateTables = async () => {
+  return Promise.all(
+    Object.keys(models).map((modelName) => {
+      if (['sequelize', 'Sequelize'].includes(modelName)) return null;
+      return models[modelName].destroy({ truncate: { cascade: true }})
+    })
+  );
+}
+
+export const syncTestDatabase = async () => {
+  await models.sequelize.sync({
+    force: true
+  })
 }
