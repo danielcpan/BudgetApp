@@ -31,6 +31,13 @@ export default class Expense extends Sequelize.Model {
        field: 'category_id'
       },
       onDelete: 'cascade'
-    })
+    }),
+    this.belongsTo(models.User, {
+      foreignKey: {
+       name: 'userId', 
+       field: 'user_id'
+      },
+      onDelete: 'cascade'
+    })    
   }
 }

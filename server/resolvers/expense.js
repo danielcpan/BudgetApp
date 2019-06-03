@@ -1,4 +1,7 @@
 export default {
+  Expense: {
+    user: async (parent, args, { models }, info) => await parent.getUser(),
+  },
   Query: {
     expense: async (parent, { id }, { models }, info) => 
       await models.Expense.findByPk(id),

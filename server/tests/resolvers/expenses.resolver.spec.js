@@ -1,45 +1,43 @@
 import axios from 'axios'
 
-describe('Category Resolver', () => {
-  let category1
-  let category2
+describe('Expense Resolver', () => {
+  let expense1
+  let expense2
 
   before(async () => {
     await truncateTables()
-    category1 = await factory.create('Category')
-    category2 = await factory.create('Category')
+    expense1 = await factory.create('Expense')
+    expense2 = await factory.create('Expense')
   })
 
   describe('Queries', () => {
-    context('#Category', () => {
+    context('#Expense', () => {
       it('responds with status 200', async () => {
         const query = `
-          query getCategory($id: ID!) {
-            category(id: $id) {
+          query getExpense($id: ID!) {
+            expense(id: $id) {
               id
-              name
-              icon
-              color
+              value
+              note
             }
           }
         `
         const variables = {
-          "id": category1.id
+          "id": expense1.id
         }
         const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables }})
         expect(response.status).to.equal(200)
       })
     })
     
-    context('#Categorys', () => {
+    context('#Expenses', () => {
       it('responds with status 200', async () => {
         const query = `
-          query getCategories {
-            categories {
+          query getExpenses {
+            expenses {
               id
-              name
-              icon
-              color
+              value
+              note
             }
           }
         `
@@ -50,46 +48,44 @@ describe('Category Resolver', () => {
   })
 
   describe('Mutations', () => {
-    context('#createCategory', () => {
+    context('#createExpense', () => {
       it('responds with status 200', async () => {
         const query = `
-          mutation createCategory($input: CategoryInput!) {
-            createCategory(input: $input) {
+          mutation createExpense($input: ExpenseInput!) {
+            createExpense(input: $input) {
               id
-              name
-              icon
-              color
+              value
+              note
             }
           }
         `
         const variables = {
           "input": {
-            "name": "Shopping", 
-            "icon": "fa-icon-shopping",
-            "color": "#f0f8ff",
-          }          
+            "value": "5.99", 
+            "note": "Mcdonalds",
+            "userId": (await expense1.getUser()).id,
+          }
         }
         const response = await axios.post('http://localhost:4000/graphql', { query, variables })
         expect(response.status).to.equal(200)
       })
     })
 
-    context('#updateCategory', () => {
+    context('#updateExpense', () => {
       it('responds with status 200', async () => {
         const query = `
-          mutation updateCategory($id: ID!, $input: CategoryInput!){
-            updateCategory(id: $id, input: $input) {
+          mutation updateExpense($id: ID!, $input: ExpenseInput!){
+            updateExpense(id: $id, input: $input) {
               id
-              name
-              icon
-              color
+              value
+              note
             }
           }      
         `
         const variables = {
-          "id": category1.id,
+          "id": expense1.id,
           "input": {
-            "name": "Leisure"
+            "value": "3.99"
           }
         }
         const response = await axios.post('http://localhost:4000/graphql', { query, variables })
@@ -97,15 +93,15 @@ describe('Category Resolver', () => {
       })
     })
 
-    context('#deleteCategory', () => {
+    context('#deleteExpense', () => {
       it('responds with status 200', async () => {
         const query = `
-          mutation deleteCategory($id: ID!) {
-            deleteCategory(id: $id)
+          mutation deleteExpense($id: ID!) {
+            deleteExpense(id: $id)
           }
         `
         const variables = {
-          "id": category1.id
+          "id": expense1.id
         }
         const response = await axios.post('http://localhost:4000/graphql', { query, variables })
         expect(response.status).to.equal(200)

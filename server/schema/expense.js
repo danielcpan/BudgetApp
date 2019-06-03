@@ -12,12 +12,15 @@ export default `
 
   type Expense {
     id: ID!
-    value: Int!
+    value: String!
     note: String
+    userId: ID!
+    user: User!
   }
 
   input ExpenseInput {
-    value: Int
+    value: String
     note: String
+    userId: Int
   }
 `
