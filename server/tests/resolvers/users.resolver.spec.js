@@ -2,16 +2,40 @@ import axios from 'axios'
 import models from '../../models'
 
 describe('User Resolver', () => {
+  let user1
+  let user2
 
   before(async () => {
-    // truncateTables()
-    let user1 = await factory.create('User')
-    let user2 = await factory.create('User')
+    await truncateTables()
+    user1 = await factory.create('User')
+    user2 = await factory.create('User')
   })
 
   describe('Queries', () => {
-    context('user', () => {
-      it('is invalid when null', async () => {
+    context('#user', () => {
+      it('responds with status 200', async () => {
+        const query = `
+          query getUser($id: ID!) {
+            user(id: $id) {
+              id
+              firstName
+              lastName
+              email
+              userRole
+            }
+          }
+        `
+        const variables = {
+          "id": user1.id
+        }
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables }})
+        console.log(response)
+        expect(response.status).to.equal(200)
+      })
+    })
+    
+    context('#users', () => {
+      it('responds with status 200', async () => {
         const query = `
           query getUsers {
             users {
@@ -24,60 +48,75 @@ describe('User Resolver', () => {
           }
         `
         const response = await axios.get('http://localhost:4000/graphql', { params: { query }})
-
-        // let response = await axios.get('https://api.openbrewerydb.org/breweries')
-
-
-        // let response = await axios({
-        //   url: 'http://localhost:4000/graphql',
-        //   method: 'GET',
-        //   params: {
-        //     query: `
-        //       query {
-        //         users {
-        //           id
-        //           firstName
-        //           lastName
-        //           email
-        //           userRole
-        //         }
-        //       }
-        //     `
-        //   }
-        // })
-        // console.log(response);
-        const { data } = response.data;
-        // console.log(data.users)
-        // console.log(await response.data.users);
-        // console.log(data.users)
-        // console.log(await models.User.count())
-        // expect(response.data.users.length).to.be.equal(2)
-        // expect(async () => await axios.get('http://localhost:4000/graphql', { params: { query }})).to.alter(models.User.count(), { by: 1 })
-        expect(data.users.length).to.be.equal(2)
         expect(response.status).to.equal(200)
       })
+    })
+  })
 
-      it('is invalid when length less than 2 characters', async () => {
-        // expect(await isValid(factory.build('User', { firstName: '' }))).to.be.false
-      })
-
-      it('is invalid when length greater than 35 characters', async () => {
-        // expect(await isValid(factory.build('User', { firstName: 'a'.repeat(36) }))).to.be.false
+  describe('Mutations', () => {
+    context('#createUser', () => {
+      it('responds with status 200', async () => {
+        const query = `
+          mutation createUser($input: UserInput!) {
+            createUser(input: $input) {
+              id
+              firstName
+              lastName
+              email
+              userRole    
+            }
+          }
+        `
+        const variables = {
+          "input": {
+            "firstName": "Daniel", 
+            "lastName": "Pan",
+            "email": "dp@gmail.com", 
+            "userRole": "admin"
+          }          
+        }
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
+        expect(response.status).to.equal(200)
       })
     })
 
-    // context('users', () => {
-    //   it('is invalid when null', async () => {
-    //     expect(await isValid(factory.build('User', { lastName: null }))).to.be.false
-    //   })
+    context('#updateUser', () => {
+      it('responds with status 200', async () => {
+        const query = `
+          mutation updateUser($id: ID!, $input: UserInput!){
+            updateUser(id: $id, input: $input) {
+              id
+              firstName
+              lastName
+              email
+            }
+          }      
+        `
+        const variables = {
+          "id": user1.id,
+          "input": {
+            "firstName": "Billy"
+          }
+        }
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
+        expect(response.status).to.equal(200)
+      })
+    })
 
-    //   it('is invalid when length less than 2 characters', async () => {
-    //     expect(await isValid(factory.build('User', { lastName: '' }))).to.be.false
-    //   })
+    context('#deleteUser', () => {
+      it('responds with status 200', async () => {
+        const query = `
+          mutation deleteUser($id: ID!) {
+            deleteUser(id: $id)
+          }
+        `
+        const variables = {
+          "id": user1.id
+        }
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
+        expect(response.status).to.equal(200)
+      })
+    })
 
-    //   it('is invalid when length greater than 35 characters', async () => {
-    //     expect(await isValid(factory.build('User', { lastName: 'a'.repeat(36) }))).to.be.false
-    //   })
-    // })
   })
 })

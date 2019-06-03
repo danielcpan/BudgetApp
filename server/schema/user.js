@@ -1,12 +1,12 @@
 export default `
   type Query {
-    user: User!
+    user(id: ID!): User!
     users: [User!]!
   }
 
   type Mutation {
     createUser(input: UserInput!): User!
-    updateUser(id: ID!, input: UserInput): User!
+    updateUser(id: ID!, input: UserInput!): User!
     deleteUser(id: ID!): Boolean!
   }
 

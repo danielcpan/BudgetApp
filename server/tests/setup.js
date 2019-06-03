@@ -1,10 +1,12 @@
-import { syncTestDatabase } from './testHelpers'
+import { isValid, syncTestDatabase, truncateTables } from './testHelpers'
+import chai, { expect } from 'chai'
+import { factory } from 'factory-girl'
 
 // Set Up Global Varaibles
-global.isValid = require('./testHelpers').isValid
-global.expect = require('chai').expect
-global.factory = require('factory-girl').factory
-global.truncateTables = require('./testHelpers').truncateTables
+global.isValid = isValid
+global.expect = expect
+global.factory = factory
+global.truncateTables = truncateTables
 require('./factories')
 
 // Sync the database models
