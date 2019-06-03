@@ -1,14 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
 
 describe('Expense Resolver', () => {
-  let expense1
-  let expense2
+  let expense1;
 
   before(async () => {
-    await truncateTables()
-    expense1 = await factory.create('Expense')
-    expense2 = await factory.create('Expense')
-  })
+    await truncateTables();
+    expense1 = await factory.create('Expense');
+  });
 
   describe('Queries', () => {
     context('#Expense', () => {
@@ -21,15 +19,15 @@ describe('Expense Resolver', () => {
               note
             }
           }
-        `
+        `;
         const variables = {
-          "id": expense1.id
-        }
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables }})
-        expect(response.status).to.equal(200)
-      })
-    })
-    
+          id: expense1.id,
+        };
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables } });
+        expect(response.status).to.equal(200);
+      });
+    });
+
     context('#Expenses', () => {
       it('responds with status 200', async () => {
         const query = `
@@ -40,12 +38,12 @@ describe('Expense Resolver', () => {
               note
             }
           }
-        `
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query }})
-        expect(response.status).to.equal(200)
-      })
-    })
-  })
+        `;
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query } });
+        expect(response.status).to.equal(200);
+      });
+    });
+  });
 
   describe('Mutations', () => {
     context('#createExpense', () => {
@@ -58,18 +56,18 @@ describe('Expense Resolver', () => {
               note
             }
           }
-        `
+        `;
         const variables = {
-          "input": {
-            "value": "5.99", 
-            "note": "Mcdonalds",
-            "userId": (await expense1.getUser()).id,
-          }
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
+          input: {
+            value: '5.99',
+            note: 'Mcdonalds',
+            userId: (await expense1.getUser()).id,
+          },
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
 
     context('#updateExpense', () => {
       it('responds with status 200', async () => {
@@ -81,17 +79,17 @@ describe('Expense Resolver', () => {
               note
             }
           }      
-        `
+        `;
         const variables = {
-          "id": expense1.id,
-          "input": {
-            "value": "3.99"
-          }
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
+          id: expense1.id,
+          input: {
+            value: '3.99',
+          },
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
 
     context('#deleteExpense', () => {
       it('responds with status 200', async () => {
@@ -99,14 +97,13 @@ describe('Expense Resolver', () => {
           mutation deleteExpense($id: ID!) {
             deleteExpense(id: $id)
           }
-        `
+        `;
         const variables = {
-          "id": expense1.id
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
-
-  })
-})
+          id: expense1.id,
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
+  });
+});

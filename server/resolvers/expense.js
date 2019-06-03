@@ -1,21 +1,23 @@
+/* eslint no-unused-vars: 0 */
+
 export default {
   Expense: {
-    user: async (parent, args, { models }, info) => await parent.getUser(),
+    user: (parent, args, { models }, info) => parent.getUser(),
   },
   Query: {
-    expense: async (parent, { id }, { models }, info) => 
-      await models.Expense.findByPk(id),
-    expenses: async (parent, args, { models }, info) => 
-      await models.Expense.findAll()
+    expense: (parent, { id }, { models }, info) => models.Expense.findByPk(id),
+    expenses: (parent, args, { models }, info) => models.Expense.findAll(),
   },
   Mutation: {
-    createExpense: async (parent, { input }, { models }, info) => 
-      await models.Expense.create(input),
+    createExpense: (parent, { input }, { models }, info) => (
+      models.Expense.create(input)
+    ),
     updateExpense: async (parent, { id, input }, { models }, info) => {
-      await models.Expense.update(input, {where: {id: id}})
-      return await models.Expense.findByPk(id) 
+      await models.Expense.update(input, { where: { id } });
+      return models.Expense.findByPk(id);
     },
-    deleteExpense: async (parent, { id }, { models }, info) => 
-      await models.Expense.destroy({where: {id: id}})
-  }
-}
+    deleteExpense: (parent, { id }, { models }, info) => (
+      models.Expense.destroy({ where: { id } })
+    ),
+  },
+};

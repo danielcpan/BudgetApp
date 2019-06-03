@@ -23,4 +23,4 @@ export default `
     note: String
     userId: Int
   }
-`
+`;

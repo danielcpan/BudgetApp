@@ -1,18 +1,20 @@
+/* eslint no-unused-vars: 0 */
+
 export default {
   Query: {
-    user: async (parent, { id }, { models }, info) => 
-      await models.User.findByPk(id),
-    users: async (parent, args, { models }, info) => 
-      await models.User.findAll()
+    user: (parent, { id }, { models }, info) => models.User.findByPk(id),
+    users: (parent, args, { models }, info) => models.User.findAll(),
   },
   Mutation: {
-    createUser: async (parent, { input }, { models }, info) => 
-      await models.User.create(input),
+    createUser: (parent, { input }, { models }, info) => (
+      models.User.create(input)
+    ),
     updateUser: async (parent, { id, input }, { models }, info) => {
-      await models.User.update(input, {where: {id: id}});
-      return await models.User.findByPk(id); 
+      await models.User.update(input, { where: { id } });
+      return models.User.findByPk(id);
     },
-    deleteUser: async (parent, { id }, { models }, info) => 
-      await models.User.destroy({where: {id: id}})
-  }
-}
+    deleteUser: (parent, { id }, { models }, info) => (
+      models.User.destroy({ where: { id } })
+    ),
+  },
+};

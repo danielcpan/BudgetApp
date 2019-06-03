@@ -1,14 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
 
 describe('User Resolver', () => {
-  let user1
-  let user2
+  let user1;
 
   before(async () => {
-    await truncateTables()
-    user1 = await factory.create('User')
-    user2 = await factory.create('User')
-  })
+    await truncateTables();
+    user1 = await factory.create('User');
+  });
 
   describe('Queries', () => {
     context('#user', () => {
@@ -23,15 +21,15 @@ describe('User Resolver', () => {
               userRole
             }
           }
-        `
+        `;
         const variables = {
-          "id": user1.id
-        }
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables }})
-        expect(response.status).to.equal(200)
-      })
-    })
-    
+          id: user1.id,
+        };
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables } });
+        expect(response.status).to.equal(200);
+      });
+    });
+
     context('#users', () => {
       it('responds with status 200', async () => {
         const query = `
@@ -44,12 +42,12 @@ describe('User Resolver', () => {
               userRole
             }
           }
-        `
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query }})
-        expect(response.status).to.equal(200)
-      })
-    })
-  })
+        `;
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query } });
+        expect(response.status).to.equal(200);
+      });
+    });
+  });
 
   describe('Mutations', () => {
     context('#createUser', () => {
@@ -64,19 +62,19 @@ describe('User Resolver', () => {
               userRole
             }
           }
-        `
+        `;
         const variables = {
-          "input": {
-            "firstName": "Daniel", 
-            "lastName": "Pan",
-            "email": "dp@gmail.com", 
-            "userRole": "admin"
-          }          
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
+          input: {
+            firstName: 'Daniel',
+            lastName: 'Pan',
+            email: 'dp@gmail.com',
+            userRole: 'admin',
+          },
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
 
     context('#updateUser', () => {
       it('responds with status 200', async () => {
@@ -89,17 +87,17 @@ describe('User Resolver', () => {
               email
             }
           }      
-        `
+        `;
         const variables = {
-          "id": user1.id,
-          "input": {
-            "firstName": "Billy"
-          }
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
+          id: user1.id,
+          input: {
+            firstName: 'Billy',
+          },
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
 
     context('#deleteUser', () => {
       it('responds with status 200', async () => {
@@ -107,14 +105,13 @@ describe('User Resolver', () => {
           mutation deleteUser($id: ID!) {
             deleteUser(id: $id)
           }
-        `
+        `;
         const variables = {
-          "id": user1.id
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
-
-  })
-})
+          id: user1.id,
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
+  });
+});

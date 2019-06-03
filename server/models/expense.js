@@ -1,5 +1,5 @@
-'use strict'
-import Sequelize from 'sequelize'
+
+import Sequelize from 'sequelize';
 
 export default class Expense extends Sequelize.Model {
   static init(sequelize, DataTypes) {
@@ -11,35 +11,35 @@ export default class Expense extends Sequelize.Model {
         primaryKey: true,
       },
       value: {
-        type: DataTypes.DECIMAL(10,2),
-        allowNull: false
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
       },
       note: {
         type: DataTypes.STRING(255),
-      }
-    }, { 
-      tableName: "expenses",
+      },
+    }, {
+      tableName: 'expenses',
       underscored: true,
-      sequelize
-    })
+      sequelize,
+    });
   }
 
-  static associate(models) {
+  static associate(models) { 
     this.belongsTo(models.Category, {
       foreignKey: {
-       name: 'categoryId', 
-       field: 'category_id',
-       allowNull: false,
+        name: 'categoryId',
+        field: 'category_id',
+        allowNull: false,
       },
-      onDelete: 'cascade'
+      onDelete: 'cascade',
     }),
     this.belongsTo(models.User, {
       foreignKey: {
-       name: 'userId', 
-       field: 'user_id',
-       allowNull: false,
+        name: 'userId',
+        field: 'user_id',
+        allowNull: false,
       },
-      onDelete: 'cascade'
-    })    
+      onDelete: 'cascade',
+    });
   }
 }

@@ -22,4 +22,4 @@ export default `
     icon: String
     color: String
   }
-`
+`;

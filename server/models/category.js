@@ -1,5 +1,5 @@
-'use strict'
-import Sequelize from 'sequelize'
+
+import Sequelize from 'sequelize';
 
 export default class Category extends Sequelize.Model {
   static init(sequelize, DataTypes) {
@@ -15,22 +15,22 @@ export default class Category extends Sequelize.Model {
         unique: true,
         allowNull: false,
         validate: {
-          len: [2,23]
-        }        
+          len: [2, 23],
+        },
       },
       icon: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: false,
       },
       color: {
         type: DataTypes.STRING(255),
         unique: true,
-        allowNull: false        
-      }
-    }, { 
-      tableName: "categories",
+        allowNull: false,
+      },
+    }, {
+      tableName: 'categories',
       underscored: true,
-      sequelize
-    })
+      sequelize,
+    });
   }
 }

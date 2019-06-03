@@ -1,11 +1,11 @@
-const userFactory = require('./users')
-const expenseFactory = require('./expenses')
-const categoryFactory = require('./categories')
+const userFactory = require('./users');
+const expenseFactory = require('./expenses');
+const categoryFactory = require('./categories');
 
 const factories = {
   user: userFactory,
   expense: expenseFactory,
-  category: categoryFactory
-}
+  category: categoryFactory,
+};
 
-export default factories
+export default factories;

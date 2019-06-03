@@ -26,4 +26,4 @@ export default `
     email: String
     userRole: String
   }
-`
+`;

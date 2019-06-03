@@ -1,14 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
 
 describe('Category Resolver', () => {
-  let category1
-  let category2
+  let category1;
 
   before(async () => {
-    await truncateTables()
-    category1 = await factory.create('Category')
-    category2 = await factory.create('Category')
-  })
+    await truncateTables();
+    category1 = await factory.create('Category');
+  });
 
   describe('Queries', () => {
     context('#Category', () => {
@@ -22,15 +20,15 @@ describe('Category Resolver', () => {
               color
             }
           }
-        `
+        `;
         const variables = {
-          "id": category1.id
-        }
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables }})
-        expect(response.status).to.equal(200)
-      })
-    })
-    
+          id: category1.id,
+        };
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables } });
+        expect(response.status).to.equal(200);
+      });
+    });
+
     context('#Categorys', () => {
       it('responds with status 200', async () => {
         const query = `
@@ -42,12 +40,12 @@ describe('Category Resolver', () => {
               color
             }
           }
-        `
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query }})
-        expect(response.status).to.equal(200)
-      })
-    })
-  })
+        `;
+        const response = await axios.get('http://localhost:4000/graphql', { params: { query } });
+        expect(response.status).to.equal(200);
+      });
+    });
+  });
 
   describe('Mutations', () => {
     context('#createCategory', () => {
@@ -61,18 +59,18 @@ describe('Category Resolver', () => {
               color
             }
           }
-        `
+        `;
         const variables = {
-          "input": {
-            "name": "Shopping", 
-            "icon": "fa-icon-shopping",
-            "color": "#f0f8ff",
-          }          
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
+          input: {
+            name: 'Shopping',
+            icon: 'fa-icon-shopping',
+            color: '#f0f8ff',
+          },
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
 
     context('#updateCategory', () => {
       it('responds with status 200', async () => {
@@ -85,17 +83,17 @@ describe('Category Resolver', () => {
               color
             }
           }      
-        `
+        `;
         const variables = {
-          "id": category1.id,
-          "input": {
-            "name": "Leisure"
-          }
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
+          id: category1.id,
+          input: {
+            name: 'Leisure',
+          },
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
 
     context('#deleteCategory', () => {
       it('responds with status 200', async () => {
@@ -103,14 +101,13 @@ describe('Category Resolver', () => {
           mutation deleteCategory($id: ID!) {
             deleteCategory(id: $id)
           }
-        `
+        `;
         const variables = {
-          "id": category1.id
-        }
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables })
-        expect(response.status).to.equal(200)
-      })
-    })
-
-  })
-})
+          id: category1.id,
+        };
+        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        expect(response.status).to.equal(200);
+      });
+    });
+  });
+});
