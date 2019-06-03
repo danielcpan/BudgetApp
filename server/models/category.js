@@ -20,7 +20,6 @@ export default class Category extends Sequelize.Model {
       },
       icon: {
         type: DataTypes.STRING(255),
-        unique: true,
         allowNull: false
       },
       color: {

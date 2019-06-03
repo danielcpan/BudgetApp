@@ -1,12 +1,12 @@
 export default `
   type Query {
-    category: Category!
+    category(id: ID!): Category!
     categories: [Category!]!
   }
 
   type Mutation {
     createCategory(input: CategoryInput!): Category!
-    updateCategory(id: ID!, input: CategoryInput): Category!
+    updateCategory(id: ID!, input: CategoryInput!): Category!
     deleteCategory(id: ID!): Boolean!
   }
 
@@ -18,8 +18,8 @@ export default `
   }
 
   input CategoryInput {
-    name: String!
-    icon: String!
-    color: String!
+    name: String
+    icon: String
+    color: String
   }
 `
