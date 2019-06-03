@@ -51,6 +51,7 @@ export default class User extends Sequelize.Model {
       foreignKey: {
         name: 'userId',
         field: 'user_id',
+        allowNull: false
       },
       onDelete: 'cascade'
     })
