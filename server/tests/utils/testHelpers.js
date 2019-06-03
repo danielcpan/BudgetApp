@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import models from '../models'
+import models from '../../models'
 
 export const isValid = async (object) => {
   let modelInstance = await object
