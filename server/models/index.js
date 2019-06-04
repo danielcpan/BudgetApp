@@ -7,7 +7,7 @@ import Expense from './expense';
 import Category from './category';
 
 const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.json`)[env];
+const config = require(`${__dirname}/../config/config.json`)[env]; // eslint-disable-line import/no-dynamic-require
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 const models = {

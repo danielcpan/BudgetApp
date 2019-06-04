@@ -24,7 +24,7 @@ export default class Expense extends Sequelize.Model {
     });
   }
 
-  static associate(models) { 
+  static associate(models) {
     this.belongsTo(models.Category, {
       foreignKey: {
         name: 'categoryId',
@@ -32,7 +32,7 @@ export default class Expense extends Sequelize.Model {
         allowNull: false,
       },
       onDelete: 'cascade',
-    }),
+    });
     this.belongsTo(models.User, {
       foreignKey: {
         name: 'userId',
