@@ -2,12 +2,12 @@
   "name": "BudgetApp",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "scripts": {
-    "serve": "vue-cli-service serve client/src/main.js",
+    "client": "vue-cli-service serve client/src/main.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "vue-cli-service build client/src/main.js",
     "lint": "vue-cli-service lint .",
-    "start": "nodemon --exec babel-node server/server.js",
+    "server": "nodemon --exec babel-node server/server.js",
     "tests": "NODE_ENV=test node_modules/.bin/mocha --require @babel/register --opts server/tests/mocha.opts server/tests/**/*.js --exit",
     "test": "NODE_ENV=test node_modules/.bin/mocha --require @babel/register --opts server/tests/mocha.opts --exit"
   },
