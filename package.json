@@ -4,8 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "serve": "vue-cli-service serve client/src/main.js",
+    "build": "vue-cli-service build client/src/main.js",
+    "lint": "vue-cli-service lint .",
     "start": "nodemon --exec babel-node server/server.js",
-    "lint": "./node_modules/.bin/eslint . --ext .js",
     "tests": "NODE_ENV=test node_modules/.bin/mocha --require @babel/register --opts server/tests/mocha.opts server/tests/**/*.js --exit",
     "test": "NODE_ENV=test node_modules/.bin/mocha --require @babel/register --opts server/tests/mocha.opts --exit"
   },
@@ -15,6 +17,7 @@
     "concurrently": "^4.1.0",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
+    "core-js": "^2.6.5",
     "express": "^4.17.1",
     "factory-girl": "^5.0.4",
     "faker": "^4.1.0",
@@ -23,7 +26,8 @@
     "nodemon": "^1.19.1",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.38.0"
+    "sequelize": "^4.38.0",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -35,13 +39,59 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.13.0",
     "factory-girl": "^5.0.4",
     "faker": "^4.1.0",
     "mocha": "^6.1.4",
-    "sequelize-cli": "^4.1.1"
+    "sequelize-cli": "^4.1.1",
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "babel-eslint": "^10.0.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
   },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly",
+      "expect": "readonly",
+      "isValid": "readonly",
+      "factory": "readonly",
+      "truncateTables": "readonly"
+    },    
+    "rules": {},
+    "overrides": [
+      {
+          "files": "*.spec.js",
+          "rules": {
+              "no-unused-expressions": "off"
+          }
+      }
+    ],    
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danielcpan/BudgetApp.git"
