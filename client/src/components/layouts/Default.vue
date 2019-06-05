@@ -14,7 +14,6 @@ export default {
     Toolbar,
     NavDrawer
   }
-
 }
 </script>
 

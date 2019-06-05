@@ -1,7 +1,5 @@
 <template>
-  <v-toolbar dark app>
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>Title</v-toolbar-title>
+  <v-toolbar app flat>
     <v-spacer></v-spacer>
     <v-btn icon>
       <v-icon>search</v-icon>
