@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-container fluid grid-list-xl pb-0>
+    <v-container fluid grid-list-xl>
       <v-layout px-4 row wrap> <!-- entire top row -->
-        <v-flex xs12 md4> <!-- left half -->
+        <v-flex xs12 sm12 md6> <!-- left half -->
             <span class="dp-head-1">
               Total Expenses: 
               <span class="total-expense-header-value">
@@ -11,19 +11,18 @@
             </span>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex md3>
+        <v-flex xs12 sm4 md3>
           <search-field class="dp-input" label="Search my apps..."></search-field>
         </v-flex>
-        <v-flex xs12 md3> <!-- right half -->
+        <v-flex xs12 sm6 md3> <!-- right half -->
           <router-link to="/expense/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium">
             <span>Add New Expense</span>
             <v-icon class="dp-btn__icon plus-icon">fas fa-plus</v-icon>
           </router-link>
         </v-flex>
       </v-layout>
-      <div class="px-4 pt-4"><v-divider></v-divider></div>
     </v-container>
-    <v-container fluid py-0> <!-- bottom section -->
+    <v-container fluid> <!-- bottom section -->
       <v-layout px-4 pb-4> <!-- entire bottom row -->
         <v-flex>
           <v-data-table 
@@ -35,8 +34,6 @@
             must-sort>
             <template v-slot:items="props">
               <tr @mouseover="showIndex=props.index" @mouseleave="showIndex=null">
-
-
                 <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
@@ -52,8 +49,7 @@
                   </v-layout>
                 </td>
 
-
-                <td valign="middle">
+                <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2 lg1>
                       <div style="padding-top: 0.5rem">{{props.item.totalExpense}}</div>
