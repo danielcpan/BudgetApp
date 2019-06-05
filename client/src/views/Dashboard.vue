@@ -38,7 +38,7 @@
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
                       <v-icon 
-                        :color="props.item.color" 
+                        :color="props.item.color"
                         class="category-icon">
                         {{ props.item.icon }}
                       </v-icon>
