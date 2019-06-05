@@ -54,7 +54,7 @@
         mini: true, 
         items: [
           { title: 'Dashboard', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'History', icon: 'history' }
         ]
       }
     }

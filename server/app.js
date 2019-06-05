@@ -18,12 +18,12 @@ app.use(cors());
 // Force close connection, sometimes it persists
 // db.sequelize.close()
 
-if (process.env.NODE_ENV === 'development') {
-  // Sync the database models
-  models.sequelize.sync({
-    force: true,
-  });
-}
+// if (process.env.NODE_ENV === 'development') {
+//   // Sync the database models
+//   models.sequelize.sync({
+//     force: true,
+//   });
+// }
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));

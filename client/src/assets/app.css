@@ -4,8 +4,8 @@ html {
 }
 
 #app {
-  /* background-color: #1b1b1d !important; */
   background-color: black !important;
+  color: white;
 }
 
 .theme--dark.v-toolbar, .theme--dark.v-navigation-drawer {
