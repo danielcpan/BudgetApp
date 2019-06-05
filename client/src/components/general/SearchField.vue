@@ -8,7 +8,7 @@
       type="text"
       single-line
       outline
-      class="search-box im-form"
+      class="search-box dp-form"
     ></v-text-field>
   </div>
 </template>

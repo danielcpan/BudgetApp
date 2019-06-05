@@ -1,20 +1,24 @@
 <template>
   <div>
-    <v-container fluid pb-0>
+    <v-container fluid grid-list-xl pb-0>
       <v-layout px-4 row wrap> <!-- entire top row -->
-        <v-flex xs12 lg6> <!-- left half -->
-          <v-layout row wrap> <!-- page title header -->
-            <span class="im-head-1 im-black pb-3">Total Expenses: <span class="im-dark-grey user-count">${{ totalExpenses }}</span></span>
-            <search-field label="Search my apps..."></search-field>
-          </v-layout>
+        <v-flex xs12 md4> <!-- left half -->
+            <span class="dp-head-1">
+              Total Expenses: 
+              <span class="total-expense-header-value">
+                ${{ totalExpenses }}
+              </span>
+            </span>
         </v-flex>
-        <v-flex xs12 lg4 offset-lg2> <!-- right half -->
-          <v-layout justify-end row>
-            <router-link to="/expense/new" tag="button" class="im-btn im-btn--primary im-btn-size--medium">
-              <span>Add New Expense</span>
-              <v-icon class="im-btn__icon plus-icon">fas fa-plus</v-icon>
-            </router-link>
-          </v-layout>
+        <v-spacer></v-spacer>
+        <v-flex md3>
+          <search-field class="dp-input" label="Search my apps..."></search-field>
+        </v-flex>
+        <v-flex xs12 md3> <!-- right half -->
+          <router-link to="/expense/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium">
+            <span>Add New Expense</span>
+            <v-icon class="dp-btn__icon plus-icon">fas fa-plus</v-icon>
+          </router-link>
         </v-flex>
       </v-layout>
       <div class="px-4 pt-4"><v-divider></v-divider></div>
@@ -94,8 +98,8 @@ export default {
       { 
         name: "Eating Out",
         icon: "fa-utensils",
-        color: "#4684FF",
-        valueDeterminate: 100,
+        color: "#5ad09a",
+        valueDeterminate: 90,
         totalExpense: "37.43",
         expenses: [
           { note: "Pizza", value: "$7.69" }
@@ -104,7 +108,7 @@ export default {
       { 
         name: "Gas",
         icon: "fa-gas-pump",
-        color: "#4684FF",
+        color: "#ff0000",
         valueDeterminate: 70,
         totalExpense: "21.08",
         expenses: [
@@ -130,4 +134,19 @@ export default {
 .category-icon.theme--dark.v-icon{
   width: 1.5rem;
 }
+.plus-icon {
+  font-size: 0.6rem !important;
+  color: white !important;
+  padding-bottom: 0.15rem !important;
+  margin-left: 0.25rem !important;
+}
+.total-expense-header-value {
+  background: -webkit-linear-gradient(left, #5ad09a , #38af79);
+  background: -o-linear-gradient(right, #5ad09a, #38af79);
+  background: -moz-linear-gradient(right, #5ad09a, #38af79);
+  background: linear-gradient(to right, #5ad09a , #38af79); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 </style>

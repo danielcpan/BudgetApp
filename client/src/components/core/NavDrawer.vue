@@ -4,6 +4,7 @@
     permanent
     width="225"
     app
+    class="default-drawer"
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
@@ -40,7 +41,7 @@
         </v-list-tile-action>
 
         <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          <v-list-tile-title class="link-title">{{ item.title }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -60,3 +61,9 @@
     }
   }
 </script>
+
+<style>
+.default-drawer .link-title:hover {
+  color: #5ad09a;
+}
+</style>
