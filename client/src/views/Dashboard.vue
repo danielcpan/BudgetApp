@@ -59,7 +59,7 @@
                       </v-icon>
                     </v-flex>
                     <v-flex xs8 sm9 md10 pl-3 pt-2>
-                      <div>{{ props.item.name }}</div>
+                      <div class="category-name">{{ props.item.name }}</div>
                     </v-flex>
                   </v-layout>
                 </td>
@@ -149,8 +149,8 @@ export default {
     expand: true,
     search: null,
     headers: [
-      {text: 'Category', value: 'name', width: 250},
-      {text: 'Expense', value: 'totalExpense', width: 750},
+      {text: 'Category', value: 'name', width: 200},
+      {text: 'Expense', value: 'totalExpense', width: 800},
     ],
     rowsPerPageItems: [],
     showIndex: null,
@@ -160,7 +160,7 @@ export default {
     totalExpenses: "47.29",
     categories: [
       { 
-        name: "Eating Out",
+        name: "Eating Outdasdasdasdsa dasdasd ",
         icon: "fa-utensils",
         color: "#5ad09a",
         valueDeterminate: 90,
@@ -207,5 +207,10 @@ export default {
   background: linear-gradient(to right, #5ad09a , #38af79); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.category-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
