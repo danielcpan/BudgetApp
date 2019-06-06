@@ -4,13 +4,13 @@
 }
 
 #app {
-  background-color: black !important;
+  background-color: #1a1a1c !important;
   color: white;
 }
 
 .theme--dark.v-toolbar, .theme--dark.v-navigation-drawer {
   /* background-color: #1b1b1d !important; */
-  background-color: black !important;
+  background-color: #1a1a1c !important;
 }
 
 #logo .v-avatar img, .v-avatar .v-icon, .v-avatar .v-image{
@@ -176,9 +176,17 @@ Buttons
   background-image: linear-gradient(130deg, #5ad09a, #38af79);
 }
 .dp-btn--secondary {
-  background-color: #ffffff;
-  color: #4d89ff;
-  border: 1px solid #e2e9f8;
+  background: -webkit-linear-gradient(left, #5ad09a , #38af79);
+  background: -o-linear-gradient(right, #5ad09a, #38af79);
+  background: -moz-linear-gradient(right, #5ad09a, #38af79);
+  background: linear-gradient(to right, #5ad09a , #38af79); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  /* background: linear-gradient(297deg, #38af79, #1ca1f2); */
+  /* width: 12rem; */
+  /* margin-left: 1rem; */
+  background-color: #1a1a1c;
+  border: 1px solid #5ad09a;
 }
 .dp-btn--secondary path {
   stroke: #4d89ff;

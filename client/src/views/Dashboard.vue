@@ -68,15 +68,32 @@
                     <v-flex xs4 sm3 md2 lg1 pt-2>
                       <div>$ {{props.item.totalExpense}}</div>
                     </v-flex>
-                    <v-flex xs7 sm8 md9 lg10>
+                    <v-flex xs7 sm8 md9 lg11>
                       <v-progress-linear 
                         :color="props.item.color" 
                         :value="props.item.valueDeterminate">
                       </v-progress-linear>                      
                     </v-flex>
-                    <v-flex xs4 sm3 md2 lg1 pt-2 pl-3>
+                    <!-- <v-flex xs4 sm3 md2 lg1 pt-2 pl-3>
                       <div>3</div>
-                    </v-flex>                     
+                    </v-flex>                      -->
+                  </v-layout>
+                </td>
+                <td>
+                  <v-layout>
+                    <v-flex xs6 sm6 md4>
+                      <div class="placement-status missing">
+                        <span class="placement-count">(3) </span>
+                      </div>
+                    </v-flex>
+                    <v-spacer></v-spacer>
+                    <v-flex xs12 sm12 md12>
+                      <v-layout justify-end>
+                        <!-- <router-link to="/apps/new" tag="button" class="dp-btn dp-btn--secondary dp-btn-size--medium">
+                          <span>Add Expense +</span>
+                        </router-link> -->
+                      </v-layout>
+                    </v-flex>
                   </v-layout>
                 </td>
               </tr>
@@ -93,7 +110,8 @@
                 item-key="name" 
                 hideHeaders
                 hideActions
-                must-sort>
+                must-sort
+                class="nested-table">
                 <template v-slot:items="props">
                   <tr 
                     @mouseover="showIndex=props.index" 
@@ -150,7 +168,9 @@ export default {
     search: null,
     headers: [
       {text: 'Category', value: 'name', width: 200},
-      {text: 'Expense', value: 'totalExpense', width: 800},
+      {text: 'Expense', value: 'totalExpense', width: 650},
+      {text: 'Items', value: 'totalExpense', width: 50},
+      {text: 'Manage', value: 'totalExpense', width: 100},
     ],
     rowsPerPageItems: [],
     showIndex: null,
@@ -212,5 +232,19 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.theme--dark.v-table {
+  /* background-color: #1a1a1c; */
+  background-color: #2d2d2d;
+}
+.theme--dark.v-datatable .v-datatable__actions {
+  background-color: #2d2d2d;
+  border-top: none;
+}
+table.v-table tbody td, table.v-table tbody th {
+  height: 70px;
+}
+.nested-table table.v-table tbody td, table.v-table tbody th {
+  height: 48px;
 }
 </style>
