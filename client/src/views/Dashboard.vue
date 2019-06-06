@@ -7,7 +7,7 @@
             <span class="dp-head-1">
               Total Expenses: 
               <span class="total-expense-header-value">
-                ${{ totalExpenses }}
+                $ {{ totalExpenses }}
               </span>
             </span>
           </v-layout>
@@ -40,10 +40,14 @@
             :items="categories"
             :search="search"
             :pagination.sync="pagination" 
-            item-key="names" 
+            :expand="expand"
+            item-key="name" 
             must-sort>
             <template v-slot:items="props">
-              <tr @mouseover="showIndex=props.index" @mouseleave="showIndex=null">
+              <tr 
+                @mouseover="showIndex=props.index" 
+                @mouseleave="showIndex=null"
+                @click="props.expanded = !props.expanded">
                 <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
@@ -59,19 +63,71 @@
                     </v-flex>
                   </v-layout>
                 </td>
-
                 <td>
                   <v-layout row wrap>
-                    <v-flex xs4 sm3 md2 lg1>
-                      <div style="padding-top: 0.5rem">{{props.item.totalExpense}}</div>
+                    <v-flex xs4 sm3 md2 lg1 pt-2>
+                      <div>$ {{props.item.totalExpense}}</div>
                     </v-flex>
                     <v-flex xs8 sm9 md10 lg11>
-                      <v-progress-linear :color="props.item.color" :value="props.item.valueDeterminate"></v-progress-linear>                      
+                      <v-progress-linear 
+                        :color="props.item.color" 
+                        :value="props.item.valueDeterminate">
+                      </v-progress-linear>                      
                     </v-flex> 
                   </v-layout>
                 </td>
               </tr>
             </template>
+
+            <template v-slot:expand="props">
+              <v-data-table
+                ref="dTable" 
+                :headers="headers" 
+                :items="categories"
+                :search="search"
+                :pagination.sync="pagination" 
+                :expand="expand"
+                item-key="name" 
+                hideHeaders
+                hideActions
+                must-sort>
+                <template v-slot:items="props">
+                  <tr 
+                    @mouseover="showIndex=props.index" 
+                    @mouseleave="showIndex=null"
+                    @click="props.expanded = !props.expanded">
+                    <td>
+                      <v-layout row wrap>
+                        <v-flex xs4 sm3 md1>
+                          <!-- <v-icon 
+                            color="white"
+                            v-bind:style="{backgroundColor: props.item.color}"
+                            class="category-icon">
+                            {{ props.item.icon }}
+                          </v-icon> -->
+                        </v-flex>
+                        <v-flex xs8 sm9 md10 pl-1 pt-2>
+                          <div>{{ props.item.name }}</div>
+                        </v-flex>
+                      </v-layout>
+                    </td>
+                    <td>
+                      <v-layout row wrap>
+                        <v-flex xs4 sm3 md2 lg1 pt-2>
+                          <div>{{props.item.totalExpense}}</div>
+                        </v-flex>
+                        <v-flex xs8 sm9 md10 lg11>
+                          <!-- <v-progress-linear 
+                            :color="props.item.color" 
+                            :value="props.item.valueDeterminate">
+                          </v-progress-linear> -->
+                        </v-flex> 
+                      </v-layout>
+                    </td>
+                  </tr>
+                </template>
+              </v-data-table>
+            </template>            
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -87,6 +143,7 @@ export default {
     SearchField
   },
   data: () => ({
+    expand: true,
     search: null,
     headers: [
       {text: 'Categories', value: 'name', width: 250},
