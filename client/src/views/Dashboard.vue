@@ -16,7 +16,10 @@
         <v-flex xs12 sm12 md5>
           <v-layout row wrap justify-end>
             <v-flex xs6>
-            <search-field class="dp-input" label="Search my apps..."></search-field>
+            <search-field 
+              label="Search my apps..."
+              v-model="search">
+            </search-field>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex xs5>
@@ -35,6 +38,7 @@
             ref="dTable" 
             :headers="headers" 
             :items="categories"
+            :search="search"
             :pagination.sync="pagination" 
             item-key="categories" 
             must-sort>
@@ -83,9 +87,10 @@ export default {
     SearchField
   },
   data: () => ({
+    search: null,
     headers: [
-      {text: 'Categories', value: 'categories', width: 250},
-      {text: 'Expenses', value: 'expenses', width: 750},
+      {text: 'Categories', value: 'name', width: 250},
+      {text: 'Expenses', value: 'totalExpense', width: 750},
     ],
     rowsPerPageItems: [],
     showIndex: null,
@@ -133,7 +138,6 @@ export default {
 .category-icon.theme--dark.v-icon{
   width: 2.5rem;
   height: 2.5rem;
-  /* background-color: white; */
   border-radius: 20px;
 }
 .total-expense-header-value {
@@ -144,5 +148,4 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 </style>

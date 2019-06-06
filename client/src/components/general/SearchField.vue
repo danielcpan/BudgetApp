@@ -1,5 +1,5 @@
 <template>
-  <div id="search-field" class="input-field">
+  <div id="search-field" class="input-field dp-input">
     <v-text-field
       v-model="searchValue"
       @input="$emit('input', searchValue)"
@@ -28,9 +28,5 @@ export default {
 <style>
 .search-box i.v-icon.fa.fa-search.theme--dark {
   font-size: 1rem;
-
-}
-.search-box.v-text-field--outline > .v-input__control > .v-input__slot{
-  /* width: 5rem; */
 }
 </style>
