@@ -27,7 +27,7 @@
               <span>Add Expense + </span>
             </router-link>
             </v-flex>
-          </v-layout>          
+          </v-layout>
         </v-flex>
       </v-layout>
     </v-container>
@@ -64,91 +64,60 @@
                   </v-layout>
                 </td>
                 <td>
+                  <div class="category-name">$ {{ props.item.totalExpense }}</div>
+                </td>
+                <td>
+                  <div class="category-name">3</div>
+                </td>
+                <td>
+                  <div class="category-name">06/04/2019</div>
+                </td>
+                <td>
                   <v-layout row wrap>
-                    <v-flex xs4 sm3 md2 lg1 pt-2>
-                      <div>$ {{props.item.totalExpense}}</div>
-                    </v-flex>
-                    <v-flex xs7 sm8 md9 lg11>
+                    <v-flex xs12 sm12 md12 lg12>
                       <v-progress-linear 
                         :color="props.item.color" 
                         :value="props.item.valueDeterminate">
                       </v-progress-linear>                      
                     </v-flex>
-                    <!-- <v-flex xs4 sm3 md2 lg1 pt-2 pl-3>
-                      <div>3</div>
-                    </v-flex>                      -->
                   </v-layout>
                 </td>
                 <td>
                   <v-layout>
-                    <v-flex xs6 sm6 md4>
-                      <div class="placement-status missing">
-                        <span class="placement-count">(3) </span>
-                      </div>
-                    </v-flex>
-                    <v-spacer></v-spacer>
-                    <v-flex xs12 sm12 md12>
-                      <v-layout justify-end>
-                        <!-- <router-link to="/apps/new" tag="button" class="dp-btn dp-btn--secondary dp-btn-size--medium">
-                          <span>Add Expense +</span>
-                        </router-link> -->
-                      </v-layout>
-                    </v-flex>
-                  </v-layout>
+                  <v-flex xs12 pl-2 v-show="showIndex == props.index">
+                    <v-menu left offset-y>
+                      <template v-slot:activator="{on}">
+                        <v-flex>
+                          <v-icon v-on="on">more_horiz</v-icon>
+                        </v-flex>
+                      </template>
+                      <v-list>
+                        <v-list-tile @mouseover="addHoverColor = '#4D89FF'" @mouseleave="addHoverColor = null" @click="openEdit()" >
+                          <v-list-tile-title>
+                            <v-layout justfy-center>
+                              <v-flex xs1>
+                              <v-icon :style="{color: 'addHoverColor'}" size="12" >fas fa-plus-square</v-icon>
+                              </v-flex>
+                              <v-flex xs11 class="manage-menu px-4">
+                              Add Expense
+                              </v-flex> </v-layout></v-list-tile-title>
+                        </v-list-tile>
+                        <v-list-tile @mouseover="manageHoverColor = '#4D89FF'" @mouseleave="manageHoverColor = null"  @click="openDelete(); toDelete=props.item.id">
+                          <v-list-tile-title>
+                            <v-layout justify-center>
+                              <v-flex xs1>
+                                <v-icon :style="{color: manageHoverColor}" size="12" class="pb-1"> fas fa-cog </v-icon>
+                              </v-flex>
+                              <v-flex xs11 class="manage-menu px-4">Edit Category</v-flex>
+                              </v-layout></v-list-tile-title>
+                        </v-list-tile>
+                      </v-list>
+                    </v-menu>
+                  </v-flex>  
+                  </v-layout>                
                 </td>
               </tr>
-            </template>
-
-            <template v-slot:expand="props">
-              <v-data-table
-                ref="dTable" 
-                :headers="headers" 
-                :items="categories"
-                :search="search"
-                :pagination.sync="pagination" 
-                :expand="expand"
-                item-key="name" 
-                hideHeaders
-                hideActions
-                must-sort
-                class="nested-table">
-                <template v-slot:items="props">
-                  <tr 
-                    @mouseover="showIndex=props.index" 
-                    @mouseleave="showIndex=null"
-                    @click="props.expanded = !props.expanded">
-                    <td>
-                      <v-layout row wrap>
-                        <v-flex xs4 sm3 md1>
-                          <!-- <v-icon 
-                            color="white"
-                            v-bind:style="{backgroundColor: props.item.color}"
-                            class="category-icon">
-                            {{ props.item.icon }}
-                          </v-icon> -->
-                        </v-flex>
-                        <v-flex xs8 sm9 md10 pl-1 pt-2>
-                          <div>{{ props.item.name }}</div>
-                        </v-flex>
-                      </v-layout>
-                    </td>
-                    <td>
-                      <v-layout row wrap>
-                        <v-flex xs4 sm3 md2 lg1 pt-2>
-                          <div>{{props.item.totalExpense}}</div>
-                        </v-flex>
-                        <v-flex xs8 sm9 md10 lg11>
-                          <!-- <v-progress-linear 
-                            :color="props.item.color" 
-                            :value="props.item.valueDeterminate">
-                          </v-progress-linear> -->
-                        </v-flex> 
-                      </v-layout>
-                    </td>
-                  </tr>
-                </template>
-              </v-data-table>
-            </template>            
+            </template>       
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -166,21 +135,25 @@ export default {
   data: () => ({
     expand: true,
     search: null,
+    manageHoverColor: null,
+    addHoverColor: null,
+    showIndex: null,    
     headers: [
-      {text: 'Category', value: 'name', width: 200},
-      {text: 'Expense', value: 'totalExpense', width: 650},
-      {text: 'Items', value: 'totalExpense', width: 50},
+      {text: 'Category', value: 'name', width: 300},
+      {text: 'Expenses', value: 'totalExpense', width: 100},
+      {text: 'Items', value: 'totalExpense', width: 100},
+      {text: 'Date', value: 'totalExpense', width: 100},
+      {text: '', value: 'totalExpense', width: 300},
       {text: 'Manage', value: 'totalExpense', width: 100},
     ],
     rowsPerPageItems: [],
-    showIndex: null,
     pagination: {
       rowsPerPage: 10
     },
     totalExpenses: "47.29",
     categories: [
       { 
-        name: "Eating Outdasdasdasdsa dasdasd ",
+        name: "Eating Outdasdasdasdsa dasdasd hhhooel ddd",
         icon: "fa-utensils",
         color: "#5ad09a",
         valueDeterminate: 90,
@@ -242,7 +215,7 @@ export default {
   border-top: none;
 }
 table.v-table tbody td, table.v-table tbody th {
-  height: 70px;
+  /* height: 70px; */
 }
 .nested-table table.v-table tbody td, table.v-table tbody th {
   height: 48px;
