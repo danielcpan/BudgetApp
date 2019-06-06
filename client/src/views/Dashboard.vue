@@ -68,12 +68,15 @@
                     <v-flex xs4 sm3 md2 lg1 pt-2>
                       <div>$ {{props.item.totalExpense}}</div>
                     </v-flex>
-                    <v-flex xs8 sm9 md10 lg11>
+                    <v-flex xs7 sm8 md9 lg10>
                       <v-progress-linear 
                         :color="props.item.color" 
                         :value="props.item.valueDeterminate">
                       </v-progress-linear>                      
-                    </v-flex> 
+                    </v-flex>
+                    <v-flex xs4 sm3 md2 lg1 pt-2 pl-3>
+                      <div>3</div>
+                    </v-flex>                     
                   </v-layout>
                 </td>
               </tr>
@@ -146,8 +149,8 @@ export default {
     expand: true,
     search: null,
     headers: [
-      {text: 'Categories', value: 'name', width: 250},
-      {text: 'Expenses', value: 'totalExpense', width: 750},
+      {text: 'Category', value: 'name', width: 250},
+      {text: 'Expense', value: 'totalExpense', width: 750},
     ],
     rowsPerPageItems: [],
     showIndex: null,
