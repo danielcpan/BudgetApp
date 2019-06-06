@@ -1,29 +1,35 @@
 <template>
   <div>
-    <v-container fluid grid-list-xl>
-      <v-layout px-4 row wrap> <!-- entire top row -->
-        <v-flex xs12 sm12 md6> <!-- left half -->
+    <v-container pb-0 fluid>
+      <v-layout px-4 row wrap>
+        <v-flex xs12 sm6 md4>
+          <v-layout row>
             <span class="dp-head-1">
               Total Expenses: 
               <span class="total-expense-header-value">
                 ${{ totalExpenses }}
               </span>
             </span>
+          </v-layout>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex xs12 sm4 md3>
-          <search-field class="dp-input" label="Search my apps..."></search-field>
-        </v-flex>
-        <v-flex xs12 sm6 md3> <!-- right half -->
-          <router-link to="/expense/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium">
-            <span>Add New Expense</span>
-            <v-icon class="dp-btn__icon plus-icon">fas fa-plus</v-icon>
-          </router-link>
+        <v-flex xs12 sm12 md5>
+          <v-layout row wrap justify-end>
+            <v-flex xs6>
+            <search-field class="dp-input" label="Search my apps..."></search-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex xs5>
+            <router-link to="/expense/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium">
+              <span>Add Expense + </span>
+            </router-link>
+            </v-flex>
+          </v-layout>          
         </v-flex>
       </v-layout>
     </v-container>
-    <v-container fluid> <!-- bottom section -->
-      <v-layout px-4 pb-4> <!-- entire bottom row -->
+    <v-container pt-0 fluid>
+      <v-layout px-4 pb-4>
         <v-flex>
           <v-data-table 
             ref="dTable" 
@@ -38,13 +44,14 @@
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
                       <v-icon 
-                        :color="props.item.color"
+                        color="white"
+                        v-bind:style="{backgroundColor: props.item.color}"
                         class="category-icon">
                         {{ props.item.icon }}
                       </v-icon>
                     </v-flex>
-                    <v-flex xs8 sm9 md10>
-                      <div style="padding-top: 0.25rem">{{ props.item.name }}</div>
+                    <v-flex xs8 sm9 md10 pl-3 pt-2>
+                      <div>{{ props.item.name }}</div>
                     </v-flex>
                   </v-layout>
                 </td>
@@ -57,11 +64,7 @@
                     <v-flex xs8 sm9 md10 lg11>
                       <v-progress-linear :color="props.item.color" :value="props.item.valueDeterminate"></v-progress-linear>                      
                     </v-flex> 
-                  </v-layout>                 
-                  <!-- <div>
-                  <div><span>{{props.item.totalExpense}}</span></div>
-                  <v-progress-linear :color="props.item.color" :value="props.item.valueDeterminate"></v-progress-linear>
-                  </div> -->
+                  </v-layout>
                 </td>
               </tr>
             </template>
@@ -128,13 +131,10 @@ export default {
 
 <style>
 .category-icon.theme--dark.v-icon{
-  width: 1.5rem;
-}
-.plus-icon {
-  font-size: 0.6rem !important;
-  color: white !important;
-  padding-bottom: 0.15rem !important;
-  margin-left: 0.25rem !important;
+  width: 2.5rem;
+  height: 2.5rem;
+  /* background-color: white; */
+  border-radius: 20px;
 }
 .total-expense-header-value {
   background: -webkit-linear-gradient(left, #5ad09a , #38af79);

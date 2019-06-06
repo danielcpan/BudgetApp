@@ -25,12 +25,12 @@ export default {
 };
 </script>
 
-<style scoped>
-.search-box i.v-icon.fa.fa-search.theme--light {
+<style>
+.search-box i.v-icon.fa.fa-search.theme--dark {
   font-size: 1rem;
-  color: #E2E9F8;
+
 }
-.v-text-field--outline > .v-input__control > .v-input__slot{
-  background: white !important;
+.search-box.v-text-field--outline > .v-input__control > .v-input__slot{
+  /* width: 5rem; */
 }
 </style>
