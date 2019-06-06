@@ -1,6 +1,6 @@
-html {
-  font-family: 'Roboto', sans-serif;
-  /* background-color: black !important; */
+.v-content {
+  max-width: 100%;
+  min-height: 100vh;
 }
 
 #app {

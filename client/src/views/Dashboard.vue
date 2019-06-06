@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="expenses-table">
     <v-container pb-0 fluid>
       <v-layout px-4 row wrap>
         <v-flex xs12 sm6 md4>
@@ -40,7 +40,7 @@
             :items="categories"
             :search="search"
             :pagination.sync="pagination" 
-            item-key="categories" 
+            item-key="names" 
             must-sort>
             <template v-slot:items="props">
               <tr @mouseover="showIndex=props.index" @mouseleave="showIndex=null">
