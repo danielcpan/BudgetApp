@@ -1,7 +1,7 @@
-import faker from 'faker/locale/en';
-import models from '../../models';
+const faker = require('faker/locale/en');
+const models = require('../../models');
 
-export default factory.define('Category', models.Category, (buildOptions ={}) => {
+module.exports = factory.define('Category', models.Category, (buildOptions ={}) => {
   const attrs = {
     name: () => faker.commerce.department(),
     icon: () => 'fa-icon',

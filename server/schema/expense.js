@@ -1,4 +1,4 @@
-export default `
+module.exports = `
   type Query {
     expense(id: ID!): Expense!
     expenses: [Expense!]!

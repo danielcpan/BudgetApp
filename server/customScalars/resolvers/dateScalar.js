@@ -2,7 +2,7 @@ import { GraphQLScalarType } from 'graphql';
 import { GraphQLError } from 'graphql/error';
 import { Kind } from 'graphql/language';
 
-export default {
+module.exports = {
   Date: new GraphQLScalarType({
     name: 'Date',
     description: 'Use JavaScript Date object for date/time fields.',

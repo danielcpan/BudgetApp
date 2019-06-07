@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 describe('Category Resolver', () => {
   let category1;

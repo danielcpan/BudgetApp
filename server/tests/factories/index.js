@@ -8,4 +8,4 @@ const factories = {
   category: categoryFactory,
 };
 
-export default factories;
+module.exports = factories;

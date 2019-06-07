@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 
-import app from './app';
+const app = require('./app');
 
 const PORT = process.env.PORT || 4000;
 

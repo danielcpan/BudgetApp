@@ -1,8 +1,8 @@
-import { expect } from 'chai';
-import { factory } from 'factory-girl';
-import { isValid, syncTestDatabase, truncateTables } from './testHelpers';
+const { expect } = require('chai');
+const { factory } = require('factory-girl');
+const { isValid, syncTestDatabase, truncateTables } = require('./testHelpers');
 
-// Set Up Global Varaibles
+// Set Up Global Variables
 global.isValid = isValid;
 global.expect = expect;
 global.factory = factory;

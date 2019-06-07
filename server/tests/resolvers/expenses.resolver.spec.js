@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 describe('Expense Resolver', () => {
   let expense1;

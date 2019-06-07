@@ -1,4 +1,4 @@
-export default `
+module.exports = `
   type Query {
     category(id: ID!): Category!
     categories: [Category!]!

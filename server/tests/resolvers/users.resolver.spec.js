@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 describe('User Resolver', () => {
   let user1;

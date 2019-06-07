@@ -1,7 +1,7 @@
-import Sequelize from 'sequelize';
-import models from '../../models';
+const Sequelize = require('sequelize');
+const models = require('../../models');
 
-export const isValid = async (object) => {
+module.exports.isValid = async (object) => {
   const modelInstance = await object;
   let errorsList = [];
 
@@ -17,15 +17,16 @@ export const isValid = async (object) => {
   return !errorsList.length;
 };
 
-export const truncateTables = async () => Promise.all(
+module.exports.truncateTables = async () => Promise.all(
   Object.keys(models).map((modelName) => {
     if (['sequelize', 'Sequelize'].includes(modelName)) return null;
     return models[modelName].destroy({ truncate: { cascade: true } });
   }),
 );
 
-export const syncTestDatabase = async () => {
+module.exports.syncTestDatabase = async () => {
   await models.sequelize.sync({
     force: true,
   });
 };
+

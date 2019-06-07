@@ -1,7 +1,7 @@
-import faker from 'faker/locale/en';
-import models from '../../models';
+const faker = require('faker/locale/en');
+const models = require('../../models');
 
-export default factory.define('User', models.User, (buildOptions = {}) => {
+module.exports = factory.define('User', models.User, (buildOptions = {}) => {
   const attrs = {
     firstName: () => faker.name.firstName(),
     lastName: () => faker.name.lastName(),

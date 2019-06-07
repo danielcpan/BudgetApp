@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
 
-export default {
+module.exports = {
   Expense: {
     user: (parent, args, { models }, info) => parent.getUser(),
   },

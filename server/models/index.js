@@ -1,10 +1,10 @@
 
+const Sequelize = require('sequelize');
 
-import Sequelize from 'sequelize';
-
-import User from './user';
-import Expense from './expense';
-import Category from './category';
+// Models
+const User = require('./user');
+const Expense = require('./expense');
+const Category = require('./category');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env]; // eslint-disable-line import/no-dynamic-require
@@ -25,4 +25,4 @@ const db = {
   sequelize,
 };
 
-export default db;
+module.exports = db;

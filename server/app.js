@@ -1,11 +1,11 @@
 /* eslint no-console: 0 */
 
-import express from 'express';
-import cors from 'cors';
-import path from 'path';
-import { ApolloServer } from 'apollo-server-express';
-import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
-import models from './models';
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const { ApolloServer } = require('apollo-server-express');
+const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
+const models = require('./models');
 
 const app = express();
 
@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 
-// import { customScalarTypeDefs, customScalarResolvers } from './customScalars'
+// const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars'
 
 // Force close connection, sometimes it persists
 // db.sequelize.close()
@@ -39,4 +39,4 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-export default app;
+module.exports = app;

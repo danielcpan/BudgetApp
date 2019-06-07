@@ -1,7 +1,7 @@
-import faker from 'faker/locale/en';
-import models from '../../models';
+const faker = require('faker/locale/en');
+const models = require('../../models');
 
-export default factory.define('Expense', models.Expense, (buildOptions = {}) => {
+module.exports = factory.define('Expense', models.Expense, (buildOptions = {}) => {
   const attrs = {
     value: () => faker.finance.amount(0, 200),
     note: () => faker.lorem.sentence(),
