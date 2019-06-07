@@ -7,7 +7,7 @@ module.exports = factory.define('User', models.User, (buildOptions = {}) => {
     firstName: () => faker.name.firstName(),
     lastName: () => faker.name.lastName(),
     email: () => faker.internet.email(),
-    userRole: () => faker.name.jobType(),    
-  }
+    userRole: () => faker.name.jobType(),
+  };
   return attrs;
 });

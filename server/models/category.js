@@ -1,4 +1,4 @@
-'use strict';
+
 const Sequelize = require('sequelize');
 
 module.exports = class Category extends Sequelize.Model {
@@ -28,8 +28,8 @@ module.exports = class Category extends Sequelize.Model {
       createdAt: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: 'created_at'
-      },      
+        field: 'created_at',
+      },
     }, {
       tableName: 'categories',
       underscored: true,
@@ -54,4 +54,4 @@ module.exports = class Category extends Sequelize.Model {
       onDelete: 'cascade',
     });
   }
-}
+};

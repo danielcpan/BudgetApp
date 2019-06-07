@@ -9,6 +9,6 @@ module.exports = factory.define('Expense', models.Expense, (buildOptions = {}) =
     date: () => faker.date.recent(),
     categoryId: factory.assoc('Category', 'id'),
     userId: factory.assoc('User', 'id'),
-  }
+  };
   return attrs;
 });

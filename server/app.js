@@ -33,17 +33,17 @@ const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers'))
 const schema = makeExecutableSchema({
   typeDefs: [
     customScalarTypeDefs,
-    typeDefs
+    typeDefs,
   ],
   resolvers: [
     customScalarResolvers,
-    resolvers
-  ]
-})
+    resolvers,
+  ],
+});
 
 // const customScalarSchema = makeExecutableSchema({
 //   customScalarTypeDefs,
-//   customScalarResolvers  
+//   customScalarResolvers
 // })
 // const x = [mainSchema, customScalarSchema]
 // const schema = mergeSchemas({x})

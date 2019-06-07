@@ -4,15 +4,15 @@ const { Kind } = require('graphql/language');
 
 module.exports = {
   Date: new GraphQLScalarType({
-    name: 'Date', 
+    name: 'Date',
     description: 'Use JavaScript Date object for date/time fields.',
 
     serialize(value) {
-      const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
       const year = value.getFullYear();
       const monthNumber = (1 + value.getMonth()).toString().padStart(2, '0');
-      const month = monthNames[monthNumber-1];
+      const month = monthNames[monthNumber - 1];
       const day = value.getDate().toString().padStart(2, '0');
 
       return `${month} ${day}, ${year}`;

@@ -1,4 +1,4 @@
-'use strict';
+
 const Sequelize = require('sequelize');
 
 module.exports = class User extends Sequelize.Model {
@@ -42,7 +42,7 @@ module.exports = class User extends Sequelize.Model {
       createdAt: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: 'created_at'
+        field: 'created_at',
       },
     }, {
       tableName: 'users',
@@ -61,4 +61,4 @@ module.exports = class User extends Sequelize.Model {
       onDelete: 'cascade',
     });
   }
-}
+};

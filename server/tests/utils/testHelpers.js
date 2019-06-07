@@ -29,4 +29,3 @@ module.exports.syncTestDatabase = async () => {
     force: true,
   });
 };
-

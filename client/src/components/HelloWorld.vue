@@ -5,7 +5,7 @@
         <v-flex xs12 sm6 md4>
           <v-layout row>
             <span class="dp-head-1">
-              Total Expenses: 
+              Total Expenses:
               <span class="total-expense-header-value">
                 $ {{ totalExpenses }}
               </span>
@@ -16,7 +16,7 @@
         <v-flex xs12 sm12 md5>
           <v-layout row wrap justify-end>
             <v-flex xs6>
-            <search-field 
+            <search-field
               label="Search my apps..."
               v-model="search">
             </search-field>
@@ -34,24 +34,24 @@
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>
         <v-flex>
-          <v-data-table 
-            ref="dTable" 
-            :headers="headers" 
+          <v-data-table
+            ref="dTable"
+            :headers="headers"
             :items="categories"
             :search="search"
-            :pagination.sync="pagination" 
+            :pagination.sync="pagination"
             :expand="expand"
-            item-key="name" 
+            item-key="name"
             must-sort>
             <template v-slot:items="props">
-              <tr 
-                @mouseover="showIndex=props.index" 
+              <tr
+                @mouseover="showIndex=props.index"
                 @mouseleave="showIndex=null"
                 @click="props.expanded = !props.expanded">
                 <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
-                      <v-icon 
+                      <v-icon
                         color="white"
                         v-bind:style="{backgroundColor: props.item.color}"
                         class="category-icon">
@@ -71,10 +71,10 @@
                 <td>
                   <v-layout row wrap>
                     <v-flex xs12 sm12 md12 lg12>
-                      <v-progress-linear 
-                        :color="props.item.color" 
+                      <v-progress-linear
+                        :color="props.item.color"
                         :value="props.item.valueDeterminate">
-                      </v-progress-linear>                      
+                      </v-progress-linear>
                     </v-flex>
                   </v-layout>
                 </td>
@@ -84,20 +84,20 @@
 
             <template v-slot:expand="props">
               <v-data-table
-                ref="dTable" 
+                ref="dTable"
                 :items="categories"
                 :headers="headers"
                 :search="search"
-                :pagination.sync="pagination" 
+                :pagination.sync="pagination"
                 :expand="expand"
-                item-key="name" 
+                item-key="name"
                 hideHeaders
                 hideActions
                 must-sort
                 class="nested-table">
                 <template v-slot:items="props">
-                  <tr 
-                    @mouseover="showIndex=props.index" 
+                  <tr
+                    @mouseover="showIndex=props.index"
                     @mouseleave="showIndex=null"
                     @click="props.expanded = !props.expanded">
                     <td>
@@ -130,7 +130,7 @@
                   </tr>
                 </template>
               </v-data-table>
-            </template>            
+            </template>
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -139,63 +139,63 @@
 </template>
 
 <script>
-import SearchField from '../components/general/SearchField.vue';
+import SearchField from './general/SearchField.vue';
 
 export default {
   components: {
-    SearchField
+    SearchField,
   },
   data: () => ({
     expand: true,
     search: null,
     headers: [
-      {text: 'Category', value: 'name', width: 200},
-      {text: 'Expense', value: 'totalExpense', width: 200},
-      {text: 'Cost', value: 'totalExpense', width: 100},
-      {text: 'Date', value: 'totalExpense', width: 100},
-      {text: '', value: 'totalExpense', width: 300},
-      {text: 'Manage', value: 'totalExpense', width: 100},
+      { text: 'Category', value: 'name', width: 200 },
+      { text: 'Expense', value: 'totalExpense', width: 200 },
+      { text: 'Cost', value: 'totalExpense', width: 100 },
+      { text: 'Date', value: 'totalExpense', width: 100 },
+      { text: '', value: 'totalExpense', width: 300 },
+      { text: 'Manage', value: 'totalExpense', width: 100 },
     ],
     rowsPerPageItems: [],
     showIndex: null,
     pagination: {
-      rowsPerPage: 10
+      rowsPerPage: 10,
     },
-    totalExpenses: "47.29",
+    totalExpenses: '47.29',
     categories: [
-      { 
-        name: "Eating Outdasdasdasdsa dasdasd ",
-        icon: "fa-utensils",
-        color: "#5ad09a",
+      {
+        name: 'Eating Outdasdasdasdsa dasdasd ',
+        icon: 'fa-utensils',
+        color: '#5ad09a',
         valueDeterminate: 90,
-        totalExpense: "37.43",
+        totalExpense: '37.43',
         expenses: [
-          { note: "Pizza", value: "$7.69" }
-        ]
+          { note: 'Pizza', value: '$7.69' },
+        ],
       },
-      { 
-        name: "Gas",
-        icon: "fa-gas-pump",
-        color: "#ff0000",
+      {
+        name: 'Gas',
+        icon: 'fa-gas-pump',
+        color: '#ff0000',
         valueDeterminate: 70,
-        totalExpense: "21.08",
+        totalExpense: '21.08',
         expenses: [
-          { note: "Pizza", value: "$7.69" }
-        ]
+          { note: 'Pizza', value: '$7.69' },
+        ],
       },
-      { 
-        name: "Rent",
-        icon: "fa-home",
-        color: "#4684FF",
+      {
+        name: 'Rent',
+        icon: 'fa-home',
+        color: '#4684FF',
         valueDeterminate: 30,
-        totalExpense: "7.29",
+        totalExpense: '7.29',
         expenses: [
-          { note: "Pizza", value: "$7.69" }
-        ]
-      }      
-    ]
-  })
-}
+          { note: 'Pizza', value: '$7.69' },
+        ],
+      },
+    ],
+  }),
+};
 </script>
 
 <style>
@@ -208,7 +208,7 @@ export default {
   background: -webkit-linear-gradient(left, #5ad09a , #38af79);
   background: -o-linear-gradient(right, #5ad09a, #38af79);
   background: -moz-linear-gradient(right, #5ad09a, #38af79);
-  background: linear-gradient(to right, #5ad09a , #38af79); 
+  background: linear-gradient(to right, #5ad09a , #38af79);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

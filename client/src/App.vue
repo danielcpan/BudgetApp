@@ -15,10 +15,10 @@ import Snackbar from './components/general/Snackbar.vue';
 export default {
   components: {
     DefaultLayout,
-    Snackbar
-  }
+    Snackbar,
+  },
 
-}
+};
 </script>
 
 <style>

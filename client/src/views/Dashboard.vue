@@ -5,7 +5,7 @@
         <v-flex xs12 sm6 md4>
           <v-layout row>
             <span class="dp-head-1">
-              Total Expenses: 
+              Total Expenses:
               <span class="total-expense-header-value">
                 $ {{ totalExpenses }}
               </span>
@@ -16,7 +16,7 @@
         <v-flex xs12 sm12 md5>
           <v-layout row wrap justify-end>
             <v-flex xs6>
-            <search-field 
+            <search-field
               label="Search my apps..."
               v-model="search">
             </search-field>
@@ -34,24 +34,24 @@
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>
         <v-flex>
-          <v-data-table 
-            ref="dTable" 
-            :headers="headers" 
+          <v-data-table
+            ref="dTable"
+            :headers="headers"
             :items="categories"
             :search="search"
-            :pagination.sync="pagination" 
+            :pagination.sync="pagination"
             :expand="expand"
-            item-key="name" 
+            item-key="name"
             must-sort>
             <template v-slot:items="props">
-              <tr 
-                @mouseover="showIndex=props.index" 
+              <tr
+                @mouseover="showIndex=props.index"
                 @mouseleave="showIndex=null"
                 @click="props.expanded = !props.expanded">
                 <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
-                      <v-icon 
+                      <v-icon
                         color="white"
                         v-bind:style="{backgroundColor: props.item.color}"
                         class="category-icon">
@@ -75,10 +75,10 @@
                 <td>
                   <v-layout row wrap>
                     <v-flex xs12 sm12 md12 lg12>
-                      <v-progress-linear 
-                        :color="props.item.color" 
+                      <v-progress-linear
+                        :color="props.item.color"
                         :value="props.item.valueDeterminate">
-                      </v-progress-linear>                      
+                      </v-progress-linear>
                     </v-flex>
                   </v-layout>
                 </td>
@@ -113,11 +113,11 @@
                         </v-list-tile>
                       </v-list>
                     </v-menu>
-                  </v-flex>  
-                  </v-layout>                
+                  </v-flex>
+                  </v-layout>
                 </td>
               </tr>
-            </template>       
+            </template>
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -141,7 +141,7 @@ const GET_EXPENSES = gql`
       }
     }
   }
-`
+`;
 
 const GET_CATEGORIES = gql`
   query {
@@ -157,56 +157,54 @@ const GET_CATEGORIES = gql`
       }    
     }
   }
-`
+`;
 
 export default {
   components: {
-    SearchField
+    SearchField,
   },
   data: () => ({
     expand: true,
     search: null,
     manageHoverColor: null,
     addHoverColor: null,
-    showIndex: null,    
+    showIndex: null,
     headers: [
-      {text: 'Category', value: 'name', width: 300},
-      {text: 'Expenses', value: 'totalExpense', width: 100},
-      {text: 'Items', value: 'totalExpense', width: 100},
-      {text: 'Last Entry Date', value: 'totalExpense', width: 100},
-      {text: '', value: 'totalExpense', width: 300},
-      {text: 'Manage', value: 'totalExpense', width: 100},
+      { text: 'Category', value: 'name', width: 300 },
+      { text: 'Expenses', value: 'totalExpense', width: 100 },
+      { text: 'Items', value: 'totalExpense', width: 100 },
+      { text: 'Last Entry Date', value: 'totalExpense', width: 100 },
+      { text: '', value: 'totalExpense', width: 300 },
+      { text: 'Manage', value: 'totalExpense', width: 100 },
     ],
     rowsPerPageItems: [],
     pagination: {
-      rowsPerPage: 10
+      rowsPerPage: 10,
     },
-    totalExpenses: "47.29",
+    totalExpenses: '47.29',
   }),
   apollo: {
     $loadingKey: 'Loading',
     categories: {
-      query: GET_CATEGORIES
-    }
+      query: GET_CATEGORIES,
+    },
   },
   methods: {
     getCategoryTotalExpense(category) {
-      console.log("getting total");
+      console.log('getting total');
       let totalExpense = 0;
 
-      for (let expense of category.expenses) {
-        totalExpense += parseFloat(expense.value)
+      for (const expense of category.expenses) {
+        totalExpense += parseFloat(expense.value);
       }
 
-      return totalExpense.toFixed(2)
-    }
+      return totalExpense.toFixed(2);
+    },
   },
   getCategoryLastInputDate(category) {
-    let lastDate = '';
-
-
-  }
-}
+    const lastDate = '';
+  },
+};
 </script>
 
 <style>
@@ -219,7 +217,7 @@ export default {
   background: -webkit-linear-gradient(left, #5ad09a , #38af79);
   background: -o-linear-gradient(right, #5ad09a, #38af79);
   background: -moz-linear-gradient(right, #5ad09a, #38af79);
-  background: linear-gradient(to right, #5ad09a , #38af79); 
+  background: linear-gradient(to right, #5ad09a , #38af79);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

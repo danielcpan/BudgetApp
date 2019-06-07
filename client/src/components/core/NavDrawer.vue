@@ -49,19 +49,19 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        mini: true, 
-        items: [
-          { title: 'Dashboard', icon: 'dashboard' },
-          { title: 'History', icon: 'history' },
-          { title: 'Goals', icon: 'fas fa-piggy-bank' },
-          { title: 'Save', icon: 'lightbulb' }
-        ]
-      }
-    }
-  }
+export default {
+  data() {
+    return {
+      mini: true,
+      items: [
+        { title: 'Dashboard', icon: 'dashboard' },
+        { title: 'History', icon: 'history' },
+        { title: 'Goals', icon: 'fas fa-piggy-bank' },
+        { title: 'Save', icon: 'lightbulb' },
+      ],
+    };
+  },
+};
 </script>
 
 <style>

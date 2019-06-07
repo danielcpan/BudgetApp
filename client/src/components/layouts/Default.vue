@@ -7,14 +7,14 @@
 
 <script>
 import Toolbar from '../core/Toolbar';
-import NavDrawer from '../core/NavDrawer.vue'
+import NavDrawer from '../core/NavDrawer.vue';
 
 export default {
   components: {
     Toolbar,
-    NavDrawer
-  }
-}
+    NavDrawer,
+  },
+};
 </script>
 
 <style>
