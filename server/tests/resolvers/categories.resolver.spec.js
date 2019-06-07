@@ -29,7 +29,7 @@ describe('Category Resolver', () => {
       });
     });
 
-    context('#Categorys', () => {
+    context('#Categories', () => {
       it('responds with status 200', async () => {
         const query = `
           query getCategories {

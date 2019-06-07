@@ -14,7 +14,7 @@ module.exports = `
     id: ID!
     email: String!
     status: String!
-    createdAt: String!
+    createdAt: String
     firstName: String!
     lastName: String!
     userRole: String!

@@ -1,5 +1,5 @@
 <template>
-  <div class="expenses-table">
+  <div class="expenses-table" v-if="!$apollo.queries.categories.loading">
     <v-container pb-0 fluid>
       <v-layout px-4 row wrap>
         <v-flex xs12 sm6 md4>
@@ -64,10 +64,10 @@
                   </v-layout>
                 </td>
                 <td>
-                  <div class="category-name">$ {{ props.item.totalExpense }}</div>
+                  <div class="category-name">$ {{ getCategoryTotalExpense(props.item) }}</div>
                 </td>
                 <td>
-                  <div class="category-name">3</div>
+                  <div class="category-name">{{ props.item.expenses.length }}</div>
                 </td>
                 <td>
                   <div class="category-name">06/04/2019</div>
@@ -145,13 +145,16 @@ const GET_EXPENSES = gql`
 
 const GET_CATEGORIES = gql`
   query {
-    expenses(userId: 23) {
+    categories(userId: 1) {
       id
-      note
-      value
-      category {
-        name
-      }
+      name
+      icon
+      color
+      expenses {
+        id
+        note
+        value
+      }    
     }
   }
 `
@@ -170,7 +173,7 @@ export default {
       {text: 'Category', value: 'name', width: 300},
       {text: 'Expenses', value: 'totalExpense', width: 100},
       {text: 'Items', value: 'totalExpense', width: 100},
-      {text: 'Date', value: 'totalExpense', width: 100},
+      {text: 'Last Entry Date', value: 'totalExpense', width: 100},
       {text: '', value: 'totalExpense', width: 300},
       {text: 'Manage', value: 'totalExpense', width: 100},
     ],
@@ -179,44 +182,30 @@ export default {
       rowsPerPage: 10
     },
     totalExpenses: "47.29",
-    categories: [
-      { 
-        name: "Eating Outdasdasdasdsa dasdasd hhhooel ddd",
-        icon: "fa-utensils",
-        color: "#5ad09a",
-        valueDeterminate: 90,
-        totalExpense: "37.43",
-        expenses: [
-          { note: "Pizza", value: "$7.69" }
-        ]
-      },
-      { 
-        name: "Gas",
-        icon: "fa-gas-pump",
-        color: "#ff0000",
-        valueDeterminate: 70,
-        totalExpense: "21.08",
-        expenses: [
-          { note: "Pizza", value: "$7.69" }
-        ]
-      },
-      { 
-        name: "Rent",
-        icon: "fa-home",
-        color: "#4684FF",
-        valueDeterminate: 30,
-        totalExpense: "7.29",
-        expenses: [
-          { note: "Pizza", value: "$7.69" }
-        ]
-      }      
-    ],
   }),
   apollo: {
-    expenses: {
-      query: GET_EXPENSES
+    $loadingKey: 'Loading',
+    categories: {
+      query: GET_CATEGORIES
     }
-  }  
+  },
+  methods: {
+    getCategoryTotalExpense(category) {
+      console.log("getting total");
+      let totalExpense = 0;
+
+      for (let expense of category.expenses) {
+        totalExpense += parseFloat(expense.value)
+      }
+
+      return totalExpense.toFixed(2)
+    }
+  },
+  getCategoryLastInputDate(category) {
+    let lastDate = '';
+
+
+  }
 }
 </script>
 

@@ -1,4 +1,4 @@
-
+'use strict';
 const Sequelize = require('sequelize');
 
 module.exports = class Category extends Sequelize.Model {
@@ -47,6 +47,6 @@ module.exports = class Category extends Sequelize.Model {
         field: 'category_id',
       },
       onDelete: 'cascade',
-    });    
+    });
   }
 }

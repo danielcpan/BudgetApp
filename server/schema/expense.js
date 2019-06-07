@@ -14,6 +14,7 @@ module.exports = `
     id: ID!
     value: String!
     note: String
+    createdAt: String
     userId: ID!
     user: User!
     category: Category!
