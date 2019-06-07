@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
+const { mergeSchemas, makeExecutableSchema } = require('graphql-tools');
+
 const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
 const models = require('./models');
 
@@ -13,7 +15,7 @@ const app = express();
 app.use(cors());
 
 
-// const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars'
+const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars');
 
 // Force close connection, sometimes it persists
 // db.sequelize.close()
@@ -28,12 +30,30 @@ app.use(cors());
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
 
+const schema = makeExecutableSchema({
+  typeDefs: [
+    customScalarTypeDefs,
+    typeDefs
+  ],
+  resolvers: [
+    customScalarResolvers,
+    resolvers
+  ]
+})
+
+// const customScalarSchema = makeExecutableSchema({
+//   customScalarTypeDefs,
+//   customScalarResolvers  
+// })
+// const x = [mainSchema, customScalarSchema]
+// const schema = mergeSchemas({x})
+
+
 // console.log(customScalarTypeDefs)
 // console.log(customScalarResolvers)
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   context: { models },
 });
 

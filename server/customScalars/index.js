@@ -1,5 +1,9 @@
 const path = require('path');
-const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
+const { fileLoader, mergeResolvers } = require('merge-graphql-schemas');
 
-const customScalarTypeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
-const customScalarResolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
+module.exports.customScalarTypeDefs = `
+  scalar Date
+  scalar Email
+`
+
+module.exports.customScalarResolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));

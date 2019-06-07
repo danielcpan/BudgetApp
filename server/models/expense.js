@@ -17,6 +17,11 @@ module.exports = class Expense extends Sequelize.Model {
       note: {
         type: DataTypes.STRING(255),
       },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        field: 'created_at'
+      },      
     }, {
       tableName: 'expenses',
       underscored: true,

@@ -1,18 +1,21 @@
-import { GraphQLScalarType } from 'graphql';
-import { GraphQLError } from 'graphql/error';
-import { Kind } from 'graphql/language';
+const { GraphQLScalarType } = require('graphql');
+const { GraphQLError } = require('graphql/error');
+const { Kind } = require('graphql/language');
 
 module.exports = {
   Date: new GraphQLScalarType({
-    name: 'Date',
+    name: 'Date', 
     description: 'Use JavaScript Date object for date/time fields.',
 
     serialize(value) {
+      const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];
+
       const year = value.getFullYear();
-      const month = (1 + value.getMonth()).toString().padStart(2, '0');
+      const monthNumber = (1 + value.getMonth()).toString().padStart(2, '0');
+      const month = monthNames[monthNumber-1];
       const day = value.getDate().toString().padStart(2, '0');
 
-      return `${month}/${day}/${year}`;
+      return `${month} ${day}, ${year}`;
     },
 
     parseValue(value) {

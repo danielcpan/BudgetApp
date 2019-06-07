@@ -39,6 +39,11 @@ module.exports = class User extends Sequelize.Model {
         defaultValue: 'GUEST',
         field: 'user_role',
       },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        field: 'created_at'
+      },
     }, {
       tableName: 'users',
       underscored: true,
