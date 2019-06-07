@@ -12,7 +12,6 @@ module.exports = class Category extends Sequelize.Model {
       },
       name: {
         type: DataTypes.STRING(255),
-        unique: true,
         allowNull: false,
         validate: {
           len: [2, 23],
@@ -24,7 +23,6 @@ module.exports = class Category extends Sequelize.Model {
       },
       color: {
         type: DataTypes.STRING(255),
-        unique: true,
         allowNull: false,
       },
     }, {
@@ -32,5 +30,23 @@ module.exports = class Category extends Sequelize.Model {
       underscored: true,
       sequelize,
     });
+  }
+
+  static associate(models) {
+    this.belongsTo(models.User, {
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id',
+        allowNull: false,
+      },
+      onDelete: 'cascade',
+    });
+    this.hasMany(models.Expense, {
+      foreignKey: {
+        name: 'categoryId',
+        field: 'category_id',
+      },
+      onDelete: 'cascade',
+    });    
   }
 }

@@ -1,7 +1,7 @@
 module.exports = `
   type Query {
     category(id: ID!): Category!
-    categories: [Category!]!
+    categories(userId: ID): [Category!]!
   }
 
   type Mutation {
@@ -15,6 +15,7 @@ module.exports = `
     name: String!
     icon: String!
     color: String!
+    expenses: [Expense!]!    
   }
 
   input CategoryInput {

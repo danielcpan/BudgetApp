@@ -6,8 +6,12 @@ module.exports = {
     category: (parent, args, { models }, info) => parent.getCategory(),
   },
   Query: {
-    expense: (parent, { id }, { models }, info) => models.Expense.findByPk(id),
-    expenses: (parent, args, { models }, info) => models.Expense.findAll(),
+    expense: (parent, { id }, { models }, info) => (
+      models.Expense.findByPk(id)
+    ),
+    expenses: (parent, args, { models }, info) => (
+      models.Expense.findAll({ where: args })
+    ),
   },
   Mutation: {
     createExpense: (parent, { input }, { models }, info) => (

@@ -126,7 +126,35 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
 import SearchField from '../components/general/SearchField.vue';
+
+const GET_EXPENSES = gql`
+  query {
+    expenses(userId: 23) {
+      id
+      note
+      value
+      category {
+        name
+      }
+    }
+  }
+`
+
+const GET_CATEGORIES = gql`
+  query {
+    expenses(userId: 23) {
+      id
+      note
+      value
+      category {
+        name
+      }
+    }
+  }
+`
 
 export default {
   components: {
@@ -182,8 +210,13 @@ export default {
           { note: "Pizza", value: "$7.69" }
         ]
       }      
-    ]
-  })
+    ],
+  }),
+  apollo: {
+    expenses: {
+      query: GET_EXPENSES
+    }
+  }  
 }
 </script>
 

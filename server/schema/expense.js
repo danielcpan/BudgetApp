@@ -1,7 +1,7 @@
 module.exports = `
   type Query {
     expense(id: ID!): Expense!
-    expenses: [Expense!]!
+    expenses(userId: ID): [Expense!]!
   }
 
   type Mutation {
