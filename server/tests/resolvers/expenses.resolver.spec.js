@@ -62,6 +62,7 @@ describe('Expense Resolver', () => {
             value: '5.99',
             note: 'Mcdonalds',
             userId: (await expense1.getUser()).id,
+            categoryId: (await expense1.getCategory()).id,
           },
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });

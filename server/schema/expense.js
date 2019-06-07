@@ -16,11 +16,13 @@ module.exports = `
     note: String
     userId: ID!
     user: User!
+    category: Category!
   }
 
   input ExpenseInput {
     value: String
     note: String
     userId: Int
+    categoryId: Int
   }
 `;

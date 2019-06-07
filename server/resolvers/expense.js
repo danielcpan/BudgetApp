@@ -3,6 +3,7 @@
 module.exports = {
   Expense: {
     user: (parent, args, { models }, info) => parent.getUser(),
+    category: (parent, args, { models }, info) => parent.getCategory(),
   },
   Query: {
     expense: (parent, { id }, { models }, info) => models.Expense.findByPk(id),

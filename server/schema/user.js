@@ -18,6 +18,7 @@ module.exports = `
     firstName: String!
     lastName: String!
     userRole: String!
+    expenses: [Expense!]!
   }
 
   input UserInput {

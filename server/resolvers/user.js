@@ -1,6 +1,9 @@
 /* eslint no-unused-vars: 0 */
 
 module.exports = {
+  User: {
+    expenses: (parent, args, { models }, info) => parent.getExpenses(),
+  },
   Query: {
     user: (parent, { id }, { models }, info) => models.User.findByPk(id),
     users: (parent, args, { models }, info) => models.User.findAll(),
