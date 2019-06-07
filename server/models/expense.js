@@ -17,6 +17,10 @@ module.exports = class Expense extends Sequelize.Model {
       note: {
         type: DataTypes.STRING(255),
       },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: true,        
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: true,
