@@ -1,12 +1,12 @@
 <template>
-  <div class="expenses-table" v-if="!$store.state.users.loading && !$store.state.expenses.loading">
+  <div id="expenses-table" class="dp-table" v-if="!$store.state.users.loading && !$store.state.expenses.loading">
     <v-container pb-0 fluid>
       <v-layout px-4 row wrap>
         <v-flex xs12 sm6 md5>
           <v-layout row>
             <span class="dp-head-1">
               Total Expenses:
-              <span class="total-expense-header-value">
+              <span class="header-value">
                 $ {{ user.totalExpenses }}
               </span>
             </span>
@@ -51,12 +51,12 @@
                 <td class="name-col">
                   <v-layout row wrap>
                   <v-flex xs11>
-                    <div class="expenses-name">{{ props.item.note }}</div>
+                    <div class="expense-name">{{ props.item.note }}</div>
                   </v-flex>
                   </v-layout>
                 </td>
                 <td class="cost-col">
-                  <div class="expenses-name">$ {{ props.item.value }}</div>
+                  <div class="expense-name">$ {{ props.item.value }}</div>
                 </td>
                 <td class="category-col">
                   <v-layout row wrap>
@@ -74,7 +74,7 @@
                   </v-layout>
                 </td>
                 <td class="date-col">
-                  <div class="expenses-name">{{ props.item.date }}</div>
+                  <div class="expense-name">{{ props.item.date }}</div>
                 </td>
                 <td class="manage-col">
                   <v-layout>
@@ -164,9 +164,9 @@ export default {
 </script>
 
 <style>
-.expenses-name {
+.dp-table .expense-name {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;  
 }
 </style>

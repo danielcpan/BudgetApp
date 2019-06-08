@@ -213,25 +213,46 @@ Inputs
   font-family: 'Fira Sans', sans-serif !important;
   font-size: 12px !important;
 }
-
 .dp-input .v-input__slot {
   height: 48px !important;
   min-height: 48px !important;
   border: 2px solid rgba(237, 241, 251, 1) !important;
   border-radius: 4px !important;
 }
-
 .dp-form .input-field .v-input--is-disabled .v-input__slot {
   background-color: #E2E9F8 !important;
 }
-
 .v-text-field--box .v-label, .v-text-field--full-width .v-label, .v-text-field--outline .v-label {
   top: 14px !important; 
 }
 .v-text-field--box.v-text-field--single-line input, .v-text-field--full-width.v-text-field--single-line input, .v-text-field--outline.v-text-field--single-line input {
   margin-top: 9px !important;
 }
-
 .v-text-field.v-text-field--enclosed .v-input__prepend-outer, .v-text-field.v-text-field--enclosed .v-input__prepend-inner, .v-text-field.v-text-field--enclosed .v-input__append-inner, .v-text-field.v-text-field--enclosed .v-input__append-outer {
   margin-top: 12px !important;
+}
+
+/* =================
+Tables
+================= */
+
+.dp-table .theme--dark.v-table {
+  background-color: #2d2d2d;
+}
+.dp-table .theme--dark.v-datatable .v-datatable__actions {
+  background-color: #2d2d2d;
+  border-top: none;
+}
+.dp-table .category-icon.theme--dark.v-icon{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 20px;
+}
+.dp-table .header-value {
+  background: -webkit-linear-gradient(left, #5ad09a , #38af79);
+  background: -o-linear-gradient(right, #5ad09a, #38af79);
+  background: -moz-linear-gradient(right, #5ad09a, #38af79);
+  background: linear-gradient(to right, #5ad09a , #38af79);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

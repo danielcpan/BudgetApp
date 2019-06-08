@@ -1,5 +1,5 @@
 <template>
-  <div id="categories-table" v-if="!$store.state.users.loading && !$store.state.categories.loading">
+  <div id="categories-table" class="dp-table" v-if="!$store.state.users.loading && !$store.state.categories.loading">
     <v-container pb-0 fluid>
       <v-layout px-4 row wrap>
         <v-flex xs12 sm6 md5>
@@ -176,36 +176,9 @@ export default {
 </script>
 
 <style>
-.category-icon.theme--dark.v-icon{
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 20px;
-}
-.total-expense-header-value {
-  background: -webkit-linear-gradient(left, #5ad09a , #38af79);
-  background: -o-linear-gradient(right, #5ad09a, #38af79);
-  background: -moz-linear-gradient(right, #5ad09a, #38af79);
-  background: linear-gradient(to right, #5ad09a , #38af79);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.category-name {
+.dp-table .category-name {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-}
-.theme--dark.v-table {
-  /* background-color: #1a1a1c; */
-  background-color: #2d2d2d;
-}
-.theme--dark.v-datatable .v-datatable__actions {
-  background-color: #2d2d2d;
-  border-top: none;
-}
-table.v-table tbody td, table.v-table tbody th {
-  /* height: 70px; */
-}
-.nested-table table.v-table tbody td, table.v-table tbody th {
-  height: 48px;
+  text-overflow: ellipsis;  
 }
 </style>
