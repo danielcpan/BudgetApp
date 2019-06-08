@@ -6,40 +6,39 @@ import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
 
 const state = () => ({
-  categoriesList: [],
+  expensesList: [],
   loading: false,
 });
 
 const actions = {
-  async getCategoriesList({ commit }) {
+  async getExpensesList({ commit }) {
     commit('SET_LOADING', true);
 
     const query = gql`
       query {
-        categories(userId: 1) {
+        expenses(userId: 1) {
           id
-          name
-          icon
-          color
-          totalExpenses
-          expenses {
-            note
-            value
-            date
-          }    
+          note
+          value
+          date
+          category {
+            name
+            icon
+            color
+          }
         }
       }
     `
 
     const response = await apolloClient.query({ query });
     commit('SET_LOADING', false);
-    commit('GET_CATEGORIES_LIST', response.data.categories);
+    commit('GET_EXPENSES_LIST', response.data.expenses);
   },
 };
 
 const mutations = {
-  GET_CATEGORIES_LIST(state, categories) {
-    state.categoriesList = categories;
+  GET_EXPENSES_LIST(state, expenses) {
+    state.expensesList = expenses;
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
