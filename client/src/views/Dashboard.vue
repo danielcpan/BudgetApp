@@ -1,5 +1,5 @@
 <template>
-  <div class="expenses-table" v-if="!$apollo.queries.categories.loading">
+  <div class="expenses-table" v-if="!$store.state.users.loading && !$store.state.categories.loading">
     <v-container pb-0 fluid>
       <v-layout px-4 row wrap>
         <v-flex xs12 sm6 md4>
@@ -128,46 +128,9 @@
 
 <script>
 import gql from 'graphql-tag';
+import { mapState, mapActions } from 'vuex';
 
 import SearchField from '../components/general/SearchField.vue';
-
-// const GET_EXPENSES = gql`
-//   query {
-//     expenses(userId: 23) {
-//       id
-//       note
-//       value
-//       category {
-//         name
-//       }
-//     }
-//   }
-// `
-const GET_USER = gql`
-  query {
-    user(id: 1) {
-      totalExpenses
-    }
-  }
-`
-
-const GET_CATEGORIES = gql`
-  query {
-    categories(userId: 1) {
-      id
-      name
-      icon
-      color
-      totalExpenses
-      expenses {
-        id
-        note
-        value
-        date
-      }    
-    }
-  }
-`
 
 export default {
   components: {
@@ -186,22 +149,23 @@ export default {
       {text: 'Percent of Total', value: 'totalExpense', width: 400},
       {text: 'Manage', value: 'totalExpense', width: 100},
     ],
-    rowsPerPageItems: [],
     pagination: {
       rowsPerPage: 10
     },
-    totalExpenses: 0,
   }),
-  apollo: {
-    $loadingKey: 'Loading',
-    user: {
-      query: GET_USER
-    },
-    categories: {
-      query: GET_CATEGORIES
-    },
+  computed: {
+    ...mapState({
+      user: state => state.users.currentUser,
+      categories: state => state.categories.categoriesList
+    })
+  },
+  mounted() {
+    this.getCurrentUser();
+    this.getCategoriesList();
   },
   methods: {
+    ...mapActions('users', ['getCurrentUser']),
+    ...mapActions('categories', ['getCategoriesList']),
     getPercentOfTotal(category) {
       return ((category.totalExpenses/this.user.totalExpenses)*100).toFixed(2);
     }
