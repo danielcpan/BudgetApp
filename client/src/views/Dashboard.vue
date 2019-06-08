@@ -144,10 +144,10 @@ export default {
     showIndex: null,
     headers: [
       {text: 'Category', value: 'name', width: 300},
-      {text: 'Expenses', value: 'totalExpense', width: 100},
-      {text: 'Items', value: 'items', width: 100},
-      {text: 'Percent of Total', value: 'totalExpense', width: 400},
-      {text: 'Manage', value: 'totalExpense', width: 100},
+      {text: 'Expenses', value: 'totalExpenses', width: 100},
+      {text: 'Items', value: 'expenses.length', width: 100},
+      {text: 'Percent of Total', value: 'totalExpenses', width: 400},
+      {text: 'Manage', value: '', width: 100, sortable: false},
     ],
     pagination: {
       rowsPerPage: 10
