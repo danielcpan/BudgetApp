@@ -15,7 +15,8 @@ module.exports = `
     name: String!
     icon: String!
     color: String!
-    expenses: [Expense!]!    
+    totalExpenses: String!
+    expenses: [Expense!]!
   }
 
   input CategoryInput {

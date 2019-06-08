@@ -5,9 +5,9 @@
         <v-flex xs12 sm6 md4>
           <v-layout row>
             <span class="dp-head-1">
-              Total Expenses:
+              Total Expenses: 
               <span class="total-expense-header-value">
-                $ {{ totalExpenses }}
+                $ {{ user.totalExpenses }}
               </span>
             </span>
           </v-layout>
@@ -16,7 +16,7 @@
         <v-flex xs12 sm12 md5>
           <v-layout row wrap justify-end>
             <v-flex xs6>
-            <search-field
+            <search-field 
               label="Search my apps..."
               v-model="search">
             </search-field>
@@ -34,24 +34,24 @@
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>
         <v-flex>
-          <v-data-table
-            ref="dTable"
-            :headers="headers"
+          <v-data-table 
+            ref="dTable" 
+            :headers="headers" 
             :items="categories"
             :search="search"
-            :pagination.sync="pagination"
+            :pagination.sync="pagination" 
             :expand="expand"
-            item-key="name"
+            item-key="name" 
             must-sort>
             <template v-slot:items="props">
-              <tr
-                @mouseover="showIndex=props.index"
+              <tr 
+                @mouseover="showIndex=props.index" 
                 @mouseleave="showIndex=null"
                 @click="props.expanded = !props.expanded">
                 <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
-                      <v-icon
+                      <v-icon 
                         color="white"
                         v-bind:style="{backgroundColor: props.item.color}"
                         class="category-icon">
@@ -64,22 +64,23 @@
                   </v-layout>
                 </td>
                 <td>
-                  <div class="category-name">$ {{ getCategoryTotalExpense(props.item) }}</div>
+                  <div class="category-name">$ {{ props.item.totalExpenses }}</div>
                 </td>
                 <td>
                   <div class="category-name">{{ props.item.expenses.length }}</div>
                 </td>
                 <td>
-                  <div class="category-name">06/04/2019</div>
-                </td>
-                <td>
                   <v-layout row wrap>
-                    <v-flex xs12 sm12 md12 lg12>
-                      <v-progress-linear
-                        :color="props.item.color"
-                        :value="props.item.valueDeterminate">
-                      </v-progress-linear>
+                    <v-flex xs8 sm8 md9>
+                      <v-progress-linear 
+                        :color="props.item.color" 
+                        :value="getPercentOfTotal(props.item)">
+                      </v-progress-linear>                      
                     </v-flex>
+                    <v-spacer></v-spacer>
+                    <v-flex xs3 sm3 md2 pt-2>
+                      {{ getPercentOfTotal(props.item) }}%
+                    </v-flex>                    
                   </v-layout>
                 </td>
                 <td>
@@ -113,11 +114,11 @@
                         </v-list-tile>
                       </v-list>
                     </v-menu>
-                  </v-flex>
-                  </v-layout>
+                  </v-flex>  
+                  </v-layout>                
                 </td>
               </tr>
-            </template>
+            </template>       
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -130,18 +131,25 @@ import gql from 'graphql-tag';
 
 import SearchField from '../components/general/SearchField.vue';
 
-const GET_EXPENSES = gql`
+// const GET_EXPENSES = gql`
+//   query {
+//     expenses(userId: 23) {
+//       id
+//       note
+//       value
+//       category {
+//         name
+//       }
+//     }
+//   }
+// `
+const GET_USER = gql`
   query {
-    expenses(userId: 23) {
-      id
-      note
-      value
-      category {
-        name
-      }
+    user(id: 1) {
+      totalExpenses
     }
   }
-`;
+`
 
 const GET_CATEGORIES = gql`
   query {
@@ -150,18 +158,20 @@ const GET_CATEGORIES = gql`
       name
       icon
       color
+      totalExpenses
       expenses {
         id
         note
         value
+        date
       }    
     }
   }
-`;
+`
 
 export default {
   components: {
-    SearchField,
+    SearchField
   },
   data: () => ({
     expand: true,
@@ -170,41 +180,33 @@ export default {
     addHoverColor: null,
     showIndex: null,
     headers: [
-      { text: 'Category', value: 'name', width: 300 },
-      { text: 'Expenses', value: 'totalExpense', width: 100 },
-      { text: 'Items', value: 'totalExpense', width: 100 },
-      { text: 'Last Entry Date', value: 'totalExpense', width: 100 },
-      { text: '', value: 'totalExpense', width: 300 },
-      { text: 'Manage', value: 'totalExpense', width: 100 },
+      {text: 'Category', value: 'name', width: 300},
+      {text: 'Expenses', value: 'totalExpense', width: 100},
+      {text: 'Items', value: 'items', width: 100},
+      {text: 'Percent of Total', value: 'totalExpense', width: 400},
+      {text: 'Manage', value: 'totalExpense', width: 100},
     ],
     rowsPerPageItems: [],
     pagination: {
-      rowsPerPage: 10,
+      rowsPerPage: 10
     },
-    totalExpenses: '47.29',
+    totalExpenses: 0,
   }),
   apollo: {
     $loadingKey: 'Loading',
+    user: {
+      query: GET_USER
+    },
     categories: {
-      query: GET_CATEGORIES,
+      query: GET_CATEGORIES
     },
   },
   methods: {
-    getCategoryTotalExpense(category) {
-      console.log('getting total');
-      let totalExpense = 0;
-
-      for (const expense of category.expenses) {
-        totalExpense += parseFloat(expense.value);
-      }
-
-      return totalExpense.toFixed(2);
-    },
-  },
-  getCategoryLastInputDate(category) {
-    const lastDate = '';
-  },
-};
+    getPercentOfTotal(category) {
+      return ((category.totalExpenses/this.user.totalExpenses)*100).toFixed(2);
+    }
+  }
+}
 </script>
 
 <style>
@@ -217,7 +219,7 @@ export default {
   background: -webkit-linear-gradient(left, #5ad09a , #38af79);
   background: -o-linear-gradient(right, #5ad09a, #38af79);
   background: -moz-linear-gradient(right, #5ad09a, #38af79);
-  background: linear-gradient(to right, #5ad09a , #38af79);
+  background: linear-gradient(to right, #5ad09a , #38af79); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

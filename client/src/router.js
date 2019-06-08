@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Dashboard from './views/Dashboard.vue';
+import Test from './views/Test.vue';
 
 Vue.use(Router);
 
@@ -18,5 +19,10 @@ export default new Router({
       name: 'Dashboard',
       component: Dashboard,
     },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test,
+    },    
   ],
 });

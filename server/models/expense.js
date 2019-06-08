@@ -21,11 +21,6 @@ module.exports = class Expense extends Sequelize.Model {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        field: 'created_at',
-      },
     }, {
       tableName: 'expenses',
       underscored: true,

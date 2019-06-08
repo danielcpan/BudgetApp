@@ -39,11 +39,6 @@ module.exports = class User extends Sequelize.Model {
         defaultValue: 'GUEST',
         field: 'user_role',
       },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        field: 'created_at',
-      },
     }, {
       tableName: 'users',
       underscored: true,
@@ -60,5 +55,16 @@ module.exports = class User extends Sequelize.Model {
       },
       onDelete: 'cascade',
     });
+  }
+
+  async getTotalExpenses() {
+    let totalExpense = 0;
+    const expenses = await this.getExpenses();
+    
+    for (let expense of expenses) {
+      totalExpense += parseFloat(expense.value)
+    }
+
+    return totalExpense.toFixed(2)    
   }
 };

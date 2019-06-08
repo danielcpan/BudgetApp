@@ -14,10 +14,10 @@ module.exports = `
     id: ID!
     email: String!
     status: String!
-    createdAt: Date
     firstName: String!
     lastName: String!
     userRole: String!
+    totalExpenses: String!
     expenses: [Expense!]!
   }
 

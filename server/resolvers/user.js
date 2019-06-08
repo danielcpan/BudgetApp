@@ -2,6 +2,7 @@
 
 module.exports = {
   User: {
+    totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(),
     expenses: (parent, args, { models }, info) => parent.getExpenses(),
   },
   Query: {
