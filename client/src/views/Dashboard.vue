@@ -5,27 +5,27 @@
         <v-flex xs12 sm6 md4>
           <v-layout row>
             <span class="dp-head-1">
-              Total Expenses: 
+              Total Categories:
               <span class="total-expense-header-value">
-                $ {{ user.totalExpenses }}
+                 ({{ categories.length }})
               </span>
             </span>
           </v-layout>
         </v-flex>
         <v-spacer></v-spacer>
-        <v-flex xs12 sm12 md5>
+        <v-flex xs12 sm12 md6>
           <v-layout row wrap justify-end>
-            <v-flex xs6>
-            <search-field 
-              label="Search my apps..."
-              v-model="search">
-            </search-field>
+            <v-flex xs6 sm7 md8>
+              <search-field
+                label="Search categories..."
+                v-model="search">
+              </search-field>
             </v-flex>
             <v-spacer></v-spacer>
-            <v-flex xs5>
-            <router-link to="/expense/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium">
-              <span>Add Expense + </span>
-            </router-link>
+            <v-flex xs5 sm5 md4>
+              <router-link to="/category/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium" style="float: right">
+                <span>Add Category + </span>
+              </router-link>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -34,24 +34,24 @@
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>
         <v-flex>
-          <v-data-table 
-            ref="dTable" 
-            :headers="headers" 
+          <v-data-table
+            ref="dTable"
+            :headers="headers"
             :items="categories"
             :search="search"
-            :pagination.sync="pagination" 
+            :pagination.sync="pagination"
             :expand="expand"
-            item-key="name" 
+            item-key="name"
             must-sort>
             <template v-slot:items="props">
-              <tr 
-                @mouseover="showIndex=props.index" 
+              <tr
+                @mouseover="showIndex=props.index"
                 @mouseleave="showIndex=null"
                 @click="props.expanded = !props.expanded">
                 <td>
                   <v-layout row wrap>
                     <v-flex xs4 sm3 md2>
-                      <v-icon 
+                      <v-icon
                         color="white"
                         v-bind:style="{backgroundColor: props.item.color}"
                         class="category-icon">
@@ -72,15 +72,15 @@
                 <td>
                   <v-layout row wrap>
                     <v-flex xs8 sm8 md9>
-                      <v-progress-linear 
-                        :color="props.item.color" 
+                      <v-progress-linear
+                        :color="props.item.color"
                         :value="getPercentOfTotal(props.item)">
-                      </v-progress-linear>                      
+                      </v-progress-linear>
                     </v-flex>
                     <v-spacer></v-spacer>
                     <v-flex xs3 sm3 md2 pt-2>
                       {{ getPercentOfTotal(props.item) }}%
-                    </v-flex>                    
+                    </v-flex>
                   </v-layout>
                 </td>
                 <td>
@@ -114,11 +114,11 @@
                         </v-list-tile>
                       </v-list>
                     </v-menu>
-                  </v-flex>  
-                  </v-layout>                
+                  </v-flex>
+                  </v-layout>
                 </td>
               </tr>
-            </template>       
+            </template>
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -134,7 +134,7 @@ import SearchField from '../components/general/SearchField.vue';
 
 export default {
   components: {
-    SearchField
+    SearchField,
   },
   data: () => ({
     expand: true,
@@ -143,21 +143,23 @@ export default {
     addHoverColor: null,
     showIndex: null,
     headers: [
-      {text: 'Category', value: 'name', width: 300},
-      {text: 'Expenses', value: 'totalExpenses', width: 100},
-      {text: 'Items', value: 'expenses.length', width: 100},
-      {text: 'Percent of Total', value: 'totalExpenses', width: 400},
-      {text: 'Manage', value: '', width: 100, sortable: false},
+      { text: 'Category', value: 'name', width: 300 },
+      { text: 'Expenses', value: 'totalExpenses', width: 100 },
+      { text: 'Items', value: 'expenses.length', width: 100 },
+      { text: 'Percent of Total', value: 'totalExpenses', width: 400 },
+      {
+        text: 'Manage', value: '', width: 100, sortable: false,
+      },
     ],
     pagination: {
-      rowsPerPage: 10
+      rowsPerPage: 10,
     },
   }),
   computed: {
     ...mapState({
       user: state => state.users.currentUser,
-      categories: state => state.categories.categoriesList
-    })
+      categories: state => state.categories.categoriesList,
+    }),
   },
   mounted() {
     this.getCurrentUser();
@@ -167,10 +169,10 @@ export default {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('categories', ['getCategoriesList']),
     getPercentOfTotal(category) {
-      return ((category.totalExpenses/this.user.totalExpenses)*100).toFixed(2);
-    }
-  }
-}
+      return ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2);
+    },
+  },
+};
 </script>
 
 <style>
@@ -183,7 +185,7 @@ export default {
   background: -webkit-linear-gradient(left, #5ad09a , #38af79);
   background: -o-linear-gradient(right, #5ad09a, #38af79);
   background: -moz-linear-gradient(right, #5ad09a, #38af79);
-  background: linear-gradient(to right, #5ad09a , #38af79); 
+  background: linear-gradient(to right, #5ad09a , #38af79);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

@@ -53,11 +53,11 @@ module.exports = class Category extends Sequelize.Model {
   async getTotalExpenses() {
     let totalExpense = 0;
     const expenses = await this.getExpenses();
-    
-    for (let expense of expenses) {
-      totalExpense += parseFloat(expense.value)
+
+    for (const expense of expenses) {
+      totalExpense += parseFloat(expense.value);
     }
 
-    return totalExpense.toFixed(2)
+    return totalExpense.toFixed(2);
   }
 };

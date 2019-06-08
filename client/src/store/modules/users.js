@@ -2,8 +2,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 
-import { apolloClient } from '../../apolloProvider';
 import gql from 'graphql-tag';
+import { apolloClient } from '../../apolloProvider';
 
 const state = () => ({
   currentUser: {},
@@ -13,17 +13,15 @@ const state = () => ({
 const actions = {
   async getCurrentUser({ commit }) {
     commit('SET_LOADING', true);
-
-    const response = await apolloClient.query({
-      query: gql`
-        query {
-          user(id: 1) {
-            totalExpenses
-          }
+    const query = gql`
+      query {
+        user(id: 1) {
+          totalExpenses
         }
-      `
-    });
+      }
+    `
 
+    const response = await apolloClient.query({ query });
     commit('SET_LOADING', false);
     commit('GET_CURRENT_USER', response.data.user);
   },
@@ -35,7 +33,7 @@ const mutations = {
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
-  }  
+  },
 };
 
 export default {

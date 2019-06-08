@@ -23,6 +23,6 @@ export default new Router({
       path: '/test',
       name: 'Test',
       component: Test,
-    },    
+    },
   ],
 });

@@ -2,37 +2,37 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 
-import { apolloClient } from '../../apolloProvider';
 import gql from 'graphql-tag';
+import { apolloClient } from '../../apolloProvider';
 
 const state = () => ({
   categoriesList: [],
-  loading: false
+  loading: false,
 });
 
 const actions = {
   async getCategoriesList({ commit }) {
     commit('SET_LOADING', true);
 
-    const response = await apolloClient.query({
-      query: gql`
-        query {
-          categories(userId: 1) {
+    const query = gql`
+      query {
+        categories(userId: 1) {
+          id
+          name
+          icon
+          color
+          totalExpenses
+          expenses {
             id
-            name
-            icon
-            color
-            totalExpenses
-            expenses {
-              id
-              note
-              value
-              date
-            }    
-          }
+            note
+            value
+            date
+          }    
         }
-      `
-    });
+      }
+    `
+
+    const response = await apolloClient.query({ query });
     commit('SET_LOADING', false);
     commit('GET_CATEGORIES_LIST', response.data.categories);
   },
@@ -44,7 +44,7 @@ const mutations = {
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
-  }
+  },
 };
 
 export default {
