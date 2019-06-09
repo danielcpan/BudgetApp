@@ -23,9 +23,13 @@
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex xs5 sm5 md4>
-              <router-link to="/expense/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium" style="float: right">
-                <span>Add Expense + </span>
-              </router-link>
+              <button
+                @click="showExpenseForm = true"
+                type="button"
+                class="dp-btn dp-btn--primary dp-btn-size--medium"
+                style="float: right">
+                  Add Expense + 
+              </button>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -116,6 +120,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <expense-form v-model="showExpenseForm"></expense-form>
   </div>
 </template>
 
@@ -123,13 +128,16 @@
 import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
+import ExpenseForm from '../../components/expenses/ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
 export default {
   components: {
+    ExpenseForm,
     SearchField,
   },
   data: () => ({
+    showExpenseForm: false,
     expand: true,
     search: null,
     manageHoverColor: null,

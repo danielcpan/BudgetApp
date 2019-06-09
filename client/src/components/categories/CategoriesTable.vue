@@ -127,7 +127,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  <category-form v-model="showCategoryForm"></category-form>    
+    <category-form v-model="showCategoryForm"></category-form>
   </div>
 </template>
 

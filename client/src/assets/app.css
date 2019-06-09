@@ -282,3 +282,7 @@ Forms
 /* .im-form .v-input__slot {
   border: 2px solid rgba(237, 241, 251, 1) !important;
 } */
+
+.theme--dark.v-sheet {
+  background-color: #2d2d2d;
+}
