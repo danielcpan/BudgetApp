@@ -23,9 +23,13 @@
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex xs5 sm5 md4>
-              <router-link to="/category/new" tag="button" class="dp-btn dp-btn--primary dp-btn-size--medium" style="float: right">
-                <span>Add Category + </span>
-              </router-link>
+              <button
+                @click="showCategoryForm = true"
+                type="button"
+                class="dp-btn dp-btn--primary dp-btn-size--medium"
+                style="float: right">
+                  Add Category + 
+              </button>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -123,6 +127,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+  <category-form v-model="showCategoryForm"></category-form>    
   </div>
 </template>
 
@@ -130,13 +135,17 @@
 import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
+// import CategoryForm from '';
+import CategoryForm from '../../components/categories/CategoryForm.vue';
 import SearchField from '../general/SearchField.vue';
 
 export default {
   components: {
+    CategoryForm,
     SearchField,
   },
   data: () => ({
+    showCategoryForm: false,
     expand: true,
     search: null,
     manageHoverColor: null,
@@ -147,9 +156,7 @@ export default {
       { text: 'Expenses', value: 'totalExpenses', width: 100 },
       { text: 'Items', value: 'expenses.length', width: 100 },
       { text: 'Percent of Total', value: 'totalExpenses', width: 400 },
-      {
-        text: 'Manage', value: '', width: 100, sortable: false,
-      },
+      { text: 'Manage', value: '', width: 100, sortable: false },
     ],
     pagination: {
       rowsPerPage: 10,

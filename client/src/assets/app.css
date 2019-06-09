@@ -243,11 +243,6 @@ Tables
   background-color: #2d2d2d;
   border-top: none;
 }
-.dp-table .category-icon.theme--dark.v-icon{
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 20px;
-}
 .dp-table .header-value {
   background: -webkit-linear-gradient(left, #5ad09a , #38af79);
   background: -o-linear-gradient(right, #5ad09a, #38af79);
@@ -256,3 +251,34 @@ Tables
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* =================
+Icons
+================= */
+
+.category-icon.theme--dark.v-icon{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 20px;
+}
+
+/* ================= 
+Forms 
+================= */
+
+.dp-form .field-title {
+  /* color: #647184; */
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.1;
+  padding-bottom: 18px;
+  /* text-transform: uppercase; */
+}
+.dp-form .sub-title {
+  font-size: 1.25rem;
+  padding: 0.3rem;
+}
+/* .im-form .v-input__slot {
+  border: 2px solid rgba(237, 241, 251, 1) !important;
+} */
