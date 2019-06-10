@@ -15,7 +15,7 @@ describe('Expense Resolver', () => {
           query getExpense($id: ID!) {
             expense(id: $id) {
               id
-              value
+              cost
               note
             }
           }
@@ -34,7 +34,7 @@ describe('Expense Resolver', () => {
           query getExpenses {
             expenses {
               id
-              value
+              cost
               note
             }
           }
@@ -52,14 +52,14 @@ describe('Expense Resolver', () => {
           mutation createExpense($input: ExpenseInput!) {
             createExpense(input: $input) {
               id
-              value
+              cost
               note
             }
           }
         `;
         const variables = {
           input: {
-            value: '5.99',
+            cost: '5.99',
             note: 'Mcdonalds',
             userId: (await expense1.getUser()).id,
             categoryId: (await expense1.getCategory()).id,
@@ -76,7 +76,7 @@ describe('Expense Resolver', () => {
           mutation updateExpense($id: ID!, $input: ExpenseInput!){
             updateExpense(id: $id, input: $input) {
               id
-              value
+              cost
               note
             }
           }      
@@ -84,7 +84,7 @@ describe('Expense Resolver', () => {
         const variables = {
           id: expense1.id,
           input: {
-            value: '3.99',
+            cost: '3.99',
           },
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });

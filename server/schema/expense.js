@@ -12,7 +12,7 @@ module.exports = `
 
   type Expense {
     id: ID!
-    value: String!
+    cost: String!
     note: String
     date: Date
     userId: ID!
@@ -21,7 +21,7 @@ module.exports = `
   }
 
   input ExpenseInput {
-    value: String
+    cost: String
     note: String
     userId: Int
     categoryId: Int

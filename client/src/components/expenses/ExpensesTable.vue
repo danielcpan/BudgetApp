@@ -60,7 +60,7 @@
                   </v-layout>
                 </td>
                 <td class="cost-col">
-                  <div class="expense-name">$ {{ props.item.value }}</div>
+                  <div class="expense-name">$ {{ props.item.cost }}</div>
                 </td>
                 <td class="category-col">
                   <v-layout row wrap>
@@ -145,7 +145,7 @@ export default {
     showIndex: null,
     headers: [
       { text: 'Expenses', value: 'note', width: 350 },
-      { text: 'Cost', value: 'value', width: 150 },
+      { text: 'Cost', value: 'cost', width: 150 },
       { text: 'Category', value: 'category.name', width: 200 },
       { text: 'Date', value: 'date', width: 200 },
       { text: 'Manage', value: '', width: 100, sortable: false },

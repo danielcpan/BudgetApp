@@ -10,7 +10,7 @@ module.exports = class Expense extends Sequelize.Model {
         autoIncrement: true,
         primaryKey: true,
       },
-      value: {
+      cost: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },

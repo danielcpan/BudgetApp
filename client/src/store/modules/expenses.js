@@ -19,7 +19,7 @@ const actions = {
         expenses(userId: 1) {
           id
           note
-          value
+          cost
           date
           category {
             name

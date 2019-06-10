@@ -3,7 +3,6 @@
 module.exports = {
   Category: {
     totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(),
-    // totalExpenses: async (parent, args, { models }, info) => console.log(await parent.getExpenses()),
     expenses: (parent, args, { models }, info) => parent.getExpenses(),
   },
   Query: {

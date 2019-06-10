@@ -24,7 +24,7 @@ const actions = {
           totalExpenses
           expenses {
             note
-            value
+            cost
             date
           }    
         }
