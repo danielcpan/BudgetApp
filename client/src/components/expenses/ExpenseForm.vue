@@ -12,24 +12,17 @@
           <v-divider></v-divider>
           <v-layout row wrap pt-3>
             <v-flex xs12>
-              <div id="icon-field" class="input-field">
-                <div class="field-title">Name</div>
-                <!-- <v-text-field 
-                  label="Name" 
-                  v-model="value" 
-                  @input="$emit('input', value)"
-                  required
-                  single-line
-                  outline>
-                </v-text-field> -->
-              </div>
+              <cost-field v-model="expense.cost"></cost-field>
             </v-flex>
-            <v-flex xs12 sm6>
-              <!-- <icon-field v-model="icon"></icon-field> -->
+            <v-flex xs12>
+              <category-field v-model="expense.category"></category-field>
             </v-flex>
-            <v-flex xs12 sm6>
-              <!-- <background-color-field v-model="color"></background-color-field> -->
+            <v-flex xs12>
+              <date-field v-model="expense.date"></date-field>
             </v-flex>
+            <v-flex xs12>
+              <note-field v-model="expense.note"></note-field>
+            </v-flex>            
           </v-layout>
         </v-card-text>
         <v-card-actions class="px-3">
@@ -53,22 +46,26 @@
 </template>
 
 <script>
-// import NameField from '../categories/NameField.vue';
-// import IconField from '../categories/IconField.vue';
-// import BackgroundColorField from '../categories/BackgroundColorField.vue';
+import CostField from '../expenses/form/CostField.vue';
+import CategoryField from '../expenses/form/CategoryField.vue';
+import DateField from '../expenses/form/DateField.vue';
+import NoteField from '../expenses/form/NoteField.vue';
 
 export default {
   components: {
-    // NameField,
-    // IconField,
-    // BackgroundColorField,
+    CostField,
+    CategoryField,
+    DateField,
+    NoteField,
   },
   props: ['value'],
   data: () => ({
-    // value: 0,
-    category: {},
-    date: 'June 7, 2019',
-    note: 'McDonalds',
+    expense: {
+      cost: '5.95',
+      category: { name: "Eating Out", icon: "fa-utensils", color: "#5ad09a" },
+      date: '2019-06-10T04:46:48.653Z',
+      note: 'McDonalds'
+    }
   }),
   computed: {
     show: {

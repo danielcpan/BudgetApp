@@ -78,7 +78,7 @@
                   </v-layout>
                 </td>
                 <td class="date-col">
-                  <div class="expense-name">{{ props.item.date }}</div>
+                  <div class="expense-name">{{ format(props.item.date) }}</div>
                 </td>
                 <td class="manage-col">
                   <v-layout>
@@ -128,6 +128,7 @@
 import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
+import { format } from '../../utils/dateFormatter';
 import ExpenseForm from '../../components/expenses/ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
@@ -166,7 +167,8 @@ export default {
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),
-    ...mapActions('expenses', ['getExpensesList'])
+    ...mapActions('expenses', ['getExpensesList']),
+    format
   },
 };
 </script>

@@ -135,7 +135,6 @@
 import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
-// import CategoryForm from '';
 import CategoryForm from '../../components/categories/CategoryForm.vue';
 import SearchField from '../general/SearchField.vue';
 

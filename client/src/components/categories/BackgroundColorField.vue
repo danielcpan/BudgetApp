@@ -7,7 +7,6 @@
           label="Color" 
           v-model="color.hex" 
           @input="$emit('input', color)"
-          color="red"
           required
           single-line
           outline

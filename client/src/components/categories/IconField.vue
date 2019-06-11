@@ -11,7 +11,7 @@
       outline
     >
       <template slot="selection" slot-scope="data">
-        <template >
+        <template>
           <v-flex xs9>
             {{data.item.name}}
           </v-flex>
@@ -20,7 +20,7 @@
       </template>
 
       <template slot="item" slot-scope="data">
-        <template >
+        <template>
           <v-layout row>
             <v-flex xs9>
               {{data.item.name}}

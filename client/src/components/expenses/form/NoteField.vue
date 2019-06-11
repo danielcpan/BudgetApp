@@ -1,10 +1,10 @@
 <template>
-  <div id="name-field" class="input-field">
-    <div class="field-title">Name</div>
+  <div id="note-field" class="input-field">
+    <div class="field-title">Note</div>
     <v-text-field 
-      label="Name" 
-      v-model="name" 
-      @input="$emit('input', name)"
+      label="Note" 
+      v-model="note" 
+      @input="$emit('input', note)"
       required
       single-line
       outline>
@@ -17,10 +17,10 @@
 export default {
   props: ['value'],
   data: () => ({
-    name: ''
+    note: ''
   }),
   mounted() {
-    this.name = this.value
+    this.note = this.value
   }
 };
 </script>
