@@ -46,4 +46,22 @@ describe('User Model', () => {
       });
     });
   });
+
+  describe('Instance Methods', () => {
+    let user1;
+    let expense1;
+    let expense2;
+
+    before(async () => {
+      user1 = await factory.create('User');
+      expense1 = await factory.create('Expense', { cost: '100', userId: user1.id });
+      expense2 = await factory.create('Expense', { cost: '200', userId: user1.id });
+    })
+
+    context('#getTotalExpenses', () => {
+      it('returns correct total expenses', async () => {
+        expect(await user1.getTotalExpenses()).to.be.eq('300.00')
+      })
+    })
+  })
 });

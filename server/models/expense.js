@@ -19,7 +19,7 @@ module.exports = class Expense extends Sequelize.Model {
       },
       date: {
         type: DataTypes.DATE,
-        allowNull: true,
+        allowNull: false,
       },
     }, {
       tableName: 'expenses',

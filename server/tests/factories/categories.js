@@ -4,6 +4,7 @@ const models = require('../../models');
 
 module.exports = factory.define('Category', models.Category, (buildOptions = {}) => {
   const attrs = {
+    id: factory.sequence('Category.id'),
     name: () => faker.commerce.department(),
     icon: () => 'fa-icon',
     color: () => faker.internet.color(),

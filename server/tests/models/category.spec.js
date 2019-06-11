@@ -18,4 +18,22 @@ describe('Category Model', () => {
       });
     });
   });
+
+  describe('Instance Methods', () => {
+    let category1;
+    let expense1;
+    let expense2;
+
+    before(async () => {
+      category1 = await factory.create('Category');
+      expense1 = await factory.create('Expense', { cost: '100', categoryId: category1.id });
+      expense2 = await factory.create('Expense', { cost: '200', categoryId: category1.id });
+    })
+
+    context('#getTotalExpenses', () => {
+      it('returns correct total expenses', async () => {
+        expect(await category1.getTotalExpenses()).to.be.eq('300.00')
+      })
+    })
+  });
 });
