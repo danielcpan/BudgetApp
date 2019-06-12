@@ -1,16 +1,16 @@
 const monthNames = [
-  'January', 
-  'February', 
-  'March', 
-  'April', 
-  'May', 
-  'June', 
-  'July', 
-  'August', 
-  'September', 
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
   'October',
   'November',
-  'December'
+  'December',
 ];
 
 export const format = (date) => {
@@ -21,5 +21,5 @@ export const format = (date) => {
   const month = monthNames[monthNumber - 1];
   const day = dateObj.getDate().toString().padStart(2, '0');
 
-  return `${month} ${day}, ${year}`;  
-}
+  return `${month} ${day}, ${year}`;
+};

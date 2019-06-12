@@ -3,9 +3,9 @@
     <div class="field-title">Background Color</div>
     <v-menu left offset-y>
       <template v-slot:activator="{on}">
-        <v-text-field 
-          label="Color" 
-          v-model="color.hex" 
+        <v-text-field
+          label="Color"
+          v-model="color.hex"
           @input="$emit('input', color)"
           required
           single-line
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { Swatches } from 'vue-color'
+import { Swatches } from 'vue-color';
 
 export default {
   components: {
@@ -31,12 +31,12 @@ export default {
   props: ['value'],
   data: () => ({
     color: {
-      hex: '#000000'
-    }
+      hex: '#000000',
+    },
   }),
   mounted() {
-    this.color = this.value
-  }
+    this.color = this.value;
+  },
 };
 </script>
 

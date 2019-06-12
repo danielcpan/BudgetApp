@@ -19,11 +19,11 @@ export default {
     showCategoryForm: false,
     name: 'My Category',
     icon: {
-      name: 'fa-utensils'
+      name: 'fa-utensils',
     },
     color: {
-      hex: '#000000'
-    }
+      hex: '#000000',
+    },
   }),
   computed: {
   },

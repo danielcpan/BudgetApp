@@ -12,10 +12,10 @@ import ExpensesTable from '../components/expenses/ExpensesTable.vue';
 export default {
   components: {
     CategoriesTable,
-    ExpensesTable
+    ExpensesTable,
   },
   data: () => ({
-    
+
   }),
   mounted() {
 

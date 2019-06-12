@@ -27,7 +27,7 @@ describe('User Resolver', () => {
         };
         const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables } });
         expect(response.status).to.equal(200);
-        expect(response.data.errors).to.be.undefined
+        expect(response.data.errors).to.be.undefined;
       });
     });
 
@@ -46,7 +46,7 @@ describe('User Resolver', () => {
         `;
         const response = await axios.get('http://localhost:4000/graphql', { params: { query } });
         expect(response.status).to.equal(200);
-        expect(response.data.errors).to.be.undefined
+        expect(response.data.errors).to.be.undefined;
       });
     });
   });
@@ -75,7 +75,7 @@ describe('User Resolver', () => {
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });
         expect(response.status).to.equal(200);
-        expect(response.data.errors).to.be.undefined
+        expect(response.data.errors).to.be.undefined;
       });
     });
 
@@ -99,7 +99,7 @@ describe('User Resolver', () => {
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });
         expect(response.status).to.equal(200);
-        expect(response.data.errors).to.be.undefined
+        expect(response.data.errors).to.be.undefined;
       });
     });
 
@@ -115,7 +115,7 @@ describe('User Resolver', () => {
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });
         expect(response.status).to.equal(200);
-        expect(response.data.errors).to.be.undefined
+        expect(response.data.errors).to.be.undefined;
       });
     });
   });

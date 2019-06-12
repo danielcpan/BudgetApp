@@ -55,8 +55,8 @@ export default {
   props: ['value'],
   data: () => ({
     categories: [
-      { name: "Eating Out", icon: "fa-utensils", color: "#5ad09a" },
-      { name: "Rent", icon: "fa-home", color: "#ff0000" }
+      { name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a' },
+      { name: 'Rent', icon: 'fa-home', color: '#ff0000' },
     ],
     category: {},
   }),

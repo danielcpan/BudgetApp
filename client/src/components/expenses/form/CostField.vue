@@ -1,9 +1,9 @@
 <template>
   <div id="cost-field" class="input-field">
     <div class="field-title">Cost</div>
-    <v-text-field 
-      label="Cost" 
-      v-model="cost" 
+    <v-text-field
+      label="Cost"
+      v-model="cost"
       :rules="costRules"
       @input="$emit('input', cost)"
       required

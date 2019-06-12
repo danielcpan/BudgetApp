@@ -3,7 +3,7 @@
     <div class="field-title">Date</div>
     <v-menu left offset-y>
       <template v-slot:activator="{on}">
-        <v-text-field 
+        <v-text-field
           label="Date"
           v-model="formattedDate"
           v-on="on"
@@ -17,7 +17,7 @@
           </template>
         </v-text-field>
       </template>
-      <v-date-picker 
+      <v-date-picker
         v-model="date"
         @input="$emit('input', date)">
       </v-date-picker>
@@ -36,7 +36,7 @@ export default {
   computed: {
     formattedDate() {
       return format(this.date);
-    }
+    },
   },
   mounted() {
     this.date = new Date(this.value).toISOString().substr(0, 10);

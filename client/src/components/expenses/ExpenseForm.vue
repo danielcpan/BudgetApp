@@ -1,6 +1,6 @@
 <template>
   <div id="category-form" class="dp-form">
-    <v-dialog 
+    <v-dialog
       v-model="show"
       max-width="450px">
       <v-card>
@@ -22,7 +22,7 @@
             </v-flex>
             <v-flex xs12>
               <note-field v-model="expense.note"></note-field>
-            </v-flex>            
+            </v-flex>
           </v-layout>
         </v-card-text>
         <v-card-actions class="px-3">
@@ -46,10 +46,10 @@
 </template>
 
 <script>
-import CostField from '../expenses/form/CostField.vue';
-import CategoryField from '../expenses/form/CategoryField.vue';
-import DateField from '../expenses/form/DateField.vue';
-import NoteField from '../expenses/form/NoteField.vue';
+import CostField from './form/CostField.vue';
+import CategoryField from './form/CategoryField.vue';
+import DateField from './form/DateField.vue';
+import NoteField from './form/NoteField.vue';
 
 export default {
   components: {
@@ -62,10 +62,10 @@ export default {
   data: () => ({
     expense: {
       cost: '5.95',
-      category: { name: "Eating Out", icon: "fa-utensils", color: "#5ad09a" },
+      category: { name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a' },
       date: new Date().toISOString().substr(0, 10),
-      note: 'McDonalds'
-    }
+      note: 'McDonalds',
+    },
   }),
   computed: {
     show: {
@@ -73,9 +73,9 @@ export default {
         return this.value;
       },
       set(val) {
-        this.$emit('input', val)
-      }
-    }
+        this.$emit('input', val);
+      },
+    },
   },
 };
 </script>

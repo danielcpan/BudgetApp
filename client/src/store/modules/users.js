@@ -19,7 +19,7 @@ const actions = {
           totalExpenses
         }
       }
-    `
+    `;
 
     const response = await apolloClient.query({ query });
     commit('SET_LOADING', false);

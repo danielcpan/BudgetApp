@@ -28,7 +28,7 @@
                 type="button"
                 class="dp-btn dp-btn--primary dp-btn-size--medium"
                 style="float: right">
-                  Add Expense + 
+                  Add Expense +
               </button>
             </v-flex>
           </v-layout>
@@ -129,7 +129,7 @@ import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
 import { format } from '../../utils/dateFormatter';
-import ExpenseForm from '../../components/expenses/ExpenseForm.vue';
+import ExpenseForm from './ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
 const GET_EXPENSES_QUERY = gql`
@@ -146,7 +146,7 @@ const GET_EXPENSES_QUERY = gql`
       }
     }
   }
-`
+`;
 
 export default {
   components: {
@@ -165,7 +165,9 @@ export default {
       { text: 'Cost', value: 'cost', width: 150 },
       { text: 'Category', value: 'category.name', width: 200 },
       { text: 'Date', value: 'date', width: 200 },
-      { text: 'Manage', value: '', width: 100, sortable: false },
+      {
+        text: 'Manage', value: '', width: 100, sortable: false,
+      },
     ],
     pagination: {
       rowsPerPage: 10,
@@ -184,7 +186,7 @@ export default {
   methods: {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('expenses', ['getExpensesList']),
-    format
+    format,
   },
 };
 </script>
@@ -193,6 +195,6 @@ export default {
 .dp-table .expense-name {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;  
+  text-overflow: ellipsis;
 }
 </style>

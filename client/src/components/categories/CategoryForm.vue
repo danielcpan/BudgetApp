@@ -1,6 +1,6 @@
 <template>
   <div id="category-form" class="dp-form">
-    <v-dialog 
+    <v-dialog
       v-model="show"
       max-width="450px">
       <v-card>
@@ -57,11 +57,11 @@ export default {
   data: () => ({
     name: 'My Category',
     icon: {
-      name: 'fa-utensils'
+      name: 'fa-utensils',
     },
     color: {
-      hex: '#000000'
-    }
+      hex: '#000000',
+    },
   }),
   computed: {
     show: {
@@ -69,9 +69,9 @@ export default {
         return this.value;
       },
       set(val) {
-        this.$emit('input', val)
-      }
-    }
+        this.$emit('input', val);
+      },
+    },
   },
 };
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div id="note-field" class="input-field">
     <div class="field-title">Note</div>
-    <v-text-field 
-      label="Note" 
-      v-model="note" 
+    <v-text-field
+      label="Note"
+      v-model="note"
       @input="$emit('input', note)"
       required
       single-line
@@ -17,11 +17,11 @@
 export default {
   props: ['value'],
   data: () => ({
-    note: ''
+    note: '',
   }),
   mounted() {
-    this.note = this.value
-  }
+    this.note = this.value;
+  },
 };
 </script>
 

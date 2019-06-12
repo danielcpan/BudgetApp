@@ -64,12 +64,12 @@ export default {
       { name: 'fa-plane-departure' },
     ],
     icon: {
-      name: 'fa-utensils'
+      name: 'fa-utensils',
     },
   }),
   mounted() {
-    this.icon = this.value
-  }
+    this.icon = this.value;
+  },
 };
 </script>
 

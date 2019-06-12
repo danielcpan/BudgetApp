@@ -28,7 +28,7 @@
                 type="button"
                 class="dp-btn dp-btn--primary dp-btn-size--medium"
                 style="float: right">
-                  Add Category + 
+                  Add Category +
               </button>
             </v-flex>
           </v-layout>
@@ -135,7 +135,7 @@
 import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
-import CategoryForm from '../../components/categories/CategoryForm.vue';
+import CategoryForm from './CategoryForm.vue';
 import SearchField from '../general/SearchField.vue';
 
 const GET_CATEGORIES_QUERY = gql`
@@ -153,7 +153,7 @@ const GET_CATEGORIES_QUERY = gql`
       }
     }
   }
-`
+`;
 
 export default {
   components: {
@@ -172,7 +172,9 @@ export default {
       { text: 'Expenses', value: 'totalExpenses', width: 100 },
       { text: 'Items', value: 'expenses.length', width: 100 },
       { text: 'Percent of Total', value: 'totalExpenses', width: 400 },
-      { text: 'Manage', value: '', width: 100, sortable: false },
+      {
+        text: 'Manage', value: '', width: 100, sortable: false,
+      },
     ],
     pagination: {
       rowsPerPage: 10,
@@ -202,6 +204,6 @@ export default {
 .dp-table .category-name {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;  
+  text-overflow: ellipsis;
 }
 </style>

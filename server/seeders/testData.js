@@ -2,7 +2,7 @@ const { factory } = require('factory-girl');
 require('../tests/factories');
 
 const createTestData = async () => {
-  const user = await factory.create('User', { id: 1});
+  const user = await factory.create('User', { id: 1 });
 
   const eatingOutCategory = await factory.create('Category', {
     name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a', userId: user.id,
