@@ -25,6 +25,7 @@ describe('Category Model', () => {
     let expense2;
 
     before(async () => {
+      await truncateTables();
       category1 = await factory.create('Category');
       expense1 = await factory.create('Expense', { cost: '100', categoryId: category1.id });
       expense2 = await factory.create('Expense', { cost: '200', categoryId: category1.id });

@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    this.date = this.value;
+    this.date = format(this.value);
   },
   methods: {
     format,

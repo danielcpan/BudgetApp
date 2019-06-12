@@ -23,5 +23,6 @@ module.exports = `
     name: String
     icon: String
     color: String
+    userId: ID
   }
 `;

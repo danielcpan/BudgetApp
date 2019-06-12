@@ -2,10 +2,12 @@ const axios = require('axios');
 
 describe('Expense Resolver', () => {
   let expense1;
+  let cateory1;
 
   before(async () => {
     await truncateTables();
     expense1 = await factory.create('Expense');
+    category1 = await factory.create('Category');
   });
 
   describe('Queries', () => {
@@ -17,6 +19,7 @@ describe('Expense Resolver', () => {
               id
               cost
               note
+              date
             }
           }
         `;
@@ -25,6 +28,7 @@ describe('Expense Resolver', () => {
         };
         const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables } });
         expect(response.status).to.equal(200);
+        expect(response.data.errors).to.be.undefined
       });
     });
 
@@ -36,11 +40,13 @@ describe('Expense Resolver', () => {
               id
               cost
               note
+              date
             }
           }
         `;
         const response = await axios.get('http://localhost:4000/graphql', { params: { query } });
         expect(response.status).to.equal(200);
+        expect(response.data.errors).to.be.undefined
       });
     });
   });
@@ -54,6 +60,7 @@ describe('Expense Resolver', () => {
               id
               cost
               note
+              date
             }
           }
         `;
@@ -61,12 +68,14 @@ describe('Expense Resolver', () => {
           input: {
             cost: '5.99',
             note: 'Mcdonalds',
-            userId: (await expense1.getUser()).id,
-            categoryId: (await expense1.getCategory()).id,
+            date: new Date(),
+            userId: expense1.userId,
+            categoryId: category1.id,
           },
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });
         expect(response.status).to.equal(200);
+        expect(response.data.errors).to.be.undefined
       });
     });
 
@@ -78,8 +87,9 @@ describe('Expense Resolver', () => {
               id
               cost
               note
+              date
             }
-          }      
+          }
         `;
         const variables = {
           id: expense1.id,
@@ -89,6 +99,7 @@ describe('Expense Resolver', () => {
         };
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });
         expect(response.status).to.equal(200);
+        expect(response.data.errors).to.be.undefined
       });
     });
 
@@ -102,8 +113,10 @@ describe('Expense Resolver', () => {
         const variables = {
           id: expense1.id,
         };
+
         const response = await axios.post('http://localhost:4000/graphql', { query, variables });
         expect(response.status).to.equal(200);
+        expect(response.data.errors).to.be.undefined
       });
     });
   });

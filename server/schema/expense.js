@@ -23,6 +23,7 @@ module.exports = `
   input ExpenseInput {
     cost: String
     note: String
+    date: Date
     userId: Int
     categoryId: Int
   }

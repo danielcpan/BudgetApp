@@ -53,6 +53,7 @@ describe('User Model', () => {
     let expense2;
 
     before(async () => {
+      await truncateTables();
       user1 = await factory.create('User');
       expense1 = await factory.create('Expense', { cost: '100', userId: user1.id });
       expense2 = await factory.create('Expense', { cost: '200', userId: user1.id });
@@ -63,5 +64,5 @@ describe('User Model', () => {
         expect(await user1.getTotalExpenses()).to.be.eq('300.00')
       })
     })
-  })
+  });
 });

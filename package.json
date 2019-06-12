@@ -5,12 +5,12 @@
   "author": "",
   "scripts": {
     "build": "vue-cli-service build client/src/main.js",
-    "test": "NODE_ENV=test node_modules/.bin/mocha --opts server/tests/mocha.opts --exit",
+    "test": "node_modules/.bin/mocha --opts server/tests/mocha.opts --exit",
     "lint": "vue-cli-service lint .",
     "client": "vue-cli-service serve client/src/main.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server/server.js",
-    "tests": "NODE_ENV=test node_modules/.bin/mocha --opts server/tests/mocha.opts server/tests/**/*.js --exit"
+    "tests": "node_modules/.bin/mocha --opts server/tests/mocha.opts server/tests/**/*.js --exit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
