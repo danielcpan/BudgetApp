@@ -63,7 +63,7 @@ export default {
     expense: {
       cost: '5.95',
       category: { name: "Eating Out", icon: "fa-utensils", color: "#5ad09a" },
-      date: '2019-06-10T04:46:48.653Z',
+      date: new Date().toISOString().substr(0, 10),
       note: 'McDonalds'
     }
   }),

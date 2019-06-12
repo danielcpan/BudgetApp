@@ -17,8 +17,10 @@
           </template>
         </v-text-field>
       </template>
-      <v-date-picker v-model="date"
-      @input="$emit('input', date)"></v-date-picker>
+      <v-date-picker 
+        v-model="date"
+        @input="$emit('input', date)">
+      </v-date-picker>
     </v-menu>
   </div>
 </template>
@@ -37,7 +39,7 @@ export default {
     }
   },
   mounted() {
-    this.date = format(this.value);
+    this.date = new Date(this.value).toISOString().substr(0, 10);
   },
   methods: {
     format,
