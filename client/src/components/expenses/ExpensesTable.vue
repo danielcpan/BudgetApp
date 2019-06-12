@@ -132,6 +132,22 @@ import { format } from '../../utils/dateFormatter';
 import ExpenseForm from '../../components/expenses/ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
+const GET_EXPENSES_QUERY = gql`
+  query {
+    expenses(userId: 1) {
+      id
+      note
+      cost
+      date
+      category {
+        name
+        icon
+        color
+      }
+    }
+  }
+`
+
 export default {
   components: {
     ExpenseForm,
@@ -163,7 +179,7 @@ export default {
   },
   mounted() {
     this.getCurrentUser();
-    this.getExpensesList();
+    this.getExpensesList(GET_EXPENSES_QUERY);
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),

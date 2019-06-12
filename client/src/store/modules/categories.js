@@ -2,7 +2,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 
-import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
 
 const state = () => ({
@@ -11,25 +10,8 @@ const state = () => ({
 });
 
 const actions = {
-  async getCategoriesList({ commit }) {
+  async getCategoriesList({ commit }, query) {
     commit('SET_LOADING', true);
-
-    const query = gql`
-      query {
-        categories(userId: 1) {
-          id
-          name
-          icon
-          color
-          totalExpenses
-          expenses {
-            note
-            cost
-            date
-          }    
-        }
-      }
-    `
 
     const response = await apolloClient.query({ query });
     commit('SET_LOADING', false);
