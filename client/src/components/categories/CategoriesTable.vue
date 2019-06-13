@@ -138,9 +138,9 @@ import { mapState, mapActions } from 'vuex';
 import CategoryForm from './CategoryForm.vue';
 import SearchField from '../general/SearchField.vue';
 
-const GET_CATEGORIES_QUERY = gql`
-  query {
-    categories(userId: 1) {
+const GET_CATEGORIES = gql`
+  query getCategories($userId: ID!){
+    categories(userId: $userId) {
       id
       name
       icon
@@ -188,7 +188,12 @@ export default {
   },
   mounted() {
     this.getCurrentUser();
-    this.getCategoriesList(GET_CATEGORIES_QUERY);
+    this.getCategoriesList({
+      query: GET_CATEGORIES,
+      variables: {
+        userId: 1
+      }
+    });
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),

@@ -10,10 +10,10 @@ const state = () => ({
 });
 
 const actions = {
-  async getCategoriesList({ commit }, query) {
+  async getCategoriesList({ commit }, payload) {
     commit('SET_LOADING', true);
 
-    const response = await apolloClient.query({ query });
+    const response = await apolloClient.query(payload);
     commit('SET_LOADING', false);
     commit('GET_CATEGORIES_LIST', response.data.categories);
   },

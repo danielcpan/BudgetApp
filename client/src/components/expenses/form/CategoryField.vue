@@ -3,7 +3,7 @@
     <div class="field-title">Category</div>
     <v-select
       v-model="category"
-      @input="$emit('input', category)"
+      @input="$emit('input', category.id)"
       :items="categories"
       label="Category"
       required

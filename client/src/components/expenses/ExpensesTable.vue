@@ -90,24 +90,25 @@
                         </v-flex>
                       </template>
                       <v-list>
-                        <v-list-tile @mouseover="addHoverColor = '#4D89FF'" @mouseleave="addHoverColor = null" @click="openEdit()" >
+                        <v-list-tile @click="openEdit()">
                           <v-list-tile-title>
                             <v-layout justfy-center>
                               <v-flex xs1>
-                              <v-icon :style="{color: 'addHoverColor'}" size="12" >fas fa-plus-square</v-icon>
+                                <v-icon>fas fa-cog</v-icon>
                               </v-flex>
-                              <v-flex xs11 class="manage-menu px-4">
-                              Add Expense
-                              </v-flex> </v-layout></v-list-tile-title>
+                              <v-flex xs11 class="manage-menu px-4">Edit Expense</v-flex>
+                            </v-layout>
+                          </v-list-tile-title>
                         </v-list-tile>
-                        <v-list-tile @mouseover="manageHoverColor = '#4D89FF'" @mouseleave="manageHoverColor = null"  @click="openDelete(); toDelete=props.item.id">
+                        <v-list-tile @click="deleteRequest(props.item.id)">
                           <v-list-tile-title>
                             <v-layout justify-center>
                               <v-flex xs1>
-                                <v-icon :style="{color: manageHoverColor}" size="12" class="pb-1"> fas fa-cog </v-icon>
+                                <v-icon>fas fa-trash</v-icon>
                               </v-flex>
-                              <v-flex xs11 class="manage-menu px-4">Edit Category</v-flex>
-                              </v-layout></v-list-tile-title>
+                              <v-flex xs11 class="manage-menu px-4">Delete Expense</v-flex>
+                            </v-layout>
+                          </v-list-tile-title>
                         </v-list-tile>
                       </v-list>
                     </v-menu>
@@ -132,9 +133,9 @@ import { format } from '../../utils/dateFormatter';
 import ExpenseForm from './ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
-const GET_EXPENSES_QUERY = gql`
-  query {
-    expenses(userId: 1) {
+const GET_EXPENSES = gql`
+  query getExpenses($userId: ID!){
+    expenses(userId: $userId) {
       id
       note
       cost
@@ -145,6 +146,12 @@ const GET_EXPENSES_QUERY = gql`
         color
       }
     }
+  }
+`;
+
+const DELETE_EXPENSE = gql`
+  mutation deleteExpense($id: ID!) {
+    deleteExpense(id: $id)
   }
 `;
 
@@ -181,12 +188,25 @@ export default {
   },
   mounted() {
     this.getCurrentUser();
-    this.getExpensesList(GET_EXPENSES_QUERY);
+    this.getExpensesList({
+      query: GET_EXPENSES, 
+      variables: {
+        userId: 1
+      }
+    });
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),
-    ...mapActions('expenses', ['getExpensesList']),
+    ...mapActions('expenses', ['getExpensesList', 'deleteExpense']),
     format,
+    deleteRequest(id) {
+      this.deleteExpense({
+        mutation: DELETE_EXPENSE,
+        variables: {
+          id: id
+        }
+      });
+    }
   },
 };
 </script>

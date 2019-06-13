@@ -15,7 +15,7 @@
               <cost-field v-model="expense.cost"></cost-field>
             </v-flex>
             <v-flex xs12>
-              <category-field v-model="expense.category"></category-field>
+              <category-field v-model="expense.categoryId"></category-field>
             </v-flex>
             <v-flex xs12>
               <date-field v-model="expense.date"></date-field>
@@ -34,6 +34,7 @@
           </button>
           <v-spacer></v-spacer>
           <button
+            @click="submit()"
             type="button"
             class="dp-btn dp-btn--primary dp-btn-size--medium">
               Add Expense
@@ -46,10 +47,37 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
+import { mapState, mapActions } from 'vuex';
+
 import CostField from './form/CostField.vue';
 import CategoryField from './form/CategoryField.vue';
 import DateField from './form/DateField.vue';
 import NoteField from './form/NoteField.vue';
+
+const CREATE_EXPENSE = gql`
+  mutation createExpense($input: ExpenseInput!) {
+    createExpense(input: $input) {
+      id
+      note
+      cost
+      date
+      category {
+        name
+        icon
+        color
+      }
+    }
+  }
+`
+
+const UPDATE_EXPENSE = gql`
+  mutation updateExpense($id: ID!, $input: ExpenseInput!) {
+    updateExpense(id: $id, input: $input) {
+      id
+    }
+  }
+`
 
 export default {
   components: {
@@ -60,14 +88,25 @@ export default {
   },
   props: ['value'],
   data: () => ({
+    // expense: {
+    //   cost: '5.95',
+    //   category: { name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a' },
+    //   date: new Date().toISOString().substr(0, 10),
+    //   note: 'McDonalds',
+    // },
     expense: {
-      cost: '5.95',
-      category: { name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a' },
+      cost: '5.99',
+      note: 'Hello',
       date: new Date().toISOString().substr(0, 10),
-      note: 'McDonalds',
+      categoryId: 11,
+      userId: 1,
     },
   }),
   computed: {
+    ...mapState({
+      user: state => state.users.currentUser,
+      expenses: state => state.expenses.expensesList,      
+    }),
     show: {
       get() {
         return this.value;
@@ -76,6 +115,18 @@ export default {
         this.$emit('input', val);
       },
     },
+  },
+  methods: {
+    ...mapActions('expenses', ['createExpense', 'updateExpense']),
+    submit() {
+      this.createExpense({
+        mutation: CREATE_EXPENSE,
+        variables: {
+          input: this.expense
+        }
+      });
+      this.show = false;
+    }
   },
 };
 </script>
