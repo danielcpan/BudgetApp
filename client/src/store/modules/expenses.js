@@ -1,15 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
-import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
 
 import {
-  EXPENSE_QUERY, 
-  EXPENSES_QUERY, 
+  EXPENSE_QUERY,
+  EXPENSES_QUERY,
   CREATE_EXPENSE_MUTATION,
   UPDATE_EXPENSE_MUTATION,
-  DELETE_EXPENSE_MUTATION
+  DELETE_EXPENSE_MUTATION,
 } from '../../graphql/expense';
 
 const state = () => ({
@@ -31,8 +30,8 @@ const state = () => ({
 });
 
 const getters = {
-  currentExpense: state => state.currentExpense
-}
+  currentExpense: state => state.currentExpense,
+};
 
 const actions = {
   setCurrentExpense({ commit }, expense) {
@@ -47,10 +46,10 @@ const actions = {
     const response = await apolloClient.query({
       query: EXPENSE_QUERY,
       variables: {
-        id
-      }
-    })
-    
+        id,
+      },
+    });
+
     commit('SET_LOADING', false);
     commit('GET_EXPENSE', response.data.expense);
   },
@@ -72,13 +71,12 @@ const actions = {
       mutation: CREATE_EXPENSE_MUTATION,
       variables: {
         input: expense,
-      }
+      },
     });
 
     commit('CREATE_EXPENSE', response.data.createExpense);
   },
   async updateExpense({ commit }, expense) {
-    console.log(expense)
     const response = await apolloClient.mutate({
       mutation: UPDATE_EXPENSE_MUTATION,
       variables: {
@@ -115,7 +113,7 @@ const mutations = {
         color: '',
       },
       userId: 1,
-    }
+    };
   },
   GET_EXPENSE(state, expense) {
     state.currentExpense = expense;

@@ -17,7 +17,7 @@
                 </v-flex>
                 <v-flex xs6>
                   <date-field v-model="expense.date"></date-field>
-                </v-flex>            
+                </v-flex>
                 <v-flex xs12>
                   <category-field v-model="expense.category"></category-field>
                 </v-flex>
@@ -45,8 +45,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 import CostField from './form/CostField.vue';
 import CategoryField from './form/CategoryField.vue';
@@ -68,7 +67,7 @@ export default {
     }),
   },
   created() {
-    if (this.$route.name == 'New') {
+    if (this.$route.name === 'New') {
       this.clearCurrentExpense();
     } else {
       this.getExpense(this.$route.params.id);
@@ -83,9 +82,9 @@ export default {
         note: this.expense.note,
         date: this.expense.date || new Date().toISOString().substr(0, 10),
         categoryId: this.expense.category.id,
-        userId: this.expense.userId
-      }
-      if (this.$route.name === 'New') { 
+        userId: this.expense.userId,
+      };
+      if (this.$route.name === 'New') {
         delete expenseToSubmit.id;
         this.createExpense(expenseToSubmit);
       } else {

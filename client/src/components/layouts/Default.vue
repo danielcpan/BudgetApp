@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Toolbar from '../core/Toolbar';
+import Toolbar from '../core/Toolbar.vue';
 import NavDrawer from '../core/NavDrawer.vue';
 
 export default {

@@ -5,8 +5,8 @@
 import { apolloClient } from '../../apolloProvider';
 
 import {
-  CATEGORY_QUERY, 
-  CATEGORIES_QUERY
+  CATEGORY_QUERY,
+  CATEGORIES_QUERY,
 } from '../../graphql/category';
 
 const state = () => ({
@@ -21,8 +21,8 @@ const actions = {
     const response = await apolloClient.query({
       query: CATEGORIES_QUERY,
       variables: {
-        userId
-      }
+        userId,
+      },
     });
     commit('SET_LOADING', false);
     commit('GET_CATEGORIES_LIST', response.data.categories);

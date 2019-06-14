@@ -123,16 +123,13 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
 import { mapState, mapActions } from 'vuex';
 
 import { format } from '../../utils/dateFormatter';
-import ExpenseForm from './ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
 export default {
   components: {
-    ExpenseForm,
     SearchField,
   },
   data: () => ({
@@ -146,7 +143,9 @@ export default {
       { text: 'Cost', value: 'cost', width: 150 },
       { text: 'Category', value: 'category.name', width: 300 },
       { text: 'Date', value: 'date', width: 200 },
-      { text: 'Manage', value: '', width: 100, sortable: false },
+      {
+        text: 'Manage', value: '', width: 100, sortable: false,
+      },
     ],
     pagination: {
       rowsPerPage: 10,

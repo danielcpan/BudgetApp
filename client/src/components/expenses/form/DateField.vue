@@ -42,7 +42,7 @@ export default {
     if (this.value === '') {
       this.date = new Date().toISOString().substr(0, 10);
     } else {
-      this.date = new Date(this.value).toISOString().substr(0, 10); 
+      this.date = new Date(this.value).toISOString().substr(0, 10);
     }
   },
   methods: {

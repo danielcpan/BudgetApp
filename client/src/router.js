@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Dashboard from './views/Dashboard.vue';
 import Test from './views/Test.vue';
-import ExpensesTable from './components/expenses/ExpensesTable.vue';
+// import ExpensesTable from './components/expenses/ExpensesTable.vue';
 import ExpenseForm from './components/expenses/ExpenseForm.vue';
 import Index from './views/Index.vue';
 
@@ -35,15 +35,15 @@ export default new Router({
         {
           path: 'new',
           name: 'New',
-          component: ExpenseForm
+          component: ExpenseForm,
         },
         {
           path: ':id/edit',
           name: 'Edit',
-          component: ExpenseForm
-        }        
-      ]
-    },    
+          component: ExpenseForm,
+        },
+      ],
+    },
     // {
     //   path: '/expense/:id/edit',
     //   name: 'expense',

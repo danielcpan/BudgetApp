@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions('categories', ['getCategoriesList']),
-  }
+  },
 };
 </script>
 

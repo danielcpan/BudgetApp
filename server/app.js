@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
-const { mergeSchemas, makeExecutableSchema } = require('graphql-tools');
+const { makeExecutableSchema } = require('graphql-tools');
 
 const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
 const models = require('./models');
@@ -40,17 +40,6 @@ const schema = makeExecutableSchema({
     resolvers,
   ],
 });
-
-// const customScalarSchema = makeExecutableSchema({
-//   customScalarTypeDefs,
-//   customScalarResolvers
-// })
-// const x = [mainSchema, customScalarSchema]
-// const schema = mergeSchemas({x})
-
-
-// console.log(customScalarTypeDefs)
-// console.log(customScalarResolvers)
 
 const server = new ApolloServer({
   schema,
