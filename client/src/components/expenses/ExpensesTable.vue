@@ -24,7 +24,7 @@
             <v-spacer></v-spacer>
             <v-flex xs5 sm5 md4>
               <button
-                @click="showExpenseForm = true; expenseObj = null"
+                @click="$router.push({ path: '/expense/new'})"
                 type="button"
                 class="dp-btn dp-btn--primary dp-btn-size--medium"
                 style="float: right">
@@ -88,7 +88,7 @@
                         </v-flex>
                       </template>
                       <v-list>
-                        <v-list-tile @click="showExpenseForm = true; expenseObj = props.item">
+                        <v-list-tile @click="$router.push({ path: `/expense/${props.item.id}/edit`})">
                           <v-list-tile-title>
                             <v-layout justfy-center>
                               <v-flex xs1>
@@ -119,7 +119,6 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <expense-form v-model="showExpenseForm" :expenseObj="expenseObj"></expense-form>
   </div>
 </template>
 

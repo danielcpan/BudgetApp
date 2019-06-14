@@ -2,7 +2,7 @@
   <v-app dark>
     <default-layout />
     <v-content>
-      <router-view/>
+      <router-view />
     </v-content>
     <snackbar />
   </v-app>

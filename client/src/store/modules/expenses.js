@@ -4,35 +4,59 @@
 import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
 
+import EXPENSE_QUERY from '../../graphql/Expense';
+import EXPENSES_QUERY from '../../graphql/Expenses';
+import CREATE_EXPENSE_MUTATION from '../../graphql/CreateExpense';
+import UPDATE_EXPENSE_MUTATION from '../../graphql/UpdateExpense';
+import DELETE_EXPENSE_MUTATION from '../../graphql/DeleteExpense';
+
 const state = () => ({
-  currentExpense: {},
+  currentExpense: {
+    id: '',
+    cost: '',
+    note: '',
+    date: '',
+    category: {
+      id: '',
+      name: '',
+      icon: '',
+      color: '',
+    },
+    userId: 1,
+  },
   expensesList: [],
   loading: false,
 });
 
+const getters = {
+  currentExpense: state => state.currentExpense
+}
+
 const actions = {
-  async getExpensesList({ commit }, userId) {
+  setCurrentExpense({ commit }, expense) {
+    commit('SET_CURRENT_EXPENSE', expense);
+  },
+  clearCurrentExpense({ commit }) {
+    commit('CLEAR_CURRENT_EXPENSE');
+  },
+  async getExpense({ commit }, id) {
     commit('SET_LOADING', true);
 
-    const query = gql`
-      query getExpenses($userId: ID!){
-        expenses(userId: $userId) {
-          id
-          note
-          cost
-          date
-          category {
-            id
-            name
-            icon
-            color
-          }
-        }
-      }
-    `;
-
     const response = await apolloClient.query({
-      query,
+      query: EXPENSE_QUERY,
+      variables: {
+        id
+      }
+    })
+    
+    commit('SET_LOADING', false);
+    commit('GET_EXPENSE', response.data.expense);
+  },
+  async getExpensesList({ commit }, userId) {
+    commit('SET_LOADING', true);
+    
+    const response = await apolloClient.query({
+      query: EXPENSES_QUERY,
       variables: {
         userId,
       },
@@ -42,25 +66,8 @@ const actions = {
     commit('GET_EXPENSES_LIST', response.data.expenses);
   },
   async createExpense({ commit }, expense) {
-    const mutation = gql`
-      mutation createExpense($input: ExpenseInput!) {
-        createExpense(input: $input) {
-          id
-          note
-          cost
-          date
-          category {
-            id
-            name
-            icon
-            color
-          }
-        }
-      }
-    `;
-
     const response = await apolloClient.mutate({
-      mutation,
+      mutation: CREATE_EXPENSE_MUTATION,
       varaibles: {
         input: expense,
       }
@@ -69,25 +76,8 @@ const actions = {
     commit('CREATE_EXPENSE', response.data.createExpense);
   },
   async updateExpense({ commit }, expense) {
-    const mutation = gql`
-      mutation updateExpense($input: ExpenseInput!) {
-        updateExpense(input: $input) {
-          id
-          note
-          cost
-          date
-          category {
-            id
-            name
-            icon
-            color
-          }
-        }
-      }
-    `;
-
     const response = await apolloClient.query({
-      mutation,
+      mutation: UPDATE_EXPENSE_MUTATION,
       variables: {
         input: expense,
       },
@@ -96,14 +86,8 @@ const actions = {
     commit('UPDATE_EXPENSE', response.data.updateExpense);
   },
   async deleteExpense({ commit }, id) {
-    const mutation = gql`
-      mutation deleteExpense($id: ID!) {
-        deleteExpense(id: $id)
-      }
-    `;
-
     await apolloClient.mutate({
-      mutation,
+      mutation: DELETE_EXPENSE_MUTATION,
       variables: { id },
     });
 
@@ -112,6 +96,27 @@ const actions = {
 };
 
 const mutations = {
+  SET_CURRENT_EXPENSE(state, expense) {
+    state.currentExpense = expense;
+  },
+  CLEAR_CURRENT_EXPENSE(state) {
+    state.currentExpense = {
+      id: '',
+      cost: '',
+      note: '',
+      date: '',
+      category: {
+        id: '',
+        name: '',
+        icon: '',
+        color: '',
+      },
+      userId: 1,
+    }
+  },
+  GET_EXPENSE(state, expense) {
+    state.currentExpense = expense;
+  },
   GET_EXPENSES_LIST(state, expenses) {
     state.expensesList = expenses;
   },
@@ -133,6 +138,7 @@ const mutations = {
 
 export default {
   namespaced: true,
+  getters,
   actions,
   state,
   mutations,
