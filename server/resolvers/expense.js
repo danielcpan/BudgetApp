@@ -17,9 +17,9 @@ module.exports = {
     createExpense: (parent, { input }, { models }, info) => (
       models.Expense.create(input)
     ),
-    updateExpense: async (parent, { id, input }, { models }, info) => {
-      await models.Expense.update(input, { where: { id } });
-      return models.Expense.findByPk(id);
+    updateExpense: async (parent, { input }, { models }, info) => {
+      await models.Expense.update(input, { where: { id: input.id } });
+      return models.Expense.findByPk(input.id);
     },
     deleteExpense: (parent, { id }, { models }, info) => (
       models.Expense.destroy({ where: { id } })

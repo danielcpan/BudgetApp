@@ -81,8 +81,8 @@ describe('Category Resolver', () => {
     context('#updateCategory', () => {
       it('responds with status 200', async () => {
         const query = `
-          mutation updateCategory($id: ID!, $input: CategoryInput!){
-            updateCategory(id: $id, input: $input) {
+          mutation updateCategory($input: CategoryInput!){
+            updateCategory(input: $input) {
               id
               name
               icon
@@ -91,8 +91,8 @@ describe('Category Resolver', () => {
           }      
         `;
         const variables = {
-          id: category1.id,
           input: {
+            id: category1.id,
             name: 'Leisure',
           },
         };

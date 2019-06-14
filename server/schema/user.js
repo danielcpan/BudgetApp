@@ -6,7 +6,7 @@ module.exports = `
 
   type Mutation {
     createUser(input: UserInput!): User!
-    updateUser(id: ID!, input: UserInput!): User!
+    updateUser(input: UserInput!): User!
     deleteUser(id: ID!): Boolean!
   }
 
@@ -22,6 +22,7 @@ module.exports = `
   }
 
   input UserInput {
+    id: ID
     firstName: String
     lastName: String
     email: String

@@ -82,8 +82,8 @@ describe('User Resolver', () => {
     context('#updateUser', () => {
       it('responds with status 200', async () => {
         const query = `
-          mutation updateUser($id: ID!, $input: UserInput!){
-            updateUser(id: $id, input: $input) {
+          mutation updateUser($input: UserInput!){
+            updateUser(input: $input) {
               id
               firstName
               lastName
@@ -92,8 +92,8 @@ describe('User Resolver', () => {
           }      
         `;
         const variables = {
-          id: user1.id,
           input: {
+            id: user1.id,
             firstName: 'Billy',
           },
         };

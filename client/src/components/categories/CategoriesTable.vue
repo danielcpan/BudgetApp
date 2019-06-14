@@ -191,8 +191,8 @@ export default {
     this.getCategoriesList({
       query: GET_CATEGORIES,
       variables: {
-        userId: 1
-      }
+        userId: 1,
+      },
     });
   },
   methods: {

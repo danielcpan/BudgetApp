@@ -13,9 +13,9 @@ module.exports = {
     createUser: (parent, { input }, { models }, info) => (
       models.User.create(input)
     ),
-    updateUser: async (parent, { id, input }, { models }, info) => {
-      await models.User.update(input, { where: { id } });
-      return models.User.findByPk(id);
+    updateUser: async (parent, { input }, { models }, info) => {
+      await models.User.update(input, { where: { id: input.id } });
+      return models.User.findByPk(input.id);
     },
     deleteUser: (parent, { id }, { models }, info) => (
       models.User.destroy({ where: { id } })

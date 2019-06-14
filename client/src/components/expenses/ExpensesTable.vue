@@ -24,7 +24,7 @@
             <v-spacer></v-spacer>
             <v-flex xs5 sm5 md4>
               <button
-                @click="showExpenseForm = true"
+                @click="showExpenseForm = true; expenseObj = null"
                 type="button"
                 class="dp-btn dp-btn--primary dp-btn-size--medium"
                 style="float: right">
@@ -44,14 +44,12 @@
             :items="expenses"
             :search="search"
             :pagination.sync="pagination"
-            :expand="expand"
             item-key="note"
             must-sort>
             <template v-slot:items="props">
               <tr
                 @mouseover="showIndex=props.index"
-                @mouseleave="showIndex=null"
-                @click="props.expanded = !props.expanded">
+                @mouseleave="showIndex=null">
                 <td class="name-col">
                   <v-layout row wrap>
                   <v-flex xs11>
@@ -72,7 +70,7 @@
                         {{ props.item.category.icon }}
                       </v-icon>
                     </v-flex>
-                    <v-flex xs8 sm9 md10 pl-3 pt-2>
+                    <v-flex xs8 sm9 md10 pl-5 pt-2>
                       <div class="category-name">{{ props.item.category.name }}</div>
                     </v-flex>
                   </v-layout>
@@ -90,7 +88,7 @@
                         </v-flex>
                       </template>
                       <v-list>
-                        <v-list-tile @click="openEdit()">
+                        <v-list-tile @click="showExpenseForm = true; expenseObj = props.item">
                           <v-list-tile-title>
                             <v-layout justfy-center>
                               <v-flex xs1>
@@ -100,7 +98,7 @@
                             </v-layout>
                           </v-list-tile-title>
                         </v-list-tile>
-                        <v-list-tile @click="deleteRequest(props.item.id)">
+                        <v-list-tile @click="deleteExpense(props.item.id)">
                           <v-list-tile-title>
                             <v-layout justify-center>
                               <v-flex xs1>
@@ -121,7 +119,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <expense-form v-model="showExpenseForm"></expense-form>
+    <expense-form v-model="showExpenseForm" :expenseObj="expenseObj"></expense-form>
   </div>
 </template>
 
@@ -133,48 +131,23 @@ import { format } from '../../utils/dateFormatter';
 import ExpenseForm from './ExpenseForm.vue';
 import SearchField from '../general/SearchField.vue';
 
-const GET_EXPENSES = gql`
-  query getExpenses($userId: ID!){
-    expenses(userId: $userId) {
-      id
-      note
-      cost
-      date
-      category {
-        name
-        icon
-        color
-      }
-    }
-  }
-`;
-
-const DELETE_EXPENSE = gql`
-  mutation deleteExpense($id: ID!) {
-    deleteExpense(id: $id)
-  }
-`;
-
 export default {
   components: {
     ExpenseForm,
     SearchField,
   },
   data: () => ({
+    expenseObj: null,
     showExpenseForm: false,
-    expand: true,
+    actionType: null,
     search: null,
-    manageHoverColor: null,
-    addHoverColor: null,
     showIndex: null,
     headers: [
-      { text: 'Expenses', value: 'note', width: 350 },
+      { text: 'Expenses', value: 'note', width: 250 },
       { text: 'Cost', value: 'cost', width: 150 },
-      { text: 'Category', value: 'category.name', width: 200 },
+      { text: 'Category', value: 'category.name', width: 300 },
       { text: 'Date', value: 'date', width: 200 },
-      {
-        text: 'Manage', value: '', width: 100, sortable: false,
-      },
+      { text: 'Manage', value: '', width: 100, sortable: false },
     ],
     pagination: {
       rowsPerPage: 10,
@@ -188,25 +161,12 @@ export default {
   },
   mounted() {
     this.getCurrentUser();
-    this.getExpensesList({
-      query: GET_EXPENSES, 
-      variables: {
-        userId: 1
-      }
-    });
+    this.getExpensesList(1);
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('expenses', ['getExpensesList', 'deleteExpense']),
     format,
-    deleteRequest(id) {
-      this.deleteExpense({
-        mutation: DELETE_EXPENSE,
-        variables: {
-          id: id
-        }
-      });
-    }
   },
 };
 </script>

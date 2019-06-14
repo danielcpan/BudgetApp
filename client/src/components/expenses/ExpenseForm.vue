@@ -6,7 +6,7 @@
       <v-card>
         <v-container grid-list-md pt-0>
         <v-card-title>
-          <span class="dp-head-1 pt-3 pb-0">Add Expense Details</span>
+          <span class="dp-head-1 pt-3 pb-0">{{expenseObj === null ?  'Add' : 'Edit' }} Expense Details</span>
         </v-card-title>
         <v-card-text class="pt-0">
           <v-divider></v-divider>
@@ -15,7 +15,7 @@
               <cost-field v-model="expense.cost"></cost-field>
             </v-flex>
             <v-flex xs12>
-              <category-field v-model="expense.categoryId"></category-field>
+              <category-field v-model="expense.category.id"></category-field>
             </v-flex>
             <v-flex xs12>
               <date-field v-model="expense.date"></date-field>
@@ -55,30 +55,6 @@ import CategoryField from './form/CategoryField.vue';
 import DateField from './form/DateField.vue';
 import NoteField from './form/NoteField.vue';
 
-const CREATE_EXPENSE = gql`
-  mutation createExpense($input: ExpenseInput!) {
-    createExpense(input: $input) {
-      id
-      note
-      cost
-      date
-      category {
-        name
-        icon
-        color
-      }
-    }
-  }
-`
-
-const UPDATE_EXPENSE = gql`
-  mutation updateExpense($id: ID!, $input: ExpenseInput!) {
-    updateExpense(id: $id, input: $input) {
-      id
-    }
-  }
-`
-
 export default {
   components: {
     CostField,
@@ -86,26 +62,26 @@ export default {
     DateField,
     NoteField,
   },
-  props: ['value'],
+  props: ['value', 'expenseObj'],
   data: () => ({
-    // expense: {
-    //   cost: '5.95',
-    //   category: { name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a' },
-    //   date: new Date().toISOString().substr(0, 10),
-    //   note: 'McDonalds',
-    // },
     expense: {
-      cost: '5.99',
-      note: 'Hello',
+      id: '',
+      cost: '',
+      note: '',
       date: new Date().toISOString().substr(0, 10),
-      categoryId: 11,
+      category: {
+        id: '',
+        name: '',
+        icon: '',
+        color: '',
+      },
       userId: 1,
     },
   }),
   computed: {
     ...mapState({
       user: state => state.users.currentUser,
-      expenses: state => state.expenses.expensesList,      
+      // expense: state => state.expenses.currentExpense,
     }),
     show: {
       get() {
@@ -116,17 +92,19 @@ export default {
       },
     },
   },
+  mounted() {
+    console.log("woot")
+    if (this.expenseObj != null) {
+      console.log("here")
+      this.expense = this.expenseObj;
+    }
+  },
   methods: {
     ...mapActions('expenses', ['createExpense', 'updateExpense']),
     submit() {
-      this.createExpense({
-        mutation: CREATE_EXPENSE,
-        variables: {
-          input: this.expense
-        }
-      });
+      this.createExpense(this.expense);
       this.show = false;
-    }
+    },
   },
 };
 </script>

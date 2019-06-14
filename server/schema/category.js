@@ -6,7 +6,7 @@ module.exports = `
 
   type Mutation {
     createCategory(input: CategoryInput!): Category!
-    updateCategory(id: ID!, input: CategoryInput!): Category!
+    updateCategory(input: CategoryInput!): Category!
     deleteCategory(id: ID!): Boolean!
   }
 
@@ -20,6 +20,7 @@ module.exports = `
   }
 
   input CategoryInput {
+    id: ID
     name: String
     icon: String
     color: String

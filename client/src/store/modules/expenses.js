@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
-
+import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
 
 const state = () => ({
@@ -11,29 +11,104 @@ const state = () => ({
 });
 
 const actions = {
-  async getExpensesList({ commit }, payload) {
+  async getExpensesList({ commit }, userId) {
     commit('SET_LOADING', true);
 
-    const response = await apolloClient.query(payload);
+    const query = gql`
+      query getExpenses($userId: ID!){
+        expenses(userId: $userId) {
+          id
+          note
+          cost
+          date
+          category {
+            id
+            name
+            icon
+            color
+          }
+        }
+      }
+    `;
+
+    const response = await apolloClient.query({
+      query,
+      variables: {
+        userId,
+      },
+    });
 
     commit('SET_LOADING', false);
     commit('GET_EXPENSES_LIST', response.data.expenses);
   },
-  async createExpense({ commit }, payload) {
-    const response = await apolloClient.mutate(payload);
+  async createExpense({ commit }, expense) {
+    const mutation = gql`
+      mutation createExpense($input: ExpenseInput!) {
+        createExpense(input: $input) {
+          id
+          note
+          cost
+          date
+          category {
+            id
+            name
+            icon
+            color
+          }
+        }
+      }
+    `;
+
+    const response = await apolloClient.mutate({
+      mutation,
+      varaibles: {
+        input: expense,
+      }
+    });
 
     commit('CREATE_EXPENSE', response.data.createExpense);
   },
-  async updateExpense({ commit }, payload) {
-    const response = await apolloClient.query(payload);
-    
+  async updateExpense({ commit }, expense) {
+    const mutation = gql`
+      mutation updateExpense($input: ExpenseInput!) {
+        updateExpense(input: $input) {
+          id
+          note
+          cost
+          date
+          category {
+            id
+            name
+            icon
+            color
+          }
+        }
+      }
+    `;
+
+    const response = await apolloClient.query({
+      mutation,
+      variables: {
+        input: expense,
+      },
+    });
+
     commit('UPDATE_EXPENSE', response.data.updateExpense);
   },
-  async deleteExpense({ commit }, payload) {
-    await apolloClient.mutate(payload);
+  async deleteExpense({ commit }, id) {
+    const mutation = gql`
+      mutation deleteExpense($id: ID!) {
+        deleteExpense(id: $id)
+      }
+    `;
 
-    commit('DELETE_EXPENSE', payload.variables.id);
-  }
+    await apolloClient.mutate({
+      mutation,
+      variables: { id },
+    });
+
+    commit('DELETE_EXPENSE', id);
+  },
 };
 
 const mutations = {
@@ -44,11 +119,11 @@ const mutations = {
     state.expensesList.push(expense);
   },
   UPDATE_EXPENSE(state, expense) {
-    let expenseToUpdate = state.expensesList.find(exp => exp.id === expense.id)
+    let expenseToUpdate = state.expensesList.find(exp => exp.id === expense.id);
     expenseToUpdate = expense;
   },
   DELETE_EXPENSE(state, id) {
-    let index = state.expensesList.findIndex(exp => exp.id === id);
+    const index = state.expensesList.findIndex(exp => exp.id === id);
     state.expensesList.splice(index, 1);
   },
   SET_LOADING(state, loading) {

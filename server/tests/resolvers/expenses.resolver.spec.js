@@ -2,7 +2,7 @@ const axios = require('axios');
 
 describe('Expense Resolver', () => {
   let expense1;
-  let cateory1;
+  let category1;
 
   before(async () => {
     await truncateTables();
@@ -82,8 +82,8 @@ describe('Expense Resolver', () => {
     context('#updateExpense', () => {
       it('responds with status 200', async () => {
         const query = `
-          mutation updateExpense($id: ID!, $input: ExpenseInput!){
-            updateExpense(id: $id, input: $input) {
+          mutation updateExpense($input: ExpenseInput!){
+            updateExpense(input: $input) {
               id
               cost
               note
@@ -92,8 +92,8 @@ describe('Expense Resolver', () => {
           }
         `;
         const variables = {
-          id: expense1.id,
           input: {
+            id: expense1.id,
             cost: '3.99',
           },
         };

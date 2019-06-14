@@ -6,7 +6,7 @@ module.exports = `
 
   type Mutation {
     createExpense(input: ExpenseInput!): Expense!
-    updateExpense(id: ID!, input: ExpenseInput!): Expense!
+    updateExpense(input: ExpenseInput!): Expense!
     deleteExpense(id: ID!): Boolean!
   }
 
@@ -21,6 +21,7 @@ module.exports = `
   }
 
   input ExpenseInput {
+    id: ID
     cost: String
     note: String
     date: Date

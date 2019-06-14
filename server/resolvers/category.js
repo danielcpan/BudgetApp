@@ -13,9 +13,9 @@ module.exports = {
     createCategory: (parent, { input }, { models }, info) => (
       models.Category.create(input)
     ),
-    updateCategory: async (parent, { id, input }, { models }, info) => {
-      await models.Category.update(input, { where: { id } });
-      return models.Category.findByPk(id);
+    updateCategory: async (parent, { input }, { models }, info) => {
+      await models.Category.update(input, { where: { id: input.id } });
+      return models.Category.findByPk(input.id);
     },
     deleteCategory: (parent, { id }, { models }, info) => (
       models.Category.destroy({ where: { id } })
