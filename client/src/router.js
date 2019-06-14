@@ -21,18 +21,6 @@ export default new Router({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      children: [
-        {
-          path: 'new',
-          name: 'New',
-          component: ExpenseForm
-        },
-        {
-          path: ':id/edit',
-          name: 'Edit',
-          component: ExpenseForm
-        }        
-      ]
     },
     {
       path: '/test',

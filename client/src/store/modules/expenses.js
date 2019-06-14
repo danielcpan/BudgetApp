@@ -4,11 +4,13 @@
 import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
 
-import EXPENSE_QUERY from '../../graphql/Expense';
-import EXPENSES_QUERY from '../../graphql/Expenses';
-import CREATE_EXPENSE_MUTATION from '../../graphql/CreateExpense';
-import UPDATE_EXPENSE_MUTATION from '../../graphql/UpdateExpense';
-import DELETE_EXPENSE_MUTATION from '../../graphql/DeleteExpense';
+import {
+  EXPENSE_QUERY, 
+  EXPENSES_QUERY, 
+  CREATE_EXPENSE_MUTATION,
+  UPDATE_EXPENSE_MUTATION,
+  DELETE_EXPENSE_MUTATION
+} from '../../graphql/expense';
 
 const state = () => ({
   currentExpense: {
@@ -54,7 +56,7 @@ const actions = {
   },
   async getExpensesList({ commit }, userId) {
     commit('SET_LOADING', true);
-    
+
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
       variables: {
@@ -68,7 +70,7 @@ const actions = {
   async createExpense({ commit }, expense) {
     const response = await apolloClient.mutate({
       mutation: CREATE_EXPENSE_MUTATION,
-      varaibles: {
+      variables: {
         input: expense,
       }
     });
@@ -76,7 +78,8 @@ const actions = {
     commit('CREATE_EXPENSE', response.data.createExpense);
   },
   async updateExpense({ commit }, expense) {
-    const response = await apolloClient.query({
+    console.log(expense)
+    const response = await apolloClient.mutate({
       mutation: UPDATE_EXPENSE_MUTATION,
       variables: {
         input: expense,

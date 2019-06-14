@@ -7,7 +7,7 @@
           <v-card>
             <v-container grid-list-md pt-0>
             <v-card-title>
-              <span class="dp-head-1 pt-3 pb-0">{{ $route.name }} Expense Details</span>
+              <span class="dp-head-1 pt-3 pb-0">{{ $route.name === 'New' ? 'Add' : 'Edit' }} Expense Details</span>
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>
@@ -19,7 +19,7 @@
                   <date-field v-model="expense.date"></date-field>
                 </v-flex>            
                 <v-flex xs12>
-                  <category-field v-model="expense.category.id"></category-field>
+                  <category-field v-model="expense.category"></category-field>
                 </v-flex>
                 <v-flex xs12>
                   <note-field v-model="expense.note"></note-field>
@@ -33,7 +33,7 @@
                 @click="submit()"
                 type="button"
                 class="dp-btn dp-btn--primary dp-btn-size--medium">
-                  Add Expense
+                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Expense
               </button>
             </v-card-actions>
             </v-container>
@@ -68,16 +68,30 @@ export default {
     }),
   },
   created() {
-    if (this.$route.name == 'Edit') {
-      this.getExpense(this.$route.params.id)
-    } else {
+    if (this.$route.name == 'New') {
       this.clearCurrentExpense();
+    } else {
+      this.getExpense(this.$route.params.id);
     }
   },
   methods: {
     ...mapActions('expenses', ['getExpense', 'clearCurrentExpense', 'createExpense', 'updateExpense']),
     submit() {
-      this.createExpense(this.expense);
+      const expenseToSubmit = {
+        id: this.expense.id,
+        cost: this.expense.cost,
+        note: this.expense.note,
+        date: this.expense.date || new Date().toISOString().substr(0, 10),
+        categoryId: this.expense.category.id,
+        userId: this.expense.userId
+      }
+      if (this.$route.name === 'New') { 
+        delete expenseToSubmit.id;
+        this.createExpense(expenseToSubmit);
+      } else {
+        this.updateExpense(expenseToSubmit);
+      }
+      this.$router.push('/');
     },
   },
 };

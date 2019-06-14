@@ -25,7 +25,7 @@ module.exports = `
     cost: String
     note: String
     date: Date
-    userId: Int
-    categoryId: Int
+    userId: ID
+    categoryId: ID
   }
 `;

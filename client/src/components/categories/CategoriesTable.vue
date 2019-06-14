@@ -138,23 +138,6 @@ import { mapState, mapActions } from 'vuex';
 import CategoryForm from './CategoryForm.vue';
 import SearchField from '../general/SearchField.vue';
 
-const GET_CATEGORIES = gql`
-  query getCategories($userId: ID!){
-    categories(userId: $userId) {
-      id
-      name
-      icon
-      color
-      totalExpenses
-      expenses {
-        note
-        cost
-        date
-      }
-    }
-  }
-`;
-
 export default {
   components: {
     CategoryForm,
@@ -188,12 +171,7 @@ export default {
   },
   mounted() {
     this.getCurrentUser();
-    this.getCategoriesList({
-      query: GET_CATEGORIES,
-      variables: {
-        userId: 1,
-      },
-    });
+    this.getCategoriesList(1);
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),

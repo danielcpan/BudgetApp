@@ -4,16 +4,26 @@
 
 import { apolloClient } from '../../apolloProvider';
 
+import {
+  CATEGORY_QUERY, 
+  CATEGORIES_QUERY
+} from '../../graphql/category';
+
 const state = () => ({
   categoriesList: [],
   loading: false,
 });
 
 const actions = {
-  async getCategoriesList({ commit }, payload) {
+  async getCategoriesList({ commit }, userId) {
     commit('SET_LOADING', true);
 
-    const response = await apolloClient.query(payload);
+    const response = await apolloClient.query({
+      query: CATEGORIES_QUERY,
+      variables: {
+        userId
+      }
+    });
     commit('SET_LOADING', false);
     commit('GET_CATEGORIES_LIST', response.data.categories);
   },

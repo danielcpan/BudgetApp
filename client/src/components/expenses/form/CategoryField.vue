@@ -3,7 +3,7 @@
     <div class="field-title">Category</div>
     <v-select
       v-model="category"
-      @input="$emit('input', category.id)"
+      @input="$emit('input', category)"
       :items="categories"
       label="Category"
       required
@@ -50,19 +50,25 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: ['value'],
   data: () => ({
-    categories: [
-      { name: 'Eating Out', icon: 'fa-utensils', color: '#5ad09a' },
-      { name: 'Rent', icon: 'fa-home', color: '#ff0000' },
-    ],
     category: {},
   }),
+  computed: {
+    ...mapState({
+      categories: state => state.categories.categoriesList,
+    }),
+  },
   mounted() {
+    this.getCategoriesList(1);
     this.category = this.value;
   },
+  methods: {
+    ...mapActions('categories', ['getCategoriesList']),
+  }
 };
 </script>
 
