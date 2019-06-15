@@ -7,7 +7,7 @@
 
 <script>
 import CategoriesTable from '../components/categories/CategoriesTable.vue';
-import ExpensesTable from '../components/expenses/ExpensesTable.vue';
+import ExpensesTable from '../components/expenses/table/ExpensesTable.vue';
 
 export default {
   components: {

@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import Dashboard from './views/Dashboard.vue';
 import Test from './views/Test.vue';
 // import ExpensesTable from './components/expenses/ExpensesTable.vue';
-import ExpenseForm from './components/expenses/ExpenseForm.vue';
+import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
 import Index from './views/Index.vue';
 
 Vue.use(Router);

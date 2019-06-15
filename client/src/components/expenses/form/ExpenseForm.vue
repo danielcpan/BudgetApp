@@ -1,5 +1,5 @@
 <template>
-  <div id="category-form" class="dp-form" v-if="!$store.state.expenses.loading">
+  <div id="expense-form" class="dp-form" v-if="!$store.state.expenses.loading">
     {{ $route.params.id }}
     <v-container fluid>
       <v-layout row wrap justify-center align-center>
@@ -47,10 +47,10 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 
-import CostField from './form/CostField.vue';
-import CategoryField from './form/CategoryField.vue';
-import DateField from './form/DateField.vue';
-import NoteField from './form/NoteField.vue';
+import CostField from './CostField.vue';
+import CategoryField from './CategoryField.vue';
+import DateField from './DateField.vue';
+import NoteField from './NoteField.vue';
 
 export default {
   components: {

@@ -26,6 +26,7 @@ const state = () => ({
     userId: 1,
   },
   expensesList: [],
+  search: '',
   loading: false,
 });
 
@@ -39,6 +40,9 @@ const actions = {
   },
   clearCurrentExpense({ commit }) {
     commit('CLEAR_CURRENT_EXPENSE');
+  },
+  setSearch({ commit }, search) {
+    commit('SET_SEARCH', search);
   },
   async getExpense({ commit }, id) {
     commit('SET_LOADING', true);
@@ -114,6 +118,9 @@ const mutations = {
       },
       userId: 1,
     };
+  },
+  SET_SEARCH(state, search) {
+    state.search = search;
   },
   GET_EXPENSE(state, expense) {
     state.currentExpense = expense;
