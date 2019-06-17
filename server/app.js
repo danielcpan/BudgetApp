@@ -21,10 +21,10 @@ const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars
 // db.sequelize.close()
 
 // if (process.env.NODE_ENV === 'development') {
-//   // Sync the database models
-//   models.sequelize.sync({
-//     force: true,
-//   });
+  // Sync the database models
+  models.sequelize.sync({
+    force: true,
+  });
 // }
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
@@ -54,6 +54,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
 });
 
-console.log(process.env.VUE_APP_HOST)
+console.log(process.env.DATABASE_URL)
 
 module.exports = app;
