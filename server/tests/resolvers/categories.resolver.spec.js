@@ -26,7 +26,7 @@ describe('Category Resolver', () => {
         const variables = {
           id: category1.id,
         };
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query, variables } });
+        const response = await axios.get('http://localhost:5000/graphql', { params: { query, variables } });
         expect(response.status).to.equal(200);
         expect(response.data.errors).to.be.undefined;
       });
@@ -44,7 +44,7 @@ describe('Category Resolver', () => {
             }
           }
         `;
-        const response = await axios.get('http://localhost:4000/graphql', { params: { query } });
+        const response = await axios.get('http://localhost:5000/graphql', { params: { query } });
         expect(response.status).to.equal(200);
         expect(response.data.errors).to.be.undefined;
       });
@@ -72,7 +72,7 @@ describe('Category Resolver', () => {
             userId: user1.id,
           },
         };
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        const response = await axios.post('http://localhost:5000/graphql', { query, variables });
         expect(response.status).to.equal(200);
         expect(response.data.errors).to.be.undefined;
       });
@@ -96,7 +96,7 @@ describe('Category Resolver', () => {
             name: 'Leisure',
           },
         };
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        const response = await axios.post('http://localhost:5000/graphql', { query, variables });
         expect(response.status).to.equal(200);
         expect(response.data.errors).to.be.undefined;
       });
@@ -112,7 +112,7 @@ describe('Category Resolver', () => {
         const variables = {
           id: category1.id,
         };
-        const response = await axios.post('http://localhost:4000/graphql', { query, variables });
+        const response = await axios.post('http://localhost:5000/graphql', { query, variables });
         expect(response.status).to.equal(200);
         expect(response.data.errors).to.be.undefined;
       });

@@ -48,4 +48,10 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
+app.use(express.static('public'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+});
+
 module.exports = app;
