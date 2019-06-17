@@ -5,7 +5,7 @@ import ApolloClient from 'apollo-boost';
 Vue.use(VueApollo);
 
 export const apolloClient = new ApolloClient({
-  uri: 'https://budget-app-daniel-pan.herokuapp',
+  uri: 'https://budget-app-daniel-pan.herokuapp/graphql',
   // uri: 'http://localhost:5000/graphql',
 });
 
