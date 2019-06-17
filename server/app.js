@@ -54,6 +54,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
 });
 
-console.log(__dirname)
+console.log(process.env.VUE_APP_HOST)
 
 module.exports = app;
