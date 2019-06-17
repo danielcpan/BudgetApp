@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint .",
     "client": "vue-cli-service serve client/src/main.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "tests": "node_modules/.bin/mocha --opts server/tests/mocha.opts server/tests/**/*.js --exit"
   },
