@@ -22,10 +22,13 @@ const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars
 
 // if (process.env.NODE_ENV === 'development') {
   // Sync the database models
-  models.sequelize.sync({
-    force: true,
-  });
+  // models.sequelize.sync({
+  //   force: true,
+  // });
 // }
+
+// // seed on start
+// require('./seeders/testData');
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
@@ -56,4 +59,6 @@ app.get('*', (req, res) => {
 
 console.log(process.env.DATABASE_URL)
 
+// seed on start
+require('./seeders/testData');
 module.exports = app;
