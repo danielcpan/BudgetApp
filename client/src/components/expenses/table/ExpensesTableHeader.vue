@@ -15,8 +15,8 @@
       <v-flex xs12 sm12 md6>
         <v-layout row wrap justify-end>
           <v-flex xs6 sm7 md8>
-            <search-field 
-              v-model="search" 
+            <search-field
+              v-model="search"
               label="Search expenses...">
             </search-field>
           </v-flex>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import SearchField from '../../general/SearchField.vue';
 
 export default {
@@ -52,19 +52,18 @@ export default {
       },
       set(val) {
         this.setSearch(val);
-      }
-    }
+      },
+    },
   },
   mounted() {
-    this.setSearch('')
+    this.setSearch('');
   },
   methods: {
-    ...mapActions('expenses', ['setSearch'])
-  }
-}
+    ...mapActions('expenses', ['setSearch']),
+  },
+};
 </script>
 
 <style>
 
 </style>
-

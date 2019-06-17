@@ -21,8 +21,8 @@ describe('Category Model', () => {
 
   describe('Instance Methods', () => {
     let category1;
-    let expense1;
-    let expense2;
+    let expense1; // eslint-disable-line no-unused-vars
+    let expense2; // eslint-disable-line no-unused-vars
 
     before(async () => {
       await truncateTables();

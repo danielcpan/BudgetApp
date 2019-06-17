@@ -105,16 +105,15 @@ export default {
   computed: {
     ...mapState({
       search: state => state.expenses.search,
-    })
-  },  
+    }),
+  },
   methods: {
     ...mapActions('expenses', ['deleteExpense']),
-    format
-  }
-}
+    format,
+  },
+};
 </script>
 
 <style>
 
 </style>
-

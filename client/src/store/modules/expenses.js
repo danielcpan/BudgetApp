@@ -73,7 +73,7 @@ const actions = {
     });
 
     commit('CREATE_EXPENSE', response.data.createExpense);
-    this.dispatch('users/getCurrentUser', { root: true })
+    this.dispatch('users/getCurrentUser', { root: true });
   },
   async updateExpense({ commit }, expense) {
     const response = await apolloClient.mutate({
@@ -84,7 +84,7 @@ const actions = {
     });
 
     commit('UPDATE_EXPENSE', response.data.updateExpense);
-    this.dispatch('users/getCurrentUser', { root: true })
+    this.dispatch('users/getCurrentUser', { root: true });
   },
   async deleteExpense({ commit }, id) {
     await apolloClient.mutate({
@@ -93,11 +93,11 @@ const actions = {
     });
 
     commit('DELETE_EXPENSE', id);
-    this.dispatch('users/getCurrentUser', { root: true })
+    this.dispatch('users/getCurrentUser', { root: true });
   },
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);
-  },  
+  },
 };
 
 const mutations = {
@@ -127,7 +127,7 @@ const mutations = {
   },
   UPDATE_EXPENSE(state, expense) {
     const expenseIndex = state.expensesList.findIndex(exp => exp.id === expense.id);
-    if (expenseIndex !== -1) state.expensesList.splice(expenseIndex, 1, expense);    
+    if (expenseIndex !== -1) state.expensesList.splice(expenseIndex, 1, expense);
   },
   DELETE_EXPENSE(state, id) {
     const index = state.expensesList.findIndex(exp => exp.id === id);
@@ -135,7 +135,7 @@ const mutations = {
   },
   SET_SEARCH(state, search) {
     state.search = search;
-  },  
+  },
   SET_LOADING(state, loading) {
     state.loading = loading;
   },

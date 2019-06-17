@@ -2,7 +2,7 @@ const { factory } = require('factory-girl');
 const faker = require('faker/locale/en');
 const models = require('../../models');
 
-module.exports = factory.define('Expense', models.Expense, (buildOptions = {}) => {
+module.exports = factory.define('Expense', models.Expense, (buildOptions = {}) => { // eslint-disable-line no-unused-vars
   const attrs = {
     cost: () => faker.finance.amount(0, 200),
     note: () => faker.lorem.sentence(),

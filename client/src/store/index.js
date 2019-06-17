@@ -2,18 +2,18 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Snackbar from './modules/snackbar';
-import Users from './modules/users';
-import Categories from './modules/categories';
-import Expenses from './modules/expenses';
+import SnackbarModule from './modules/snackbar';
+import UsersModule from './modules/users';
+import CategoriesModule from './modules/categories';
+import ExpensesModule from './modules/expenses';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    users: Users,
-    categories: Categories,
-    expenses: Expenses,
-    snackbar: Snackbar,
+    users: UsersModule,
+    categories: CategoriesModule,
+    expenses: ExpensesModule,
+    snackbar: SnackbarModule,
   },
 });

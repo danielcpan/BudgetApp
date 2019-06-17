@@ -34,8 +34,8 @@ const actions = {
       query: CATEGORY_QUERY,
       variables: {
         id,
-      }
-    })
+      },
+    });
 
     commit('SET_LOADING', false);
     commit('GET_CATEGORY', response.data.category);
@@ -49,7 +49,7 @@ const actions = {
         userId,
       },
     });
-    
+
     commit('SET_LOADING', false);
     commit('GET_CATEGORIES_LIST', response.data.categories);
   },
@@ -57,7 +57,7 @@ const actions = {
     const response = await apolloClient.mutate({
       mutation: CREATE_CATEGORY_MUTATION,
       variables: {
-        input: category
+        input: category,
       },
     });
 
@@ -67,16 +67,16 @@ const actions = {
     const response = await apolloClient.mutate({
       mutation: UPDATE_CATEGORY_MUTATION,
       variables: {
-        input: category
+        input: category,
       },
     });
 
     commit('UPDATE_CATEGORY', response.data.updateCategory);
-    this.dispatch('expenses/getExpensesList', 1, { root: true })
+    this.dispatch('expenses/getExpensesList', 1, { root: true });
   },
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);
-  }
+  },
 };
 
 const mutations = {
@@ -88,11 +88,11 @@ const mutations = {
       id: '',
       name: '',
       icon: '',
-      color: '',      
-    }
+      color: '',
+    };
   },
   GET_CATEGORY(state, category) {
-    state.currentCategory = category
+    state.currentCategory = category;
   },
   GET_CATEGORIES_LIST(state, categories) {
     state.categoriesList = categories;

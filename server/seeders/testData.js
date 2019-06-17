@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 const { factory } = require('factory-girl');
 require('../tests/factories');
 

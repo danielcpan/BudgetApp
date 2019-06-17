@@ -31,16 +31,6 @@ module.exports = {
 
       return v.toJSON();
     },
-    // serialize(value) {
-    //   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    //   const year = value.getFullYear();
-    //   const monthNumber = (1 + value.getMonth()).toString().padStart(2, '0');
-    //   const month = monthNames[monthNumber - 1];
-    //   const day = value.getDate().toString().padStart(2, '0');
-
-    //   return `${month} ${day}, ${year}`;
-    // },
 
     parseValue(value) {
       const date = new Date(value);

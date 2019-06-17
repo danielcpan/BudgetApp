@@ -6,7 +6,10 @@
           <v-card>
             <v-container grid-list-md pt-0>
             <v-card-title>
-              <span class="dp-head-1 pt-3 pb-0">{{ $route.name === 'New' ? 'Add' : 'Edit' }} Category Details</span>
+              <span
+                class="dp-head-1 pt-3 pb-0">
+                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Category Details
+              </span>
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>
@@ -23,7 +26,12 @@
               </v-layout>
             </v-card-text>
             <v-card-actions class="px-3">
-              <router-link to="/" tag="button" class="dp-btn dp-btn--secondary dp-btn-size--medium">Cancel</router-link>
+              <router-link
+                to="/"
+                tag="button"
+                class="dp-btn dp-btn--secondary dp-btn-size--medium">
+                  Cancel
+              </router-link>
               <v-spacer></v-spacer>
               <button
                 @click="submit()"
@@ -55,22 +63,22 @@ export default {
   },
   computed: {
     ...mapState({
-      category: state => state.categories.currentCategory
-    })
+      category: state => state.categories.currentCategory,
+    }),
   },
   created() {
     if (this.$route.name === 'New') {
       this.clearCurrentCategory();
     } else {
       this.getCategory(this.$route.params.id);
-    }    
+    }
   },
   methods: {
     ...mapActions('categories', [
-      'getCategory', 
-      'clearCurrentCategory', 
-      'createCategory', 
-      'updateCategory'
+      'getCategory',
+      'clearCurrentCategory',
+      'createCategory',
+      'updateCategory',
     ]),
     submit() {
       const categoryToSubmit = {

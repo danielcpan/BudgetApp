@@ -1,6 +1,9 @@
 <template>
-  <div id="expenses-table" class="dp-table" v-if="!$store.state.users.loading && !$store.state.expenses.loading">
-    <expenses-table-header 
+  <div
+    id="expenses-table"
+    class="dp-table"
+    v-if="!$store.state.users.loading && !$store.state.expenses.loading">
+    <expenses-table-header
       :headerValue="user.totalExpenses">
     </expenses-table-header>
     <v-container pt-0 fluid>
@@ -22,7 +25,7 @@ import ExpensesTableBody from './ExpensesTableBody.vue';
 export default {
   components: {
     ExpensesTableHeader,
-    ExpensesTableBody
+    ExpensesTableBody,
   },
   computed: {
     ...mapState({

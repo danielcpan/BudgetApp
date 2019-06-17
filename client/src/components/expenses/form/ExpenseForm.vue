@@ -6,7 +6,10 @@
           <v-card>
             <v-container grid-list-md pt-0>
             <v-card-title>
-              <span class="dp-head-1 pt-3 pb-0">{{ $route.name === 'New' ? 'Add' : 'Edit' }} Expense Details</span>
+              <span
+                class="dp-head-1 pt-3 pb-0">
+                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Expense Details
+              </span>
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>
@@ -26,7 +29,12 @@
               </v-layout>
             </v-card-text>
             <v-card-actions class="px-3">
-              <router-link to="/" tag="button" class="dp-btn dp-btn--secondary dp-btn-size--medium">Cancel</router-link>
+              <router-link
+                to="/"
+                tag="button"
+                class="dp-btn dp-btn--secondary dp-btn-size--medium"
+              >Cancel
+              </router-link>
               <v-spacer></v-spacer>
               <button
                 @click="submit()"
@@ -73,10 +81,10 @@ export default {
   },
   methods: {
     ...mapActions('expenses', [
-      'getExpense', 
-      'clearCurrentExpense', 
-      'createExpense', 
-      'updateExpense'
+      'getExpense',
+      'clearCurrentExpense',
+      'createExpense',
+      'updateExpense',
     ]),
     submit() {
       const expenseToSubmit = {

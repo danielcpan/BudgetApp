@@ -17,13 +17,13 @@ const actions = {
   async getCurrentUser({ commit }) {
     commit('SET_LOADING', true);
 
-    const response = await apolloClient.query({ 
+    const response = await apolloClient.query({
       query: USER_QUERY,
       variables: {
-        id: 1
-      }
+        id: 1,
+      },
     });
-    
+
     commit('SET_LOADING', false);
     commit('GET_CURRENT_USER', response.data.user);
   },

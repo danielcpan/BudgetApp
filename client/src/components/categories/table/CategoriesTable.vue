@@ -1,5 +1,8 @@
 <template>
-  <div id="categories-table" class="dp-table" v-if="!$store.state.users.loading && !$store.state.categories.loading">
+  <div
+    id="categories-table"
+    class="dp-table"
+    v-if="!$store.state.users.loading && !$store.state.categories.loading">
     <catagories-table-header :headerValue="categories.length"></catagories-table-header>
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>

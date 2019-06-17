@@ -2,8 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Dashboard from './views/Dashboard.vue';
-import Test from './views/Test.vue';
-// import ExpensesTable from './components/expenses/ExpensesTable.vue';
 import CategoryForm from './components/categories/form/CategoryForm.vue';
 import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
 import Index from './views/Index.vue';
@@ -24,11 +22,6 @@ export default new Router({
       component: Dashboard,
     },
     {
-      path: '/test',
-      name: 'Test',
-      component: Test,
-    },
-    {
       path: '/category',
       name: 'Category',
       component: Index,
@@ -44,7 +37,7 @@ export default new Router({
           component: CategoryForm,
         },
       ],
-    },    
+    },
     {
       path: '/expense',
       name: 'Expense',
@@ -62,15 +55,5 @@ export default new Router({
         },
       ],
     },
-    // {
-    //   path: '/expense/:id/edit',
-    //   name: 'expense',
-    //   component: ExpenseForm,
-    // },
-    // {
-    //   path: '/expense/:id/new',
-    //   name: 'Expense Form',
-    //   component: ExpenseForm,
-    // },
   ],
 });

@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import SearchField from '../../general/SearchField.vue';
 
 export default {
   components: {
     SearchField,
   },
-  props: ['headerValue'],  
+  props: ['headerValue'],
   computed: {
     search: {
       get() {
@@ -52,19 +52,18 @@ export default {
       },
       set(val) {
         this.setSearch(val);
-      }
-    }
+      },
+    },
   },
   mounted() {
-    this.setSearch('')
-  },  
-  methods: {
-    ...mapActions('categories', ['setSearch'])
+    this.setSearch('');
   },
-}
+  methods: {
+    ...mapActions('categories', ['setSearch']),
+  },
+};
 </script>
 
 <style>
 
 </style>
-

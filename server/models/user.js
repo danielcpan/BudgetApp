@@ -61,9 +61,9 @@ module.exports = class User extends Sequelize.Model {
     let totalExpense = 0;
     const expenses = await this.getExpenses();
 
-    for (const expense of expenses) {
+    expenses.forEach((expense) => {
       totalExpense += parseFloat(expense.cost);
-    }
+    });
 
     return totalExpense.toFixed(2);
   }
