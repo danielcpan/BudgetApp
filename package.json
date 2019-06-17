@@ -109,5 +109,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danielcpan/BudgetApp.git"
-  }
+  },
+  "engines": {
+    "node": "11.1.0"
+  }  
 }
