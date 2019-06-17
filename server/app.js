@@ -60,5 +60,5 @@ app.get('*', (req, res) => {
 console.log(process.env.DATABASE_URL)
 
 // seed on start
-require('./seeders/testData');
+// require('./seeders/testData');
 module.exports = app;
