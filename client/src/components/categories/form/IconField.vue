@@ -13,20 +13,19 @@
       <template slot="selection" slot-scope="data">
         <template>
           <v-flex xs9>
-            {{data.item.name}}
+            {{data.item}}
           </v-flex>
-          <v-icon>{{data.item.name}}</v-icon>
         </template>
       </template>
 
       <template slot="item" slot-scope="data">
         <template>
           <v-layout row>
-            <v-flex xs9>
-              {{data.item.name}}
+            <v-flex xs10>
+              {{data.item}}
             </v-flex>
             <v-flex xs2>
-              <v-icon>{{data.item.name}}</v-icon>
+              <v-icon>{{data.item}}</v-icon>
             </v-flex>
           </v-layout>
         </template>
@@ -45,27 +44,25 @@ export default {
   props: ['value'],
   data: () => ({
     iconsList: [
-      { name: 'fa-utensils' },
-      { name: 'fa-home' },
-      { name: 'fa-plug' },
-      { name: 'fa-wrench' },
-      { name: 'fa-briefcase-medical' },
-      { name: 'fa-gifts' },
-      { name: 'fa-shopping-cart' },
-      { name: 'fa-graduation-cap' },
-      { name: 'fa-hamburger' },
-      { name: 'fa-gas-pump' },
-      { name: 'fa-basketball-ball' },
-      { name: 'fa-church' },
-      { name: 'fa-wine-bottle' },
-      { name: 'fa-dog' },
-      { name: 'fa-birthday-cake' },
-      { name: 'fa-mountain' },
-      { name: 'fa-plane-departure' },
+      'fa-utensils',
+      'fa-home',
+      'fa-plug',
+      'fa-wrench',
+      'fa-briefcase-medical',
+      'fa-gifts',
+      'fa-shopping-cart',
+      'fa-graduation-cap',
+      'fa-hamburger',
+      'fa-gas-pump',
+      'fa-basketball-ball',
+      'fa-church',
+      'fa-wine-bottle',
+      'fa-dog',
+      'fa-birthday-cake',
+      'fa-mountain',
+      'fa-plane-departure',
     ],
-    icon: {
-      name: 'fa-utensils',
-    },
+    icon: 'fa-utensils',
   }),
   mounted() {
     this.icon = this.value;

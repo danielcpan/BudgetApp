@@ -1,6 +1,5 @@
 <template>
   <div id="expense-form" class="dp-form" v-if="!$store.state.expenses.loading">
-    {{ $route.params.id }}
     <v-container fluid>
       <v-layout row wrap justify-center align-center>
         <v-flex md6>
@@ -59,10 +58,9 @@ export default {
     DateField,
     NoteField,
   },
-  props: ['value'],
   computed: {
     ...mapState({
-      user: state => state.users.currentUser,
+      // user: state => state.users.currentUser,
       expense: state => state.expenses.currentExpense,
     }),
   },
@@ -74,7 +72,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('expenses', ['getExpense', 'clearCurrentExpense', 'createExpense', 'updateExpense']),
+    ...mapActions('expenses', [
+      'getExpense', 
+      'clearCurrentExpense', 
+      'createExpense', 
+      'updateExpense'
+    ]),
     submit() {
       const expenseToSubmit = {
         id: this.expense.id,

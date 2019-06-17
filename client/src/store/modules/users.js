@@ -2,8 +2,11 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 
-import gql from 'graphql-tag';
 import { apolloClient } from '../../apolloProvider';
+
+import {
+  USER_QUERY,
+} from '../../graphql/user';
 
 const state = () => ({
   currentUser: {},
@@ -13,15 +16,14 @@ const state = () => ({
 const actions = {
   async getCurrentUser({ commit }) {
     commit('SET_LOADING', true);
-    const query = gql`
-      query {
-        user(id: 1) {
-          totalExpenses
-        }
-      }
-    `;
 
-    const response = await apolloClient.query({ query });
+    const response = await apolloClient.query({ 
+      query: USER_QUERY,
+      variables: {
+        id: 1
+      }
+    });
+    
     commit('SET_LOADING', false);
     commit('GET_CURRENT_USER', response.data.user);
   },

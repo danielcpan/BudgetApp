@@ -35,14 +35,8 @@ const getters = {
 };
 
 const actions = {
-  setCurrentExpense({ commit }, expense) {
-    commit('SET_CURRENT_EXPENSE', expense);
-  },
   clearCurrentExpense({ commit }) {
     commit('CLEAR_CURRENT_EXPENSE');
-  },
-  setSearch({ commit }, search) {
-    commit('SET_SEARCH', search);
   },
   async getExpense({ commit }, id) {
     commit('SET_LOADING', true);
@@ -79,6 +73,7 @@ const actions = {
     });
 
     commit('CREATE_EXPENSE', response.data.createExpense);
+    this.dispatch('users/getCurrentUser', { root: true })
   },
   async updateExpense({ commit }, expense) {
     const response = await apolloClient.mutate({
@@ -89,6 +84,7 @@ const actions = {
     });
 
     commit('UPDATE_EXPENSE', response.data.updateExpense);
+    this.dispatch('users/getCurrentUser', { root: true })
   },
   async deleteExpense({ commit }, id) {
     await apolloClient.mutate({
@@ -97,13 +93,14 @@ const actions = {
     });
 
     commit('DELETE_EXPENSE', id);
+    this.dispatch('users/getCurrentUser', { root: true })
   },
+  setSearch({ commit }, search) {
+    commit('SET_SEARCH', search);
+  },  
 };
 
 const mutations = {
-  SET_CURRENT_EXPENSE(state, expense) {
-    state.currentExpense = expense;
-  },
   CLEAR_CURRENT_EXPENSE(state) {
     state.currentExpense = {
       id: '',
@@ -119,9 +116,6 @@ const mutations = {
       userId: 1,
     };
   },
-  SET_SEARCH(state, search) {
-    state.search = search;
-  },
   GET_EXPENSE(state, expense) {
     state.currentExpense = expense;
   },
@@ -132,13 +126,16 @@ const mutations = {
     state.expensesList.push(expense);
   },
   UPDATE_EXPENSE(state, expense) {
-    let expenseToUpdate = state.expensesList.find(exp => exp.id === expense.id);
-    expenseToUpdate = expense;
+    const expenseIndex = state.expensesList.findIndex(exp => exp.id === expense.id);
+    if (expenseIndex !== -1) state.expensesList.splice(expenseIndex, 1, expense);    
   },
   DELETE_EXPENSE(state, id) {
     const index = state.expensesList.findIndex(exp => exp.id === id);
     state.expensesList.splice(index, 1);
   },
+  SET_SEARCH(state, search) {
+    state.search = search;
+  },  
   SET_LOADING(state, loading) {
     state.loading = loading;
   },

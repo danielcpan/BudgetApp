@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CategoriesTable from '../components/categories/CategoriesTable.vue';
+import CategoriesTable from '../components/categories/table/CategoriesTable.vue';
 import ExpensesTable from '../components/expenses/table/ExpensesTable.vue';
 
 export default {

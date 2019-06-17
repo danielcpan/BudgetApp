@@ -5,8 +5,7 @@
       <template v-slot:activator="{on}">
         <v-text-field
           label="Color"
-          v-model="color.hex"
-          @input="$emit('input', color)"
+          v-model="color"
           required
           single-line
           outline
@@ -16,7 +15,7 @@
           </template>
         </v-text-field>
       </template>
-      <swatches v-model="color"></swatches>
+      <swatches v-model="swatchColor" @input="$emit('input', swatchColor.hex)"></swatches>
     </v-menu>
   </div>
 </template>
@@ -30,12 +29,17 @@ export default {
   },
   props: ['value'],
   data: () => ({
-    color: {
-      hex: '#000000',
-    },
+    swatchColor: '',
   }),
-  mounted() {
-    this.color = this.value;
+  computed: {
+    color: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit('input', val);
+      }
+    }
   },
 };
 </script>

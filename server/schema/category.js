@@ -17,6 +17,7 @@ module.exports = `
     color: String!
     totalExpenses: String!
     expenses: [Expense!]!
+    userId: ID!
   }
 
   input CategoryInput {

@@ -3,9 +3,10 @@
     <div class="field-title">Category</div>
     <v-select
       v-model="category"
-      @input="$emit('input', category)"
+      
       :items="categories"
       label="Category"
+      item-value="id"
       required
       single-line
       outline
@@ -54,17 +55,29 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   props: ['value'],
-  data: () => ({
-    category: {},
-  }),
+  // data: () => ({
+  //   category: {},
+  // }),
   computed: {
     ...mapState({
       categories: state => state.categories.categoriesList,
     }),
+    category: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        console.log("woot")
+        console.log(val)
+        const pickedCategory = this.categories.find(cat => cat.id === val)
+        this.$emit('input', pickedCategory);
+        // categories.find()
+      }
+    }
   },
   mounted() {
     this.getCategoriesList(1);
-    this.category = this.value;
+    // this.category = this.value;
   },
   methods: {
     ...mapActions('categories', ['getCategoriesList']),
