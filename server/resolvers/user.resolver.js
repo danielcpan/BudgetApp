@@ -1,4 +1,5 @@
 /* eslint no-unused-vars: 0 */
+const bcrypt = require('bcrypt');
 
 module.exports = {
   User: {
@@ -10,9 +11,15 @@ module.exports = {
     users: (parent, args, { models }, info) => models.User.findAll(),
   },
   Mutation: {
-    createUser: (parent, { input }, { models }, info) => (
-      models.User.create(input)
-    ),
+    register: async (parent, { input: { password, ...otherInputArgs }}, { models }, info) => {
+      try {
+        const hashedPassword = await bcrypt.hash(password, 12);
+        await models.User.create({ ...otherInputArgs, password: hashedPassword });
+        return true;
+      } catch (err) {
+        return false;
+      }
+    },
     updateUser: async (parent, { input }, { models }, info) => {
       await models.User.update(input, { where: { id: input.id } });
       return models.User.findByPk(input.id);

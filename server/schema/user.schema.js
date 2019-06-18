@@ -5,17 +5,17 @@ module.exports = `
   }
 
   type Mutation {
-    createUser(input: UserInput!): User!
+    register(input: UserInput!): Boolean!
     updateUser(input: UserInput!): User!
     deleteUser(id: ID!): Boolean!
   }
 
   type User {
     id: ID!
-    email: String!
-    status: String!
     firstName: String!
     lastName: String!
+    email: String!
+    password: String!
     userRole: String!
     totalExpenses: String!
     expenses: [Expense!]!
@@ -26,6 +26,7 @@ module.exports = `
     firstName: String
     lastName: String
     email: String
+    password: String
     userRole: String
   }
 `;

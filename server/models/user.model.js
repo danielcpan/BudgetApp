@@ -34,6 +34,9 @@ module.exports = class User extends Sequelize.Model {
           isEmail: true,
         },
       },
+      password: {
+        type: DataTypes.STRING(255),
+      },
       userRole: {
         type: DataTypes.STRING(255),
         defaultValue: 'GUEST',
