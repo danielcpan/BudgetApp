@@ -2,9 +2,9 @@
 const Sequelize = require('sequelize');
 
 // Models
-const User = require('./user');
-const Expense = require('./expense');
-const Category = require('./category');
+const User = require('./user.model');
+const Expense = require('./expense.model');
+const Category = require('./category.model');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env]; // eslint-disable-line import/no-dynamic-require
