@@ -2,10 +2,11 @@ module.exports = `
   type Query {
     user(id: ID!): User!
     users: [User!]!
+    isEmailUnique(email: String!): Boolean!
   }
 
   type Mutation {
-    register(input: UserInput!): Boolean!
+    createUser(input: UserInput!): User!
     updateUser(input: UserInput!): User!
     deleteUser(id: ID!): Boolean!
   }

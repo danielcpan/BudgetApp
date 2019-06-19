@@ -50,7 +50,7 @@
                 </v-flex>
               </template>
               <v-list>
-                <v-list-tile @click="$router.push({ path: `/expense/${props.item.id}/edit`})">
+                <v-list-tile @click="$router.push({ path: `/expenses/${props.item.id}/edit`})">
                   <v-list-tile-title>
                     <v-layout justfy-center>
                       <v-flex xs1>

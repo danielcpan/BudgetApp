@@ -9,16 +9,16 @@ module.exports = {
   Query: {
     user: (parent, { id }, { models }, info) => models.User.findByPk(id),
     users: (parent, args, { models }, info) => models.User.findAll(),
+    isEmailUnique: async (parent, { email }, { models }, info) => {
+      const user = await models.User.findOne({where: { email: email.toLowerCase() }});
+      return user ? false :true;
+    }
   },
   Mutation: {
-    register: async (parent, { input: { password, ...otherInputArgs }}, { models }, info) => {
-      try {
-        const hashedPassword = await bcrypt.hash(password, 12);
-        await models.User.create({ ...otherInputArgs, password: hashedPassword });
-        return true;
-      } catch (err) {
-        return false;
-      }
+    createUser: async (parent, { input: { password, ...otherInputArgs }}, { models }, info) => {
+      // TODO: Serverside Password Length Validation
+      const hashedPassword = await bcrypt.hash(password, 12);
+      return await models.User.create({ ...otherInputArgs, password: hashedPassword });
     },
     updateUser: async (parent, { input }, { models }, info) => {
       await models.User.update(input, { where: { id: input.id } });

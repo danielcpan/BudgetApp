@@ -4,10 +4,10 @@
       <v-layout row wrap justify-center align-center>
         <v-flex md6>
           <v-card>
-            <v-container grid-list-md pt-0>
+            <v-container grid-list-md>
             <v-card-title>
               <span
-                class="dp-head-1 pt-3 pb-0">
+                class="dp-head-1 pb-0">
                   {{ $route.name === 'New' ? 'Add' : 'Edit' }} Expense Details
               </span>
             </v-card-title>

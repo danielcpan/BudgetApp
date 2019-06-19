@@ -23,7 +23,7 @@
           <v-spacer></v-spacer>
           <v-flex xs5 sm5 md4>
             <button
-              @click="$router.push({ path: '/expense/new'})"
+              @click="$router.push({ path: '/expenses/new'})"
               type="button"
               class="dp-btn dp-btn--primary dp-btn-size--medium"
               style="float: right">

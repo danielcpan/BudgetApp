@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Dashboard from './views/Dashboard.vue';
+import UserForm from './components/users/form/UserForm.vue';
+import UserLoginForm from './components/users/form/UserLoginForm.vue';
 import CategoryForm from './components/categories/form/CategoryForm.vue';
 import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
 import Index from './views/Index.vue';
@@ -22,7 +24,39 @@ export default new Router({
       component: Dashboard,
     },
     {
-      path: '/category',
+      path: '/signup',
+      name: 'Sign Up',
+      component: UserForm
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: UserLoginForm
+    },
+    {
+      path: '/users',
+      name: 'User',
+      component: Index,
+      children: [
+        // {
+        //   path: 'signup',
+        //   name: 'New',
+        //   component: UserForm,
+        // },
+        // {
+        //   path: 'signup',
+        //   name: 'Signup',
+        //   component: UserForm,
+        // },
+        {
+          path: ':id/edit',
+          name: 'Edit',
+          component: UserForm,
+        },
+      ],
+    },    
+    {
+      path: '/categories',
       name: 'Category',
       component: Index,
       children: [
@@ -39,7 +73,7 @@ export default new Router({
       ],
     },
     {
-      path: '/expense',
+      path: '/expenses',
       name: 'Expense',
       component: Index,
       children: [

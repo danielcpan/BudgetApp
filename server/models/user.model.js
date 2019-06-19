@@ -36,6 +36,7 @@ module.exports = class User extends Sequelize.Model {
       },
       password: {
         type: DataTypes.STRING(255),
+        allowNull: false,
       },
       userRole: {
         type: DataTypes.STRING(255),
