@@ -11,7 +11,7 @@ import Index from './views/Index.vue';
 
 Vue.use(Router);
 
-const router = new Router({  
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -29,13 +29,13 @@ const router = new Router({
     {
       path: '/signup',
       name: 'Sign Up',
-      component: UserForm
+      component: UserForm,
     },
     {
       path: '/login',
       name: 'Login',
-      component: UserLoginForm
-    },    
+      component: UserLoginForm,
+    },
     {
       path: '/categories',
       name: 'Category',
@@ -97,13 +97,13 @@ router.beforeEach((to, from, next) => {
       next({
         path: '/login',
         // query: { redirect: to.fullPath }
-      })
+      });
     } else {
-      next()
+      next();
     }
   } else {
-    next()
+    next();
   }
-})
+});
 
 export default router;

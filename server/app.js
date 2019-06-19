@@ -25,10 +25,10 @@ const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars
 // db.sequelize.close()
 
 // if (process.env.NODE_ENV === 'development') {
-  // Sync the database models
-  // models.sequelize.sync({
-  //   force: true,
-  // });
+// Sync the database models
+// models.sequelize.sync({
+//   force: true,
+// });
 // }
 
 // // seed on start
@@ -72,9 +72,9 @@ app.use(addUser);
 
 const server = new ApolloServer({
   schema,
-  context: ({ req }) => {
-    return { models, user: req.user, SECRET, SECRET2 };
-  }
+  context: ({ req }) => ({
+    models, user: req.user, SECRET, SECRET2,
+  }),
 });
 
 server.applyMiddleware({ app });

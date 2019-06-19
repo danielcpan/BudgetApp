@@ -9,7 +9,7 @@ const Category = require('./category.model');
 const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env]; // eslint-disable-line import/no-dynamic-require
 // const sequelize = new Sequelize(config.database, config.username, config.password, config);
-var sequelize = null;
+let sequelize = null;
 
 if (process.env.DATABASE_URL) {
   // the application is executed on Heroku ... use the postgres database
@@ -17,9 +17,9 @@ if (process.env.DATABASE_URL) {
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
-        ssl: true
-    }
-  })
+      ssl: true,
+    },
+  });
 } else {
   // the application is executed on the local machine ... use mysql
   sequelize = new Sequelize(config.database, config.username, config.password, config);

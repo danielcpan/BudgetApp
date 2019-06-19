@@ -10,14 +10,14 @@ module.exports = {
     user: (parent, { id }, { models }, info) => models.User.findByPk(id),
     users: (parent, args, { models }, info) => models.User.findAll(),
     isEmailUnique: async (parent, { email }, { models }, info) => {
-      const user = await models.User.findOne({where: { email: email.toLowerCase() }});
-      return user ? false :true;
-    }
+      const user = await models.User.findOne({ where: { email: email.toLowerCase() } });
+      return !user;
+    },
   },
   Mutation: {
     login: async (parent, { email, password }, { models, SECRET, SECRET2 }, info) => (
       tryLogin(email, password, models, SECRET, SECRET2)
-    ),    
+    ),
     createUser: (parent, { input }, { models }, info) => (
       models.User.create(input)
     ),

@@ -52,7 +52,7 @@ import PasswordField from './PasswordField.vue';
 export default {
   components: {
     EmailField,
-    PasswordField
+    PasswordField,
   },
   data: () => ({
     email: 'Dp@gmail.com',
@@ -63,12 +63,12 @@ export default {
   methods: {
     ...mapActions('users', ['login']),
     submit() {
-      this.login({ 
-        email: this.email, 
-        password: this.password
+      this.login({
+        email: this.email,
+        password: this.password,
       });
       // this.$router.push('/');
-    }
+    },
   },
 };
 </script>

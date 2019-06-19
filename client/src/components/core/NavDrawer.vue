@@ -58,7 +58,7 @@ export default {
   data: () => ({
     mini: true,
     items: [
-      { title: 'Dashboard', icon: 'dashboard', path: "/dashboard" },
+      { title: 'Dashboard', icon: 'dashboard', path: '/dashboard' },
       // { title: 'History', icon: 'history' },
       // { title: 'Goals', icon: 'fas fa-piggy-bank' },
       // { title: 'Save', icon: 'lightbulb' },

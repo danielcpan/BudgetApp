@@ -40,7 +40,7 @@ module.exports = class User extends Sequelize.Model {
         allowNull: false,
         validate: {
           len: [8, 255],
-        },        
+        },
       },
       userRole: {
         type: DataTypes.STRING(255),
@@ -55,8 +55,8 @@ module.exports = class User extends Sequelize.Model {
         afterValidate: async (user) => {
           const hashedPassword = await bcrypt.hash(user.password, 12);
           user.password = hashedPassword;
-        }
-      }      
+        },
+      },
     });
   }
 

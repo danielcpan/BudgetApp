@@ -61,7 +61,7 @@ export default {
   components: {
     NameField,
     EmailField,
-    PasswordField
+    PasswordField,
   },
   data: () => ({
     user: {
@@ -76,7 +76,7 @@ export default {
     submit() {
       this.createUser(this.user);
       this.$router.push('/');
-    }
+    },
   },
 };
 </script>

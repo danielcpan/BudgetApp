@@ -22,20 +22,20 @@ export default {
   props: ['value', 'isDisabled', 'validate'],
   data: () => ({
     email: '',
-    errors: []
+    errors: [],
   }),
   mounted() {
     this.email = this.value;
   },
   watch: {
-     async email(val) {
-       if (!this.validate) return [];
+    async email(val) {
+      if (!this.validate) return [];
       // To reduce unnecessary validation calls to the database
       if (this.isEmailValid(this.email) && this.isEmailLengthValid(this.email)) {
         const isValid = await this.isEmailUnique(val);
         this.errors = isValid ? [] : ['Email address is already being used'];
       }
-    }
+    },
   },
   computed: {
     emailRules() {
@@ -50,8 +50,8 @@ export default {
   },
   methods: {
     isEmailValid(email) {
-      const emailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return emailReg.test(email)
+      const emailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return emailReg.test(email);
     },
     isEmailLengthValid(email) {
       return email.length < 255;
@@ -60,10 +60,10 @@ export default {
       const response = await this.$apollo.query({
         query: IS_EMAIL_UNIQUE_QUERY,
         variables: {
-          email
-        }
-      })
-      
+          email,
+        },
+      });
+
       return response.data.isEmailUnique;
     },
   },

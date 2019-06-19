@@ -92,6 +92,7 @@
     "overrides": [
       {
         "files": "*.spec.js",
+        "excludedFiles": "./dist/js/*.js",
         "rules": {
           "no-unused-expressions": "off"
         }

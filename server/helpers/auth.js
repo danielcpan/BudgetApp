@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const createTokens = async (user, secret, secret2) => {
   const createToken = jwt.sign(
-    { user: _.pick(user, ['id']) }, 
+    { user: _.pick(user, ['id']) },
     secret,
     { expiresIn: '1h' },
   );
@@ -78,12 +78,12 @@ const tryLogin = async (email, password, models, SECRET, SECRET2) => {
     ok: true,
     token,
     refreshToken,
-    user
+    user,
   };
 };
 
 module.exports = {
   createTokens,
   refreshTokens,
-  tryLogin
-}
+  tryLogin,
+};

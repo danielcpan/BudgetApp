@@ -27,7 +27,7 @@ export default {
   props: ['value', 'titleType', 'revealOption'],
   data: () => ({
     password: '',
-    show: false
+    show: false,
   }),
   mounted() {
     this.password = this.value;
@@ -38,9 +38,9 @@ export default {
       const lengthRule = v => (v.length >= 8 && v.length <= 255) || 'Please enter a value between 8 and 255 characters long';
 
       return [requiredRule, lengthRule];
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>

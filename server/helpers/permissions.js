@@ -10,7 +10,7 @@
 //   return baseResolver;
 // };
 
-// module.exports = 
+// module.exports =
 //   createResolver((parent, args, { user }) => {
 //     if (!user || !user.id) {
 //       throw new Error('Not authenticated');
@@ -18,7 +18,7 @@
 //   });
 
 module.exports.auth = next => (root, args, context, info) => {
-  if (!context.currentUser) { throw new Error(`Unauthenticated!`) }
-  
+  if (!context.currentUser) { throw new Error('Unauthenticated!'); }
+
   return next(root, args, context, info);
 };
