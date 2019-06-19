@@ -8,11 +8,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store/index';
 import apolloProvider from './apolloProvider';
-import AsyncComputed from 'vue-async-computed'
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
-Vue.use(AsyncComputed)
 
 new Vue({
   router,

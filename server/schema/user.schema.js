@@ -5,7 +5,16 @@ module.exports = `
     isEmailUnique(email: String!): Boolean!
   }
 
+  type LoginResponse {
+    ok: Boolean!
+    token: String
+    refreshToken: String
+    errors: [Error!]
+    user: User
+  }
+
   type Mutation {
+    login(email: String!, password: String!): LoginResponse!
     createUser(input: UserInput!): User!
     updateUser(input: UserInput!): User!
     deleteUser(id: ID!): Boolean!

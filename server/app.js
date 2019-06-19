@@ -10,6 +10,8 @@ const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schema
 const models = require('./models');
 
 const app = express();
+const SECRET = 'KSAJDJASKDNKASUEIHQJKDMASSD';
+const SECRET2 = 'JAKSDKASDNASDNAKNJQWIOQWEJAS';
 
 // Middleware
 app.use(cors());
@@ -46,7 +48,7 @@ const schema = makeExecutableSchema({
 
 const server = new ApolloServer({
   schema,
-  context: { models },
+  context: { models, SECRET, SECRET2 },
 });
 
 server.applyMiddleware({ app });

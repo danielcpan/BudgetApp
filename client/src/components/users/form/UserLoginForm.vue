@@ -14,10 +14,10 @@
               <v-divider></v-divider>
               <v-layout row wrap pt-3>
                 <v-flex xs12 sm6>
-                  <email-field v-model="user.email" :validate="false"></email-field>
+                  <email-field v-model="email" :validate="false"></email-field>
                 </v-flex>
                 <v-flex xs12 sm6>
-                  <password-field v-model="user.password" titleType="Password" :revealOption="false"></password-field>
+                  <password-field v-model="password" titleType="Password" :revealOption="false"></password-field>
                 </v-flex>
               </v-layout>
             </v-card-text>
@@ -61,9 +61,12 @@ export default {
   computed: {
   },
   methods: {
-    ...mapActions('users', ['createUser']),
+    ...mapActions('users', ['login']),
     submit() {
-      this.createUser(this.user);
+      this.login({ 
+        email: this.email, 
+        password: this.password
+      });
       // this.$router.push('/');
     }
   },

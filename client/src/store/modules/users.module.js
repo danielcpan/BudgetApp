@@ -6,6 +6,7 @@ import { apolloClient } from '../../apolloProvider';
 
 import {
   USER_QUERY,
+  LOGIN_MUTATION,
   CREATE_USER_MUATION,
   UPDATE_USER_MUTATION
 } from '../../graphql/user';
@@ -35,6 +36,21 @@ const actions = {
     commit('SET_LOADING', false);
     commit('GET_CURRENT_USER', response.data.user);
   },
+  async login({ commit }, credentials) {
+    console.log("credentials")
+    console.log(credentials)
+    const response = await apolloClient.mutate({
+      mutation: LOGIN_MUTATION,
+      variables: {
+        email: credentials.email,
+        password: credentials.password
+      }
+    })
+    console.log(response.data.login)
+    if (response.data.login.ok) {
+      commit('SET_CURRENT_USER', response.data.login)
+    }
+  },
   async createUser({ commit }, user) {
     const response = await apolloClient.mutate({
       mutation: CREATE_USER_MUATION,
@@ -60,6 +76,13 @@ const actions = {
 const mutations = {
   GET_CURRENT_USER(state, user) {
     state.currentUser = user;
+  },
+  SET_CURRENT_USER(state, { token, refreshToken, user }) {
+    console.log("token: " + token)
+    console.log("refreshToken: " + refreshToken)
+    state.currentUser = user;
+    localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken);
   },
   CREATE_USER(state, user) {
     state.currentUser = user;
