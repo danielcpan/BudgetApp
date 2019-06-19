@@ -6,10 +6,10 @@ const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 const jwt = require('jsonwebtoken');
-const { refreshTokens } = require('./helpers/auth');
-
 const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
+
 const models = require('./models');
+const { refreshTokens } = require('./helpers/auth');
 
 const app = express();
 const SECRET = 'KSAJDJASKDNKASUEIHQJKDMASSD';

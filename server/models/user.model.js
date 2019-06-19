@@ -54,7 +54,7 @@ module.exports = class User extends Sequelize.Model {
       hooks: {
         afterValidate: async (user) => {
           const hashedPassword = await bcrypt.hash(user.password, 12);
-          user.password = hashedPassword;
+          user.password = hashedPassword; // eslint-disable-line no-param-reassign
         },
       },
     });

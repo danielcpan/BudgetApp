@@ -24,7 +24,11 @@
                   <email-field v-model="user.email" :validate="true"></email-field>
                 </v-flex>
                 <v-flex xs12 sm6>
-                  <password-field v-model="user.password" titleType="Password" :revealOption="true"></password-field>
+                  <password-field
+                    v-model="user.password"
+                    titleType="Password"
+                    :revealOption="true">
+                  </password-field>
                 </v-flex>
               </v-layout>
             </v-card-text>
@@ -52,7 +56,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import NameField from './NameField.vue';
 import EmailField from './EmailField.vue';
 import PasswordField from './PasswordField.vue';

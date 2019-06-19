@@ -29,7 +29,7 @@ export default {
   },
   watch: {
     async email(val) {
-      if (!this.validate) return [];
+      if (!this.validate) return;
       // To reduce unnecessary validation calls to the database
       if (this.isEmailValid(this.email) && this.isEmailLengthValid(this.email)) {
         const isValid = await this.isEmailUnique(val);

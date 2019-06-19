@@ -38,8 +38,8 @@ const actions = {
     commit('GET_CURRENT_USER', response.data.user);
   },
   async login({ commit }, credentials) {
-    console.log('credentials');
-    console.log(credentials);
+    // console.log('credentials');
+    // console.log(credentials);
     const response = await apolloClient.mutate({
       mutation: LOGIN_MUTATION,
       variables: {
@@ -47,7 +47,7 @@ const actions = {
         password: credentials.password,
       },
     });
-    console.log(response.data.login);
+    // console.log(response.data.login);
     if (response.data.login.ok) {
       commit('SET_CURRENT_USER', response.data.login);
     }
@@ -79,8 +79,8 @@ const mutations = {
     state.currentUser = user;
   },
   SET_CURRENT_USER(state, { token, refreshToken, user }) {
-    console.log(`token: ${token}`);
-    console.log(`refreshToken: ${refreshToken}`);
+    // console.log(`token: ${token}`);
+    // console.log(`refreshToken: ${refreshToken}`);
     state.currentUser = user;
     localStorage.setItem('token', token);
     localStorage.setItem('refreshToken', refreshToken);
