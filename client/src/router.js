@@ -7,6 +7,7 @@ import UserLoginForm from './components/users/form/UserLoginForm.vue';
 import CategoryForm from './components/categories/form/CategoryForm.vue';
 import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
 import Index from './views/Index.vue';
+import decode from 'jwt-decode';
 
 Vue.use(Router);
 
@@ -80,6 +81,8 @@ const router = new Router({
 const isAuthenticated = () => {
   const token = localStorage.getItem('token');
   const refreshToken = localStorage.getItem('refreshToken');
+  console.log("token: " + token)
+  console.log("refresh-token: " + refreshToken);
   try {
     decode(token);
     decode(refreshToken);
@@ -99,6 +102,7 @@ router.beforeEach((to, from, next) => {
       console.log("not authenticated for routes")
       next({
         path: '/login',
+        // query: { redirect: to.fullPath }
       })
     } else {
       next()
