@@ -10,18 +10,21 @@ import Index from './views/Index.vue';
 
 Vue.use(Router);
 
-export default new Router({
+// export default new Router({
+const router = new Router({  
   mode: 'history',
   routes: [
     {
       path: '/',
       name: 'Home',
       component: Dashboard,
+      meta: { requiresAuth: true },
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
+      meta: { requiresAuth: true },
     },
     {
       path: '/signup',
@@ -32,28 +35,6 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: UserLoginForm
-    },
-    {
-      path: '/users',
-      name: 'User',
-      component: Index,
-      children: [
-        // {
-        //   path: 'signup',
-        //   name: 'New',
-        //   component: UserForm,
-        // },
-        // {
-        //   path: 'signup',
-        //   name: 'Signup',
-        //   component: UserForm,
-        // },
-        {
-          path: ':id/edit',
-          name: 'Edit',
-          component: UserForm,
-        },
-      ],
     },    
     {
       path: '/categories',
@@ -64,11 +45,13 @@ export default new Router({
           path: 'new',
           name: 'New',
           component: CategoryForm,
+          meta: { requiresAuth: true },
         },
         {
           path: ':id/edit',
           name: 'Edit',
           component: CategoryForm,
+          meta: { requiresAuth: true },
         },
       ],
     },
@@ -81,13 +64,48 @@ export default new Router({
           path: 'new',
           name: 'New',
           component: ExpenseForm,
+          meta: { requiresAuth: true },
         },
         {
           path: ':id/edit',
           name: 'Edit',
           component: ExpenseForm,
+          meta: { requiresAuth: true },
         },
       ],
     },
   ],
 });
+
+const isAuthenticated = () => {
+  const token = localStorage.getItem('token');
+  const refreshToken = localStorage.getItem('refreshToken');
+  try {
+    decode(token);
+    decode(refreshToken);
+  } catch (err) {
+    return false;
+  }
+
+  return true;
+};
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    console.log("attemtping to check before")
+    if (!isAuthenticated()) {
+      console.log("not authenticated for routes")
+      next({
+        path: '/login',
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+})
+
+export default router;
