@@ -5,6 +5,7 @@
     width="225"
     app
     class="default-drawer"
+    v-if="$route.name !== 'Login'"
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
@@ -41,7 +42,11 @@
         </v-list-tile-action>
 
         <v-list-tile-content>
-          <v-list-tile-title class="link-title">{{ item.title }}</v-list-tile-title>
+          <v-list-tile-title class="link-title">
+            <router-link :to="item.path">
+              {{ item.title }}
+            </router-link>
+          </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -50,22 +55,25 @@
 
 <script>
 export default {
-  data() {
-    return {
-      mini: true,
-      items: [
-        { title: 'Dashboard', icon: 'dashboard' },
-        { title: 'History', icon: 'history' },
-        { title: 'Goals', icon: 'fas fa-piggy-bank' },
-        { title: 'Save', icon: 'lightbulb' },
-      ],
-    };
-  },
+  data: () => ({
+    mini: true,
+    items: [
+      { title: 'Dashboard', icon: 'dashboard', path: "/dashboard" },
+      // { title: 'History', icon: 'history' },
+      // { title: 'Goals', icon: 'fas fa-piggy-bank' },
+      // { title: 'Save', icon: 'lightbulb' },
+    ],
+  }),
 };
 </script>
 
 <style>
 .default-drawer .link-title:hover {
   color: #5ad09a;
+}
+
+.link-title a {
+  text-decoration: none;
+  color: white;
 }
 </style>

@@ -19,6 +19,7 @@ const state = () => ({
     email: '',
     totalExpenses: ''
   },
+  // currentUser: {},
   loading: false,
 });
 

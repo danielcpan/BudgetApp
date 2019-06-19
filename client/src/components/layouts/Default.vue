@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
-    <toolbar></toolbar>
-    <nav-drawer></nav-drawer>
+    <Toolbar />
+    <NavDrawer />
   </div>
 </template>
 
