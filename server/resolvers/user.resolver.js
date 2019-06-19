@@ -1,5 +1,4 @@
 /* eslint no-unused-vars: 0 */
-const bcrypt = require('bcrypt');
 const { tryLogin } = require('../helpers/auth');
 
 module.exports = {
@@ -19,11 +18,9 @@ module.exports = {
     login: async (parent, { email, password }, { models, SECRET, SECRET2 }, info) => (
       tryLogin(email, password, models, SECRET, SECRET2)
     ),    
-    createUser: async (parent, { input: { password, ...otherInputArgs }}, { models }, info) => {
-      // TODO: Serverside Password Length Validation
-      const hashedPassword = await bcrypt.hash(password, 12);
-      return await models.User.create({ ...otherInputArgs, password: hashedPassword });
-    },
+    createUser: (parent, { input }, { models }, info) => (
+      models.User.create(input)
+    ),
     updateUser: async (parent, { input }, { models }, info) => {
       await models.User.update(input, { where: { id: input.id } });
       return models.User.findByPk(input.id);

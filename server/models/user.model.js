@@ -1,5 +1,6 @@
 
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = class User extends Sequelize.Model {
   static init(sequelize, DataTypes) {
@@ -37,6 +38,9 @@ module.exports = class User extends Sequelize.Model {
       password: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        validate: {
+          len: [8, 255],
+        },        
       },
       userRole: {
         type: DataTypes.STRING(255),
@@ -47,6 +51,12 @@ module.exports = class User extends Sequelize.Model {
       tableName: 'users',
       underscored: true,
       sequelize,
+      hooks: {
+        afterValidate: async (user) => {
+          const hashedPassword = await bcrypt.hash(user.password, 12);
+          user.password = hashedPassword;
+        }
+      }      
     });
   }
 
