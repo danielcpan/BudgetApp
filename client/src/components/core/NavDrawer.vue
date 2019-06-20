@@ -5,7 +5,7 @@
     width="225"
     app
     class="default-drawer"
-    v-if="$route.name !== 'Login'"
+    v-if="$route.name !== 'Login'&& $route.name !== 'Sign Up'"
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">

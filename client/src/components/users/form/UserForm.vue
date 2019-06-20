@@ -37,14 +37,14 @@
                 to="/"
                 tag="button"
                 class="dp-btn dp-btn--secondary dp-btn-size--medium">
-                  Cancel
+                  Have an account? Log in!
               </router-link>
               <v-spacer></v-spacer>
               <button
                 @click="submit()"
                 type="button"
                 class="dp-btn dp-btn--primary dp-btn-size--medium">
-                  {{ $route.name === 'Sign Up' ? 'Create ' : 'Update' }} Account
+                  {{ $route.name === 'Sign Up' ? 'Create ' : 'Update' }} my account
               </button>
             </v-card-actions>
             </v-container>

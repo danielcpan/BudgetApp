@@ -27,10 +27,10 @@
             </v-card-text>
             <v-card-actions class="px-3">
               <router-link
-                to="/"
+                to="/signup"
                 tag="button"
                 class="dp-btn dp-btn--secondary dp-btn-size--medium">
-                  Create An Account
+                  Create an account
               </router-link>
               <v-spacer></v-spacer>
               <button
@@ -59,19 +59,19 @@ export default {
     PasswordField,
   },
   data: () => ({
-    email: 'Dp@gmail.com',
-    password: '12345678',
+    email: 'dp2test@gmail.com',
+    password: 'Inmobi@123456',
   }),
   computed: {
   },
   methods: {
     ...mapActions('users', ['login']),
-    submit() {
-      this.login({
+    async submit() {
+      await this.login({
         email: this.email,
         password: this.password,
       });
-      // this.$router.push('/');
+      this.$router.push('/');
     },
   },
 };

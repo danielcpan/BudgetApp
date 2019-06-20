@@ -38,8 +38,6 @@ const actions = {
     commit('GET_CURRENT_USER', response.data.user);
   },
   async login({ commit }, credentials) {
-    // console.log('credentials');
-    // console.log(credentials);
     const response = await apolloClient.mutate({
       mutation: LOGIN_MUTATION,
       variables: {
@@ -47,7 +45,7 @@ const actions = {
         password: credentials.password,
       },
     });
-    // console.log(response.data.login);
+
     if (response.data.login.ok) {
       commit('SET_CURRENT_USER', response.data.login);
     }
