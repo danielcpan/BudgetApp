@@ -19,6 +19,7 @@ const state = () => ({
     email: '',
     totalExpenses: '',
   },
+  isLoggedIn: false,
   // currentUser: {},
   loading: false,
 });
@@ -48,7 +49,13 @@ const actions = {
 
     if (response.data.login.ok) {
       commit('SET_CURRENT_USER', response.data.login);
+      commit('SET_IS_LOGGED_IN', true);
     }
+  },
+  logout({ commit }) {
+    localStorage.clear();
+    commit('SET_IS_LOGGED_IN', false);
+    // commit('SET_CURRENT_USER', )
   },
   async createUser({ commit }, user) {
     const response = await apolloClient.mutate({
@@ -75,6 +82,9 @@ const actions = {
 const mutations = {
   GET_CURRENT_USER(state, user) {
     state.currentUser = user;
+  },
+  SET_IS_LOGGED_IN(state, isLoggedIn) {
+    state.isLoggedIn = isLoggedIn;
   },
   SET_CURRENT_USER(state, { token, refreshToken, user }) {
     // console.log(`token: ${token}`);

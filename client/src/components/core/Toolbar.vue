@@ -2,7 +2,7 @@
   <v-toolbar app flat id="default-toolbar">
     <v-spacer></v-spacer>
     <v-toolbar-items>
-        <div>
+        <div v-if="isLoggedIn">
           <v-list subheader :class="{ 'elevation-9' : optsList }" >
             <v-list-group v-model="optsList" append-icon="fas fa-sort-down">
               <template v-slot:activator>
@@ -10,8 +10,11 @@
                   <v-list-tile-title class="user-hi"><span>Welcome, <a>{{ user.email }}</a></span></v-list-tile-title>
                 </v-list-tile>
               </template>
+              <!-- <v-list-tile class="link-button">
+                <v-list-tile-title @click="logout()"><a>Logout</a></v-list-tile-title>
+              </v-list-tile> -->
               <v-list-tile v-for="link in links" :key="link.title" :to="{path: link.path}" class="link-button">
-                <v-list-tile-title>{{ link.title }}</v-list-tile-title>
+                <v-list-tile-title @click="link.title === 'Logout' ? logout() : ''">{{ link.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list-group>
           </v-list>
@@ -21,19 +24,23 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
  data: () => ({
     optsList: false,
     links: [
-      { title: 'Log Out', path: '/logout' },
+      { title: 'Logout', path: '/login' },
     ],   
  }),
  computed: {
    ...mapState({
-     user: state => state.users.currentUser
+     user: state => state.users.currentUser,
+     isLoggedIn: state => state.users.isLoggedIn
    })
- }
+ },
+ methods: {
+   ...mapActions('users', ['logout'])
+ },
 };
 </script>
 
