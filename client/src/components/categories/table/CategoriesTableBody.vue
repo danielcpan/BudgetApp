@@ -105,7 +105,8 @@ export default {
   },
   methods: {
     getPercentOfTotal(category) {
-      return ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2);
+      let percent = ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2)
+      return isNaN(percent) ? 0 : percent;
     },
   },
 };

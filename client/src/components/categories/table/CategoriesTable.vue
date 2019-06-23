@@ -32,8 +32,8 @@ export default {
     }),
   },
   mounted() {
-    this.getCurrentUser();
-    this.getCategoriesList(1);
+    // this.getCurrentUser();
+    this.getCategoriesList();
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),

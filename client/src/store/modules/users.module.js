@@ -5,7 +5,7 @@
 import { apolloClient } from '../../apolloProvider';
 
 import {
-  USER_QUERY,
+  CURRENT_USER_QUERY,
   LOGIN_MUTATION,
   CREATE_USER_MUATION,
   UPDATE_USER_MUTATION,
@@ -19,7 +19,7 @@ const state = () => ({
     email: '',
     totalExpenses: '',
   },
-  isLoggedIn: false,
+  isLoggedIn: !!localStorage.getItem('token'),
   // currentUser: {},
   loading: false,
 });
@@ -29,14 +29,11 @@ const actions = {
     commit('SET_LOADING', true);
 
     const response = await apolloClient.query({
-      query: USER_QUERY,
-      variables: {
-        id: 1,
-      },
+      query: CURRENT_USER_QUERY,
     });
 
     commit('SET_LOADING', false);
-    commit('GET_CURRENT_USER', response.data.user);
+    commit('GET_CURRENT_USER', response.data.currentUser);
   },
   async login({ commit }, credentials) {
     const response = await apolloClient.mutate({
@@ -48,13 +45,15 @@ const actions = {
     });
 
     if (response.data.login.ok) {
-      commit('SET_CURRENT_USER', response.data.login);
-      commit('SET_IS_LOGGED_IN', true);
+      commit('LOG_IN', response.data.login)
+      // commit('SET_CURRENT_USER', response.data.login.user);
+      // commit('SET_IS_LOGGED_IN', true);
     }
   },
   logout({ commit }) {
-    localStorage.clear();
-    commit('SET_IS_LOGGED_IN', false);
+    // localStorage.clear();
+    commit('LOG_OUT')
+    // commit('SET_IS_LOGGED_IN', false);
     // commit('SET_CURRENT_USER', )
   },
   async createUser({ commit }, user) {
@@ -82,6 +81,15 @@ const actions = {
 const mutations = {
   GET_CURRENT_USER(state, user) {
     state.currentUser = user;
+  },
+  LOG_IN(state, { token, refreshToken }){
+    console.log("token: " + token)
+    console.log("refresh-token: " + refreshToken)
+    localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken);
+  },
+  LOG_OUT(state) {
+    localStorage.clear();
   },
   SET_IS_LOGGED_IN(state, isLoggedIn) {
     state.isLoggedIn = isLoggedIn;

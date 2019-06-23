@@ -7,6 +7,9 @@ module.exports = {
     expenses: (parent, args, { models }, info) => parent.getExpenses(),
   },
   Query: {
+    currentUser: (parent, args, { models, user }, info) => (
+      models.User.findByPk(user.id)
+    ),
     user: (parent, { id }, { models }, info) => models.User.findByPk(id),
     users: (parent, args, { models }, info) => models.User.findAll(),
     isEmailUnique: async (parent, { email }, { models }, info) => {
@@ -18,6 +21,10 @@ module.exports = {
     login: async (parent, { email, password }, { models, SECRET, SECRET2 }, info) => (
       tryLogin(email, password, models, SECRET, SECRET2)
     ),
+    // login: async (parent, { email, password }, { models, SECRET, SECRET2, user }, info) => {
+    //   console.log(user)
+    //   return tryLogin(email, password, models, SECRET, SECRET2)
+    // },
     createUser: (parent, { input }, { models }, info) => (
       models.User.create(input)
     ),

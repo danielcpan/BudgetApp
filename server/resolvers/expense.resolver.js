@@ -11,16 +11,16 @@ module.exports = {
     expense: auth((parent, { id }, { models }, info) => (
       models.Expense.findByPk(id)
     )),
-    expenses: auth((parent, args, { models }, info) => (
-      models.Expense.findAll({ where: args })
+    expenses: auth((parent, args, { models, user }, info) => (
+      models.Expense.findAll({ where: { userId: user.id } })
     )),
   },
   Mutation: {
-    createExpense: auth((parent, { input }, { models }, info) => (
-      models.Expense.create(input)
+    createExpense: auth((parent, { input }, { models, user }, info) => (
+      models.Expense.create({ ...input, userId: user.id })
     )),
-    updateExpense: auth(async (parent, { input }, { models }, info) => {
-      await models.Expense.update(input, { where: { id: input.id } });
+    updateExpense: auth(async (parent, { input }, { models, user }, info) => {
+      await models.Expense.update({ ...input, userId: user.id}, { where: { id: input.id } });
       return models.Expense.findByPk(input.id);
     }),
     deleteExpense: auth((parent, { id }, { models }, info) => (

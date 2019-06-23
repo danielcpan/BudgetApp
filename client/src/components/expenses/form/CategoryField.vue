@@ -70,7 +70,7 @@ export default {
     },
   },
   mounted() {
-    this.getCategoriesList(1);
+    this.getCategoriesList();
   },
   methods: {
     ...mapActions('categories', ['getCategoriesList']),

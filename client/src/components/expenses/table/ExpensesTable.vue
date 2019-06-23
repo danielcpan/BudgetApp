@@ -34,7 +34,7 @@ export default {
     }),
   },
   mounted() {
-    this.getCurrentUser();
+    // this.getCurrentUser();
     this.getExpensesList(1);
   },
   methods: {

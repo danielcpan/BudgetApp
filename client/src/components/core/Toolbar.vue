@@ -2,17 +2,14 @@
   <v-toolbar app flat id="default-toolbar">
     <v-spacer></v-spacer>
     <v-toolbar-items>
-        <div v-if="isLoggedIn">
-          <v-list subheader :class="{ 'elevation-9' : optsList }" >
-            <v-list-group v-model="optsList" append-icon="fas fa-sort-down">
+        <div v-if="$route.name !== 'Login'&& $route.name !== 'Sign Up'">
+          <v-list subheader class="elevation-9">
+            <v-list-group append-icon="fas fa-sort-down">
               <template v-slot:activator>
                 <v-list-tile>
                   <v-list-tile-title class="user-hi"><span>Welcome, <a>{{ user.email }}</a></span></v-list-tile-title>
                 </v-list-tile>
               </template>
-              <!-- <v-list-tile class="link-button">
-                <v-list-tile-title @click="logout()"><a>Logout</a></v-list-tile-title>
-              </v-list-tile> -->
               <v-list-tile v-for="link in links" :key="link.title" :to="{path: link.path}" class="link-button">
                 <v-list-tile-title @click="link.title === 'Logout' ? logout() : ''">{{ link.title }}</v-list-tile-title>
               </v-list-tile>
@@ -39,8 +36,11 @@ export default {
    })
  },
  methods: {
-   ...mapActions('users', ['logout'])
+   ...mapActions('users', ['logout', 'getCurrentUser'])
  },
+ mounted() {
+   this.getCurrentUser();
+ }
 };
 </script>
 
