@@ -84,19 +84,18 @@ const middlewareLink = setContext(() => ({
 // });
 
 
-const afterwareLink = new ApolloLink((operation, forward) =>
-  forward(operation).map((response) => {
-    const { response: { headers } } = operation.getContext();
-    if (headers) {
-      const token = headers.get('x-token');
-      const refreshToken = headers.get('x-refresh-token');
+const afterwareLink = new ApolloLink((operation, forward) => forward(operation).map((response) => {
+  const { response: { headers } } = operation.getContext();
+  if (headers) {
+    const token = headers.get('x-token');
+    const refreshToken = headers.get('x-refresh-token');
 
-      if (token) { localStorage.setItem('token', token) }
-      if (refreshToken) { localStorage.setItem('refreshToken', refreshToken) }
-    }
+    if (token) { localStorage.setItem('token', token); }
+    if (refreshToken) { localStorage.setItem('refreshToken', refreshToken); }
+  }
 
-    return response;
-  }));
+  return response;
+}));
 
 const link = afterwareLink.concat(middlewareLink.concat(httpLink));
 
@@ -111,7 +110,7 @@ const defaultOptions = {
     fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
-}
+};
 
 export const apolloClient = new ApolloClient({
   link,

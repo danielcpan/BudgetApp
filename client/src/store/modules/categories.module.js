@@ -42,13 +42,10 @@ const actions = {
   },
   async getCategoriesList({ commit }) {
     commit('SET_LOADING', true);
-    console.log("GETTING CATEGORIES LIST")
 
     const response = await apolloClient.query({
       query: CATEGORIES_QUERY,
     });
-
-    console.log(response.data)
 
     commit('GET_CATEGORIES_LIST', response.data.categories);
     commit('SET_LOADING', false);
@@ -79,7 +76,7 @@ const actions = {
   },
   resetModuleState({ commit }) {
     commit('RESET_MODULE_STATE');
-  }
+  },
 };
 
 const mutations = {
@@ -119,7 +116,7 @@ const mutations = {
     };
     state.categoriesList = [];
     state.search = '';
-  }
+  },
 };
 
 export default {

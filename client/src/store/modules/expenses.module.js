@@ -52,15 +52,10 @@ const actions = {
   },
   async getExpensesList({ commit }) {
     commit('SET_LOADING', true);
-    console.log("GETTING EXPENSES LIST")
 
     const response = await apolloClient.query({
-      query: EXPENSES_QUERY
+      query: EXPENSES_QUERY,
     });
-
-    console.log(response.data)
-    console.log("APOLLO CLIENT expenses")
-    console.log(apolloClient)    
 
     commit('SET_LOADING', false);
     commit('GET_EXPENSES_LIST', response.data.expenses);
@@ -74,10 +69,6 @@ const actions = {
     });
 
     commit('CREATE_EXPENSE', response.data.createExpense);
-
-    this.dispatch('users/getCurrentUser', { root: true });
-    this.dispatch('categories/getCategoriesList', { root: true });
-    this.dispatch('expenses/getExpensesList', { root: true});
   },
   async updateExpense({ commit }, expense) {
     const response = await apolloClient.mutate({
@@ -88,9 +79,6 @@ const actions = {
     });
 
     commit('UPDATE_EXPENSE', response.data.updateExpense);
-    this.dispatch('users/getCurrentUser', { root: true });
-    this.dispatch('categories/getCategoriesList', { root: true });
-    this.dispatch('expenses/getExpensesList', { root: true});
   },
   async deleteExpense({ commit }, id) {
     await apolloClient.mutate({
@@ -105,8 +93,8 @@ const actions = {
     commit('SET_SEARCH', search);
   },
   resetModuleState({ commit }) {
-    commit('RESET_MODULE_STATE')
-  }
+    commit('RESET_MODULE_STATE');
+  },
 };
 
 const mutations = {
@@ -162,7 +150,7 @@ const mutations = {
     };
     state.expensesList = [];
     state.search = '';
-  }
+  },
 };
 
 export default {

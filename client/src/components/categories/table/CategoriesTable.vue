@@ -38,7 +38,6 @@ export default {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('categories', ['getCategoriesList']),
     getPercentOfTotal(category) {
-
       return ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2);
     },
   },

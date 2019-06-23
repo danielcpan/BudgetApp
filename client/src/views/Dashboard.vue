@@ -29,11 +29,11 @@ export default {
   //   })
   // }
   methods: {
-    ...mapActions('users', ['getCurrentUser'])
+    ...mapActions('users', ['getCurrentUser']),
   },
   mounted() {
     this.getCurrentUser();
-  }
+  },
 };
 </script>
 

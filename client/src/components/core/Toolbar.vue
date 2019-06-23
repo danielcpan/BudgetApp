@@ -7,39 +7,49 @@
           <v-list-group append-icon="fas fa-sort-down">
             <template v-slot:activator>
               <v-list-tile>
-                <v-list-tile-title class="user-hi"><span>Welcome, <a>{{ user.email }}</a></span></v-list-tile-title>
+                <v-list-tile-title class="user-hi">
+                  <span>Welcome, <a>{{ user.email }}</a></span>
+                </v-list-tile-title>
               </v-list-tile>
             </template>
-            <v-list-tile v-for="link in links" :key="link.title" :to="{path: link.path}" class="link-button">
-              <v-list-tile-title @click="link.title === 'Logout' ? logout() : ''">{{ link.title }}</v-list-tile-title>
+            <v-list-tile
+              v-for="link in links"
+              :key="link.title"
+              :to="{ path: link.path }"
+              class="link-button">
+                <v-list-tile-title
+                  @click="link.title === 'Logout' ? logout() : ''">
+                    {{ link.title }}
+                </v-list-tile-title>
             </v-list-tile>
           </v-list-group>
         </v-list>
-      </div>    
+      </div>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+
 export default {
- data: () => ({
+  data: () => ({
     links: [
       { title: 'Logout', path: '/login' },
-    ],   
- }),
- computed: {
-   ...mapState({
-     user: state => state.users.currentUser,
-     isLoggedIn: state => state.users.isLoggedIn
-   })
- },
- methods: {
-   ...mapActions('users', ['logout', 'getCurrentUser'])
- },
- mounted() {
+    ],
+  }),
+  computed: {
+    ...mapState({
+      user: state => state.users.currentUser,
+      isLoggedIn: state => state.users.isLoggedIn,
+    }),
+  },
+  methods: {
+    ...mapActions('users', ['logout', 'getCurrentUser']),
+  },
+  mounted() {
   // this.getCurrentUser();
- }
+  },
 };
 </script>
 
@@ -86,4 +96,3 @@ export default {
   background: #2d2d2d !important;
 }
 </style>
-
