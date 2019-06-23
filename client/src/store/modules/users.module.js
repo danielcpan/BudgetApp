@@ -7,8 +7,9 @@ import { apolloClient } from '../../apolloProvider';
 import {
   CURRENT_USER_QUERY,
   LOGIN_MUTATION,
+  LOGOUT_MUTATION,
   CREATE_USER_MUATION,
-  UPDATE_USER_MUTATION,
+  // UPDATE_USER_MUTATION,
 } from '../../graphql/user';
 
 const state = () => ({
@@ -20,7 +21,6 @@ const state = () => ({
     totalExpenses: '',
   },
   isLoggedIn: !!localStorage.getItem('token'),
-  // currentUser: {},
   loading: false,
 });
 
@@ -31,9 +31,11 @@ const actions = {
     const response = await apolloClient.query({
       query: CURRENT_USER_QUERY,
     });
+    console.log("CURRENT USER")
+    console.log(response.data)
 
-    commit('SET_LOADING', false);
-    commit('GET_CURRENT_USER', response.data.currentUser);
+    commit('SET_CURRENT_USER', response.data.currentUser);
+    commit('SET_LOADING', false); 
   },
   async login({ commit }, credentials) {
     const response = await apolloClient.mutate({
@@ -46,15 +48,27 @@ const actions = {
 
     if (response.data.login.ok) {
       commit('LOG_IN', response.data.login)
-      // commit('SET_CURRENT_USER', response.data.login.user);
-      // commit('SET_IS_LOGGED_IN', true);
     }
   },
-  logout({ commit }) {
-    // localStorage.clear();
+  async logout({ commit }) {
+    commit('RESET_MODULE_STATE')
+    this.dispatch('categories/resetModuleState', { root: true });
+    this.dispatch('expenses/resetModuleState', { root: true });
+    // this.dispatch('users/getCurrentUser', { root: true });    
+    const response = await apolloClient.mutate({
+      mutation: LOGOUT_MUTATION,
+    })
+    console.log("response: ")
+    console.log(response)
     commit('LOG_OUT')
-    // commit('SET_IS_LOGGED_IN', false);
-    // commit('SET_CURRENT_USER', )
+    console.log("APOLLO CLIENT")
+    console.log(apolloClient)
+    console.log("CLEARING STORE");
+    apolloClient.clearStore()
+    console.log("APOLLO CLIENT")
+    console.log(apolloClient)    
+    // apolloClient.clearStore()
+    // console.log(apolloClient.clearStore())
   },
   async createUser({ commit }, user) {
     const response = await apolloClient.mutate({
@@ -63,53 +77,35 @@ const actions = {
         input: user,
       },
     });
-
-    commit('CREATE_USER', response.data.createUser);
   },
-  async updateUser({ commit }, user) {
-    const response = await apolloClient.mutate({
-      mutation: UPDATE_USER_MUTATION,
-      variables: {
-        input: user,
-      },
-    });
-
-    commit('UPDATE_USER', response.data.updateUser);
-  },
+  resetModuleState({ commit }) {
+    commit('RESET_MODULE_STATE');
+  }
 };
 
 const mutations = {
-  GET_CURRENT_USER(state, user) {
-    state.currentUser = user;
-  },
   LOG_IN(state, { token, refreshToken }){
-    console.log("token: " + token)
-    console.log("refresh-token: " + refreshToken)
     localStorage.setItem('token', token);
     localStorage.setItem('refreshToken', refreshToken);
   },
   LOG_OUT(state) {
     localStorage.clear();
   },
-  SET_IS_LOGGED_IN(state, isLoggedIn) {
-    state.isLoggedIn = isLoggedIn;
-  },
-  SET_CURRENT_USER(state, { token, refreshToken, user }) {
-    // console.log(`token: ${token}`);
-    // console.log(`refreshToken: ${refreshToken}`);
-    state.currentUser = user;
-    localStorage.setItem('token', token);
-    localStorage.setItem('refreshToken', refreshToken);
-  },
-  CREATE_USER(state, user) {
-    state.currentUser = user;
-  },
-  UPDATE_USER(state, user) {
+  SET_CURRENT_USER(state, user) {
     state.currentUser = user;
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
   },
+  RESET_MODULE_STATE(state) {
+    state.currentUser = {
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      totalExpenses: ''
+    }
+  }
 };
 
 export default {

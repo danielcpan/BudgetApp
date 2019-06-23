@@ -49,8 +49,8 @@ const schema = makeExecutableSchema({
 });
 
 const addUser = async (req, res, next) => {
-  // console.log("ADDING USER")
-  // console.log(req.headers)
+  console.log("ADDING USER")
+  console.log(req.headers)
   const token = req.headers['x-token'];
 
   if (token) {

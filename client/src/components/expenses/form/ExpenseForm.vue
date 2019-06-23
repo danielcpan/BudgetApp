@@ -101,6 +101,7 @@ export default {
       } else {
         this.updateExpense(expenseToSubmit);
       }
+      // this.$router.push('/expenses-table');
       this.$router.push('/');
     },
   },

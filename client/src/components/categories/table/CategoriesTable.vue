@@ -32,13 +32,13 @@ export default {
     }),
   },
   mounted() {
-    // this.getCurrentUser();
     this.getCategoriesList();
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('categories', ['getCategoriesList']),
     getPercentOfTotal(category) {
+
       return ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2);
     },
   },

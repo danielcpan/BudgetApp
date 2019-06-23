@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="layout" v-if="$route.name !== 'Login'&& $route.name !== 'Sign Up'">
     <Toolbar />
     <NavDrawer />
   </div>

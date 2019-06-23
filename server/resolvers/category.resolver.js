@@ -10,9 +10,14 @@ module.exports = {
     category: auth((parent, { id }, { models }, info) => (
       models.Category.findByPk(id)
     )),
-    categories: auth((parent, args, { models, user }, info) => (
-      models.Category.findAll({ where: { userId: user.id} })
-    )),
+    // categories: auth((parent, args, { models, user }, info) => (
+    //   models.Category.findAll({ where: { userId: user.id} })
+    // )),
+    categories: auth((parent, args, { models, user }, info) => {
+      console.log("user.id: " + user.id);
+      console.log("GETTING CATEGORIES LIST NOW")
+      return models.Category.findAll({ where: { userId: user.id} })
+    }),
   },
   Mutation: {
     createCategory: auth((parent, { input }, { models, user }, info) => (

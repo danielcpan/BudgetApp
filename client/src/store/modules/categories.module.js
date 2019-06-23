@@ -37,21 +37,21 @@ const actions = {
       },
     });
 
-    commit('SET_LOADING', false);
     commit('GET_CATEGORY', response.data.category);
+    commit('SET_LOADING', false);
   },
-  async getCategoriesList({ commit }, userId) {
+  async getCategoriesList({ commit }) {
     commit('SET_LOADING', true);
+    console.log("GETTING CATEGORIES LIST")
 
     const response = await apolloClient.query({
       query: CATEGORIES_QUERY,
-      variables: {
-        userId,
-      },
     });
 
-    commit('SET_LOADING', false);
+    console.log(response.data)
+
     commit('GET_CATEGORIES_LIST', response.data.categories);
+    commit('SET_LOADING', false);
   },
   async createCategory({ commit }, category) {
     const response = await apolloClient.mutate({
@@ -77,12 +77,12 @@ const actions = {
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);
   },
+  resetModuleState({ commit }) {
+    commit('RESET_MODULE_STATE');
+  }
 };
 
 const mutations = {
-  SET_CURRENT_CATEGORY(state, category) {
-    state.currentCategory = category;
-  },
   CLEAR_CURRENT_CATEGORY(state) {
     state.currentCategory = {
       id: '',
@@ -110,6 +110,16 @@ const mutations = {
   SET_LOADING(state, loading) {
     state.loading = loading;
   },
+  RESET_MODULE_STATE(state) {
+    state.currentCategory = {
+      id: '',
+      name: '',
+      icon: '',
+      color: '',
+    };
+    state.categoriesList = [];
+    state.search = '';
+  }
 };
 
 export default {

@@ -7,6 +7,8 @@ import UserForm from './components/users/form/UserForm.vue';
 import UserLoginForm from './components/users/form/UserLoginForm.vue';
 import CategoryForm from './components/categories/form/CategoryForm.vue';
 import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
+import ExpensesTable from './components/expenses/table/ExpensesTable.vue';
+import CategoriesTable from './components/categories/table/CategoriesTable.vue';
 import Index from './views/Index.vue';
 
 Vue.use(Router);
@@ -17,12 +19,6 @@ const router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Dashboard,
-      meta: { requiresAuth: true },
-    },
-    {
-      path: '/dashboard',
-      name: 'Dashboard',
       component: Dashboard,
       meta: { requiresAuth: true },
     },
@@ -74,6 +70,16 @@ const router = new Router({
         },
       ],
     },
+    // {
+    //   path: '/expenses-table',
+    //   component: ExpensesTable,
+    //   meta: { requiresAuth: true },
+    // },
+    // {
+    //   path: '/categories-table',
+    //   component: CategoriesTable,
+    //   meta: { requiresAuth: true },
+    // },
   ],
 });
 

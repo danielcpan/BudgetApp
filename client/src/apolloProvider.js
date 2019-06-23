@@ -87,18 +87,9 @@ const middlewareLink = setContext(() => ({
 const afterwareLink = new ApolloLink((operation, forward) =>
   forward(operation).map((response) => {
     const { response: { headers } } = operation.getContext();
-    console.log(response)
-    console.log("headers")
-    console.log(headers)
-    console.log("test")
-    console.log(middlewareLink)
     if (headers) {
-      console.log("made it here!")
       const token = headers.get('x-token');
       const refreshToken = headers.get('x-refresh-token');
-
-      console.log("token: " + token);
-      console.log("refresh-token: " + refreshToken)
 
       if (token) { localStorage.setItem('token', token) }
       if (refreshToken) { localStorage.setItem('refreshToken', refreshToken) }
@@ -109,9 +100,23 @@ const afterwareLink = new ApolloLink((operation, forward) =>
 
 const link = afterwareLink.concat(middlewareLink.concat(httpLink));
 
+// Disable Cache temporarily due to caching issues
+// For now relying on force refetching
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
+
 export const apolloClient = new ApolloClient({
   link,
   cache: new InMemoryCache(),
+  defaultOptions,
 });
 
 export default new VueApollo({

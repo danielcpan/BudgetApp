@@ -5,7 +5,6 @@
     width="225"
     app
     class="default-drawer"
-    v-if="$route.name !== 'Login'&& $route.name !== 'Sign Up'"
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
@@ -58,7 +57,9 @@ export default {
   data: () => ({
     mini: true,
     items: [
-      { title: 'Dashboard', icon: 'dashboard', path: '/dashboard' },
+      { title: 'Dashboard', icon: 'dashboard', path: '/' },
+      // { title: 'Categories', icon: 'fas fa-signal', path: '/categories-table' },
+      // { title: 'Expenses', icon: 'history', path: '/expenses-table' },
       // { title: 'History', icon: 'history' },
       // { title: 'Goals', icon: 'fas fa-piggy-bank' },
       // { title: 'Save', icon: 'lightbulb' },

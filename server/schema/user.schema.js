@@ -16,9 +16,10 @@ module.exports = `
 
   type Mutation {
     login(email: String!, password: String!): LoginResponse!
-    createUser(input: UserInput!): User!
-    updateUser(input: UserInput!): User!
-    deleteUser(id: ID!): Boolean!
+    logout: Boolean!
+    createUser(input: UserInput!): User
+    updateUser(input: UserInput!): User
+    deleteUser(id: ID!): Boolean
   }
 
   type User {

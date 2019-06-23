@@ -3,9 +3,12 @@
     id="expenses-table"
     class="dp-table"
     v-if="!$store.state.users.loading && !$store.state.expenses.loading">
+    <!-- <expenses-table-header
+      :headerValue="getTotalExpenses()">
+    </expenses-table-header> -->
     <expenses-table-header
       :headerValue="user.totalExpenses">
-    </expenses-table-header>
+    </expenses-table-header>    
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>
         <v-flex>
@@ -35,11 +38,19 @@ export default {
   },
   mounted() {
     // this.getCurrentUser();
-    this.getExpensesList(1);
+    this.getExpensesList();
   },
   methods: {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('expenses', ['getExpensesList']),
+    getTotalExpenses() {
+      let totalExpense = 0;
+      this.expenses.forEach(expense => {
+        totalExpense += parseFloat(expense.cost);
+      });
+
+      return totalExpense.toFixed(2);
+    }
   },
 };
 </script>

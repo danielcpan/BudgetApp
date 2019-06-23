@@ -69,10 +69,10 @@ export default {
   },
   data: () => ({
     user: {
-      firstName: 'Daniel',
-      lastName: 'Pan',
-      email: 'Dp@gmail.com',
-      password: '12345678',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
     },
   }),
   methods: {

@@ -23,7 +23,6 @@ const state = () => ({
       icon: '',
       color: '',
     },
-    userId: 1,
   },
   expensesList: [],
   search: '',
@@ -48,18 +47,20 @@ const actions = {
       },
     });
 
-    commit('SET_LOADING', false);
     commit('GET_EXPENSE', response.data.expense);
+    commit('SET_LOADING', false);
   },
-  async getExpensesList({ commit }, userId) {
+  async getExpensesList({ commit }) {
     commit('SET_LOADING', true);
+    console.log("GETTING EXPENSES LIST")
 
     const response = await apolloClient.query({
-      query: EXPENSES_QUERY,
-      variables: {
-        userId,
-      },
+      query: EXPENSES_QUERY
     });
+
+    console.log(response.data)
+    console.log("APOLLO CLIENT expenses")
+    console.log(apolloClient)    
 
     commit('SET_LOADING', false);
     commit('GET_EXPENSES_LIST', response.data.expenses);
@@ -73,7 +74,10 @@ const actions = {
     });
 
     commit('CREATE_EXPENSE', response.data.createExpense);
+
     this.dispatch('users/getCurrentUser', { root: true });
+    this.dispatch('categories/getCategoriesList', { root: true });
+    this.dispatch('expenses/getExpensesList', { root: true});
   },
   async updateExpense({ commit }, expense) {
     const response = await apolloClient.mutate({
@@ -85,6 +89,8 @@ const actions = {
 
     commit('UPDATE_EXPENSE', response.data.updateExpense);
     this.dispatch('users/getCurrentUser', { root: true });
+    this.dispatch('categories/getCategoriesList', { root: true });
+    this.dispatch('expenses/getExpensesList', { root: true});
   },
   async deleteExpense({ commit }, id) {
     await apolloClient.mutate({
@@ -98,6 +104,9 @@ const actions = {
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);
   },
+  resetModuleState({ commit }) {
+    commit('RESET_MODULE_STATE')
+  }
 };
 
 const mutations = {
@@ -113,7 +122,6 @@ const mutations = {
         icon: '',
         color: '',
       },
-      userId: 1,
     };
   },
   GET_EXPENSE(state, expense) {
@@ -139,6 +147,22 @@ const mutations = {
   SET_LOADING(state, loading) {
     state.loading = loading;
   },
+  RESET_MODULE_STATE(state) {
+    state.currentExpense = {
+      id: '',
+      cost: '',
+      note: '',
+      date: '',
+      category: {
+        id: '',
+        name: '',
+        icon: '',
+        color: '',
+      },
+    };
+    state.expensesList = [];
+    state.search = '';
+  }
 };
 
 export default {
