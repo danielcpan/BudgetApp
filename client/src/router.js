@@ -68,16 +68,6 @@ const router = new Router({
         },
       ],
     },
-    // {
-    //   path: '/expenses-table',
-    //   component: ExpensesTable,
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/categories-table',
-    //   component: CategoriesTable,
-    //   meta: { requiresAuth: true },
-    // },
   ],
 });
 

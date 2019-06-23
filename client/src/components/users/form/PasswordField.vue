@@ -1,11 +1,11 @@
 <template>
   <div id="password-field" class="input-field">
-    <div class="field-title">{{ titleType }}</div>
+    <div class="field-title">Password</div>
     <v-text-field
       v-model="password"
       @input="$emit('input', password)"
       :rules="passwordRules"
-      :label="`Enter ${titleType} Password`"
+      label="Enter Password"
       :type="show ? 'text' : 'password'"
       single-line
       outline
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  props: ['value', 'titleType', 'revealOption'],
+  props: ['value', 'revealOption'],
   data: () => ({
     password: '',
     show: false,
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     passwordRules() {
-      const requiredRule = v => !!v || `${this.titleType} is required`;
+      const requiredRule = v => !!v || 'Password is required';
       const lengthRule = v => (v.length >= 8 && v.length <= 255) || 'Please enter a value between 8 and 255 characters long';
 
       return [requiredRule, lengthRule];

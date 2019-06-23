@@ -4,43 +4,48 @@
       <v-layout row wrap justify-center align-center>
         <v-flex md6>
           <v-card>
-            <v-container grid-list-md>
-            <v-card-title>
-              <span
-                class="dp-head-1 pb-0">
-                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Category Details
-              </span>
-            </v-card-title>
-            <v-card-text class="pt-0">
-              <v-divider></v-divider>
-              <v-layout row wrap pt-3>
-                <v-flex xs12>
-                  <name-field v-model="category.name"></name-field>
-                </v-flex>
-                <v-flex xs12 sm6>
-                  <icon-field v-model="category.icon"></icon-field>
-                </v-flex>
-                <v-flex xs12 sm6>
-                  <background-color-field v-model="category.color"></background-color-field>
-                </v-flex>
-              </v-layout>
-            </v-card-text>
-            <v-card-actions class="px-3">
-              <router-link
-                to="/"
-                tag="button"
-                class="dp-btn dp-btn--secondary dp-btn-size--medium">
-                  Cancel
-              </router-link>
-              <v-spacer></v-spacer>
-              <button
-                @click="submit()"
-                type="button"
-                class="dp-btn dp-btn--primary dp-btn-size--medium">
-                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Category
-              </button>
-            </v-card-actions>
-            </v-container>
+            <v-form
+              ref="form"
+              v-model="isValid"
+              lazy-validation>            
+              <v-container grid-list-md>
+              <v-card-title>
+                <span
+                  class="dp-head-1 pb-0">
+                    {{ $route.name === 'New' ? 'Add' : 'Edit' }} Category Details
+                </span>
+              </v-card-title>
+              <v-card-text class="pt-0">
+                <v-divider></v-divider>
+                <v-layout row wrap pt-3>
+                  <v-flex xs12>
+                    <name-field v-model="category.name"></name-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <icon-field v-model="category.icon"></icon-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <background-color-field v-model="category.color"></background-color-field>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+              <v-card-actions class="px-3">
+                <router-link
+                  to="/"
+                  tag="button"
+                  class="dp-btn dp-btn--secondary dp-btn-size--medium">
+                    Cancel
+                </router-link>
+                <v-spacer></v-spacer>
+                <button
+                  @click="submit()"
+                  type="button"
+                  class="dp-btn dp-btn--primary dp-btn-size--medium">
+                    {{ $route.name === 'New' ? 'Add' : 'Edit' }} Category
+                </button>
+              </v-card-actions>
+              </v-container>
+            </v-form>
           </v-card>
         </v-flex>
       </v-layout>
@@ -61,6 +66,9 @@ export default {
     IconField,
     BackgroundColorField,
   },
+  data: () => ({
+    isValid: true
+  }),  
   computed: {
     ...mapState({
       category: state => state.categories.currentCategory,
@@ -81,20 +89,22 @@ export default {
       'updateCategory',
     ]),
     submit() {
-      const categoryToSubmit = {
-        id: this.category.id,
-        name: this.category.name,
-        icon: this.category.icon,
-        color: this.category.color,
-        userId: this.category.userId,
-      };
-      if (this.$route.name === 'New') {
-        delete categoryToSubmit.id;
-        this.createCategory(categoryToSubmit);
-      } else {
-        this.updateCategory(categoryToSubmit);
+      if (this.$refs.form.validate()) {
+        const categoryToSubmit = {
+          id: this.category.id,
+          name: this.category.name,
+          icon: this.category.icon,
+          color: this.category.color,
+          userId: this.category.userId,
+        };
+        if (this.$route.name === 'New') {
+          delete categoryToSubmit.id;
+          this.createCategory(categoryToSubmit);
+        } else {
+          this.updateCategory(categoryToSubmit);
+        }
+        this.$router.push('/');
       }
-      this.$router.push('/');
     },
   },
 };

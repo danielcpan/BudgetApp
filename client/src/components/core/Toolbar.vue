@@ -47,9 +47,6 @@ export default {
   methods: {
     ...mapActions('users', ['logout', 'getCurrentUser']),
   },
-  mounted() {
-  // this.getCurrentUser();
-  },
 };
 </script>
 

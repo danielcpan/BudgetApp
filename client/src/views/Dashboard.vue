@@ -23,11 +23,6 @@ export default {
     CategoriesTable,
     ExpensesTable,
   },
-  // computed: {
-  //   ...mapState({
-  //     user: state => state.users.user
-  //   })
-  // }
   methods: {
     ...mapActions('users', ['getCurrentUser']),
   },

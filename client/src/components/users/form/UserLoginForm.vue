@@ -19,7 +19,6 @@
                 <v-flex xs12 sm6>
                   <password-field
                     v-model="password"
-                    titleType="Password"
                     :revealOption="false">
                   </password-field>
                 </v-flex>
