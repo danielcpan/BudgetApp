@@ -43,8 +43,6 @@ const actions = {
       },
     });
 
-    console.log(response.data);
-
     if (response.data.login.ok) {
       commit('LOG_IN', response.data.login);
     } else {
