@@ -8,8 +8,8 @@
   >
     <div class="snackbar-text">
       <v-icon color="#5ad09a" style="padding-right: 1rem;">fas fa-check-circle</v-icon>
-        <span style="font-weight: bold; color: black;">{{ snack.header }}</span>
-        <span style="color: black;">{{ snack.body }}</span>
+        <span style="font-weight: bold; color: white;">{{ snack.header }}</span>
+        <span style="color: white;">{{ snack.body }}</span>
     </div>
 
     <v-btn

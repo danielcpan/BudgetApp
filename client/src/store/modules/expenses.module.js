@@ -90,6 +90,7 @@ const actions = {
 
     commit('DELETE_EXPENSE', expense.id);
     this.dispatch('categories/getCategoriesList', { root: true });
+    this.dispatch('categories/getExpensesList', { root: true });
     this.dispatch('snackbar/setAndDisplaySnackbar', {
       header: 'Deleted Expense: ',
       body: expense.note,
