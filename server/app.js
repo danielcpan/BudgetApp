@@ -81,11 +81,11 @@ server.applyMiddleware({ app });
 
 // Uncomment Below for heroku build
 
-app.use(express.static('dist'));
+// app.use(express.static('dist'));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
+// });
 
 // seed on start
 // require('./seeders/testData');

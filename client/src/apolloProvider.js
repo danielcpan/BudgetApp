@@ -23,8 +23,8 @@ import { ApolloLink } from 'apollo-link';
 
 Vue.use(VueApollo);
 
-// const httpLink = new HttpLink({ uri: 'http://localhost:5000/graphql' });
-const httpLink = new HttpLink({ uri: 'https://budget-app-daniel-pan.herokuapp.com/graphql' });
+const httpLink = new HttpLink({ uri: 'http://localhost:5000/graphql' });
+// const httpLink = new HttpLink({ uri: 'https://budget-app-daniel-pan.herokuapp.com/graphql' });
 
 const middlewareLink = setContext(() => ({
   headers: {
@@ -32,57 +32,6 @@ const middlewareLink = setContext(() => ({
     'x-refresh-token': localStorage.getItem('refreshToken'),
   },
 }));
-
-// const middlewareLink = setContext(() => {
-//   return {
-//     headers: {
-//       'x-token': localStorage.getItem('token'),
-//       'x-refresh-token': localStorage.getItem('refreshToken')
-//     }
-//   }
-// });
-
-// const middlewareLink = setContext((_, { headers }) => {
-//   // get the authentication token from local storage if it exists
-//   const token = localStorage.getItem('token');
-//   // return the headers to the context so httpLink can read them
-//   return {
-//     headers: {
-//       ...headers,
-//       'x-token': localStorage.getItem('token'),
-//       'x-refresh-token': localStorage.getItem('refreshToken')
-//     }
-//   }
-// });
-
-// const middlewareLink = new ApolloLink((operation, forward) => {
-//   // add the authorization to the headers
-//   operation.setContext({
-//     headers: {
-//       'x-token': localStorage.getItem('token'),
-//       'x-refresh-token': localStorage.getItem('refreshToken')
-//     }
-//   });
-//   return forward(operation);
-// })
-
-// const afterwareLink = new ApolloLink((operation, forward) => {
-//   const { headers } = operation.getContext();
-//   console.log("headers")
-//   console.log(headers)
-//   console.log(operation.getContext())
-
-//   if (headers) {
-//     const token = headers.get('x-token');
-//     const refreshToken = headers.get('x-refresh-token');
-
-//     if (token) { localStorage.setItem('token', token); }
-//     if (refreshToken) { localStorage.setItem('refreshToken', refreshToken); }
-//   }
-
-//   return forward(operation);
-// });
-
 
 const afterwareLink = new ApolloLink((operation, forward) => forward(operation).map((response) => {
   const { response: { headers } } = operation.getContext();

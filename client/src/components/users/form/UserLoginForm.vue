@@ -12,17 +12,28 @@
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>
-              <v-layout row wrap pt-3>
-                <v-flex xs12 sm6>
-                  <email-field v-model="email" :validate="false"></email-field>
-                </v-flex>
-                <v-flex xs12 sm6>
-                  <password-field
-                    v-model="password"
-                    :revealOption="false">
-                  </password-field>
-                </v-flex>
-              </v-layout>
+                <v-form
+                  ref="form"
+                  v-model="isValid"
+                  @keyup.native.enter="submit"
+                  lazy-validation>
+                  <v-layout row wrap pt-3>
+                    <v-flex xs12 sm6>
+                      <email-field v-model="email" :validate="false"></email-field>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                      <password-field
+                        v-model="password"
+                        :revealOption="false">
+                      </password-field>
+                    </v-flex>
+                    <v-flex xs12 sm12>
+                      <div v-for="error in errors" v-bind:key="error.message">
+                        <span style="color: #ff5252">{{ error.message }}</span>
+                      </div>
+                    </v-flex>
+                  </v-layout>
+                </v-form>
             </v-card-text>
             <v-card-actions class="px-3">
               <router-link
@@ -48,7 +59,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import EmailField from './EmailField.vue';
 import PasswordField from './PasswordField.vue';
 
@@ -60,17 +71,28 @@ export default {
   data: () => ({
     email: '',
     password: '',
+    isValid: true,
   }),
+  computed: {
+    ...mapState({
+      errors: state => state.users.errors
+    })
+  },
   methods: {
-    ...mapActions('users', ['login']),
+    ...mapActions('users', ['login', 'setErrors']),
     async submit() {
-      await this.login({
-        email: this.email,
-        password: this.password,
-      });
-      this.$router.push('/');
+      if (this.$refs.form.validate()) {
+        await this.login({
+          email: this.email,
+          password: this.password,
+        });
+        this.$router.push('/');
+      }
     },
   },
+  mounted() {
+    this.setErrors([])
+  }
 };
 </script>
 

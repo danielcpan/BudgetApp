@@ -18,6 +18,7 @@ const state = () => ({
     email: '',
     totalExpenses: '',
   },
+  errors: [],
   isLoggedIn: !!localStorage.getItem('token'),
   loading: false,
 });
@@ -42,9 +43,16 @@ const actions = {
       },
     });
 
+    console.log(response.data);
+
     if (response.data.login.ok) {
       commit('LOG_IN', response.data.login);
+    } else {
+      commit('SET_ERRORS', response.data.login.errors);
     }
+  },
+  setErrors({ commit }, errors) {
+    commit('SET_ERRORS', errors);
   },
   async logout({ commit }) {
     commit('LOG_OUT');
@@ -57,7 +65,7 @@ const actions = {
       mutation: CREATE_USER_MUATION,
       variables: {
         input: user,
-      },
+      }, 
     });
   },
   resetModuleState({ commit }) {
@@ -72,6 +80,9 @@ const mutations = {
   },
   LOG_OUT() {
     localStorage.clear();
+  },
+  SET_ERRORS(state, errors) {
+    state.errors = errors;
   },
   SET_CURRENT_USER(state, user) {
     state.currentUser = user;

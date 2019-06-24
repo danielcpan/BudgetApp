@@ -39,8 +39,6 @@ export default {
   },
   computed: {
     emailRules() {
-      if (!this.validate) return [];
-
       const requiredRule = v => !!v || 'E-mail is required';
       const validRule = v => this.isEmailValid(v) || 'E-mail must be valid';
       const lengthRule = v => this.isEmailLengthValid(v) || 'Please enter a value no longer than 254 characters';
