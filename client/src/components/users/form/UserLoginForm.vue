@@ -58,11 +58,9 @@ export default {
     PasswordField,
   },
   data: () => ({
-    email: 'dp2test@gmail.com',
-    password: 'Inmobi@123456',
+    email: '',
+    password: '',
   }),
-  computed: {
-  },
   methods: {
     ...mapActions('users', ['login']),
     async submit() {

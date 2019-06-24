@@ -80,14 +80,21 @@ const actions = {
 
     commit('UPDATE_EXPENSE', response.data.updateExpense);
   },
-  async deleteExpense({ commit }, id) {
+  async deleteExpense({ commit }, expense) {
     await apolloClient.mutate({
       mutation: DELETE_EXPENSE_MUTATION,
-      variables: { id },
+      variables: { 
+        id: expense.id
+      },
     });
 
-    commit('DELETE_EXPENSE', id);
-    this.dispatch('users/getCurrentUser', { root: true });
+    commit('DELETE_EXPENSE', expense.id);
+    this.dispatch('categories/getCategoriesList', { root: true });
+    this.dispatch('snackbar/setAndDisplaySnackbar', {
+      header: "Deleted Expense: ",
+      body: expense.note
+    },{ root: true });
+    
   },
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);

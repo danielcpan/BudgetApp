@@ -69,7 +69,7 @@ const actions = {
     });
 
     commit('UPDATE_CATEGORY', response.data.updateCategory);
-    this.dispatch('expenses/getExpensesList', 1, { root: true });
+    this.dispatch('expenses/getExpensesList', { root: true });
   },
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);

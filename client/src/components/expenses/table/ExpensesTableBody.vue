@@ -60,7 +60,7 @@
                     </v-layout>
                   </v-list-tile-title>
                 </v-list-tile>
-                <v-list-tile @click="deleteExpense(props.item.id)">
+                <v-list-tile @click="deleteExpense(props.item)">
                   <v-list-tile-title>
                     <v-layout justify-center>
                       <v-flex xs1>

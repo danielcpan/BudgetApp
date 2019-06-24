@@ -18,7 +18,6 @@ const SECRET2 = 'JAKSDKASDNASDNAKNJQWIOQWEJAS';
 // Middleware
 app.use(cors());
 
-
 const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars');
 
 // Force close connection, sometimes it persists
@@ -49,16 +48,12 @@ const schema = makeExecutableSchema({
 });
 
 const addUser = async (req, res, next) => {
-  console.log('ADDING USER');
-  console.log(req.headers);
   const token = req.headers['x-token'];
 
   if (token) {
     try {
       const { user } = jwt.verify(token, SECRET);
       req.user = user;
-      console.log('req.user');
-      console.log(req.user);
     } catch (err) {
       const refreshToken = req.headers['x-refresh-token'];
       const newTokens = await refreshTokens(token, refreshToken, models, SECRET, SECRET2);

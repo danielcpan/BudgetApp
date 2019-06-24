@@ -47,6 +47,7 @@ const actions = {
     }
   },
   async logout({ commit }) {
+    commit('LOG_OUT');
     commit('RESET_MODULE_STATE');
     this.dispatch('categories/resetModuleState', { root: true });
     this.dispatch('expenses/resetModuleState', { root: true });
