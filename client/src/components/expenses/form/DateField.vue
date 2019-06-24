@@ -5,6 +5,7 @@
       <template v-slot:activator="{on}">
         <v-text-field
           label="Date"
+          :rules="dateRules"
           v-model="formattedDate"
           v-on="on"
           readonly
@@ -37,6 +38,11 @@ export default {
     formattedDate() {
       return format(this.date);
     },
+    dateRules() {
+      const requiredRule = v => !!v || 'Date is required';
+
+      return [requiredRule];
+    },    
   },
   mounted() {
     if (this.value === '') {

@@ -5,6 +5,7 @@
       <template v-slot:activator="{on}">
         <v-text-field
           label="Color"
+          :rules="backgroundColorRules"
           v-model="color"
           required
           single-line
@@ -40,6 +41,11 @@ export default {
         this.$emit('input', val);
       },
     },
+    backgroundColorRules() {
+      const requiredRule = v => !!v || 'Color is required';
+
+      return [requiredRule];
+    },    
   },
 };
 </script>

@@ -3,6 +3,7 @@
     <div class="field-title" style="">Font Awesome Icon</div>
     <v-select
       v-model="icon"
+      :rules="iconRules"
       @input="$emit('input', icon)"
       :items="iconsList"
       label="Icon"
@@ -67,6 +68,13 @@ export default {
   mounted() {
     this.icon = this.value;
   },
+  computed: {
+    iconRules() {
+      const requiredRule = v => !!v || 'Icon is required';
+
+      return [requiredRule];
+    },
+  },    
 };
 </script>
 

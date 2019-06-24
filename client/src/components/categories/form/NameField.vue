@@ -4,6 +4,7 @@
     <v-text-field
       label="Name"
       v-model="name"
+      :rules="nameRules"
       @input="$emit('input', name)"
       required
       single-line
@@ -22,6 +23,13 @@ export default {
   mounted() {
     this.name = this.value;
   },
+  computed: {
+    nameRules() {
+      const requiredRule = v => !!v || 'Name is required';
+
+      return [requiredRule];
+    },
+  },  
 };
 </script>
 

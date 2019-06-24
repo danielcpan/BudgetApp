@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: 0 */
 const { tryLogin } = require('../helpers/auth');
+const { createTestData } = require('../seeders/testData');
 
 module.exports = {
   User: {
@@ -21,9 +22,14 @@ module.exports = {
     login: async (parent, { email, password }, { models, SECRET, SECRET2 }, info) => (
       tryLogin(email, password, models, SECRET, SECRET2)
     ),
-    createUser: (parent, { input }, { models }, info) => (
-      models.User.create(input)
-    ),
+    // createUser: (parent, { input }, { models }, info) => (
+    //   models.User.create(input)
+    // ),
+    createUser: async (parent, { input }, { models }, info) => {
+      const user = await models.User.create(input)
+      createTestData(user)
+      return user;
+    },
     updateUser: async (parent, { input }, { models }, info) => {
       await models.User.update(input, { where: { id: input.id } });
       return models.User.findByPk(input.id);

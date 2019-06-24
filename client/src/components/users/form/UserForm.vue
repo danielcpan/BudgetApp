@@ -19,7 +19,7 @@
                   @keyup.native.enter="submit"
                   lazy-validation>
                   <v-layout row wrap pt-3>
-                    <v-flex xs6>
+                    <v-flex xs12 sm6>
                       <name-field v-model="user.firstName" titleType="First"></name-field>
                     </v-flex>
                     <v-flex xs12 sm6>

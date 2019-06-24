@@ -15,8 +15,8 @@ const state = () => ({
   currentCategory: {
     id: '',
     name: '',
-    icon: '',
-    color: '',
+    icon: 'fa-utensils',
+    color: '#000000',
   },
   categoriesList: [],
   search: '',
@@ -84,8 +84,8 @@ const mutations = {
     state.currentCategory = {
       id: '',
       name: '',
-      icon: '',
-      color: '',
+      icon: 'fa-utensils',
+      color: '#000000',
     };
   },
   GET_CATEGORY(state, category) {
@@ -111,8 +111,8 @@ const mutations = {
     state.currentCategory = {
       id: '',
       name: '',
-      icon: '',
-      color: '',
+      icon: 'fa-utensils',
+      color: '#000000',
     };
     state.categoriesList = [];
     state.search = '';

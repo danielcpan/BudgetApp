@@ -3,7 +3,7 @@
     <div class="field-title">Category</div>
     <v-select
       v-model="category"
-
+      :rules="categoryRules"
       :items="categories"
       label="Category"
       item-value="id"
@@ -68,6 +68,11 @@ export default {
         this.$emit('input', pickedCategory);
       },
     },
+    categoryRules() {
+      const requiredRule = v => !!v.id || 'Category is required';
+
+      return [requiredRule];
+    },    
   },
   mounted() {
     this.getCategoriesList();
