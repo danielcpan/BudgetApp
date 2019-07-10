@@ -8,8 +8,7 @@ import { ApolloLink } from 'apollo-link';
 
 Vue.use(VueApollo);
 
-const httpLink = new HttpLink({ uri: 'http://localhost:5000/graphql' });
-// const httpLink = new HttpLink({ uri: 'https://budget-app-daniel-pan.herokuapp.com/graphql' });
+const httpLink = new HttpLink({ uri: process.env.DATABASE_URL || 'http://localhost:5000/graphql' });
 
 const middlewareLink = setContext(() => ({
   headers: {
