@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-
+require('dotenv').config()
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -12,8 +12,8 @@ const models = require('./models');
 const { refreshTokens } = require('./helpers/auth');
 
 const app = express();
-const SECRET = 'KSAJDJASKDNKASUEIHQJKDMASSD';
-const SECRET2 = 'JAKSDKASDNASDNAKNJQWIOQWEJAS';
+// console.log(process.env.SECRET)
+const { SECRET, SECRET2 } = require('./config/config')
 
 // Middleware
 app.use(cors());
@@ -47,7 +47,7 @@ const schema = makeExecutableSchema({
   ],
 });
 
-const addUser = async (req, res, next) => {
+const addUserToContext = async (req, res, next) => {
   const token = req.headers['x-token'];
 
   if (token) {
@@ -68,7 +68,7 @@ const addUser = async (req, res, next) => {
   next();
 };
 
-app.use(addUser);
+app.use(addUserToContext);
 
 const server = new ApolloServer({
   schema,
@@ -80,11 +80,11 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 // Uncomment Below for heroku build
-app.use(express.static('dist'));
+// app.use(express.static('dist'));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
+// });
 
 // seed on start
 // require('./seeders/testData');
