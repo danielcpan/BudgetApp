@@ -7,6 +7,7 @@ module.exports = factory.define('Category', models.Category, (buildOptions = {})
     name: () => faker.commerce.department(),
     icon: () => 'fa-icon',
     color: () => faker.internet.color(),
+    isDefault: false,
     userId: factory.assoc('User', 'id'),
   };
   return attrs;

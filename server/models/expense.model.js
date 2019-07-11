@@ -34,7 +34,7 @@ module.exports = class Expense extends Sequelize.Model {
       foreignKey: {
         name: 'categoryId',
         field: 'category_id',
-        allowNull: false,
+        // allowNull: false,
       },
       onDelete: 'cascade',
     });

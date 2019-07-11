@@ -67,6 +67,16 @@
                     </v-layout>
                   </v-list-tile-title>
                 </v-list-tile>
+                <v-list-tile @click="deleteCategory(props.item)" v-if="!props.item.isDefault">
+                  <v-list-tile-title>
+                    <v-layout justify-center>
+                      <v-flex xs1>
+                        <v-icon>fas fa-trash</v-icon>
+                      </v-flex>
+                      <v-flex xs11 class="manage-menu px-4">Delete Category</v-flex>
+                    </v-layout>
+                  </v-list-tile-title>
+                </v-list-tile>                
               </v-list>
             </v-menu>
           </v-flex>
@@ -78,7 +88,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: ['tableData'],
@@ -104,6 +114,7 @@ export default {
     }),
   },
   methods: {
+    ...mapActions('categories', ['deleteCategory']),
     getPercentOfTotal(category) {
       const percent = ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2);
       return isNaN(percent) ? 0 : percent; // eslint-disable-line no-restricted-globals

@@ -6,6 +6,7 @@ export default gql`
     name
     icon
     color
+    isDefault
     totalExpenses
     expenses {
       note

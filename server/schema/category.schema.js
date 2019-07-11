@@ -1,7 +1,8 @@
 module.exports = `
   type Query {
     category(id: ID!): Category!
-    categories(userId: ID): [Category!]!
+    categories: [Category!]!
+    categoriesAll: [Category!]!
   }
 
   type Mutation {
@@ -15,6 +16,7 @@ module.exports = `
     name: String!
     icon: String!
     color: String!
+    isDefault: Boolean!
     totalExpenses: String!
     expenses: [Expense!]!
     userId: ID!

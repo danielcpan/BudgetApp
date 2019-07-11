@@ -5,8 +5,8 @@ describe('Expense Model', () => {
     });
 
     context('categoryId', () => {
-      it('is invalid when null', async () => {
-        expect(await isValid(factory.build('Expense', { categoryId: null }))).to.be.false;
+      it('is valid when null', async () => {
+        expect(await isValid(factory.build('Expense', { categoryId: null }))).to.be.true;
       });
     });
 

@@ -9,6 +9,7 @@ import {
   CATEGORIES_QUERY,
   CREATE_CATEGORY_MUTATION,
   UPDATE_CATEGORY_MUTATION,
+  DELETE_CATEGORY_MUTATION,
 } from '../../graphql/category';
 
 const state = () => ({
@@ -51,6 +52,7 @@ const actions = {
     commit('SET_LOADING', false);
   },
   async createCategory({ commit }, category) {
+    commit('SET_LOADING', true);
     const response = await apolloClient.mutate({
       mutation: CREATE_CATEGORY_MUTATION,
       variables: {
@@ -59,6 +61,7 @@ const actions = {
     });
 
     commit('CREATE_CATEGORY', response.data.createCategory);
+    commit('SET_LOADING', false);
   },
   async updateCategory({ commit }, category) {
     const response = await apolloClient.mutate({
@@ -70,6 +73,22 @@ const actions = {
 
     commit('UPDATE_CATEGORY', response.data.updateCategory);
     this.dispatch('expenses/getExpensesList', { root: true });
+  },
+  async deleteCategory({ commit }, category) {
+    await apolloClient.mutate({
+      mutation: DELETE_CATEGORY_MUTATION,
+      variables: {
+        id: category.id
+      },
+    });
+
+    commit('DELETE_CATEGORY', category.id);
+    this.dispatch('expenses/getExpensesList', { root: true });
+    this.dispatch('users/getCurrentUser', { root: true });
+    this.dispatch('snackbar/setAndDisplaySnackbar', {
+      header: 'Deleted Category: ',
+      body: category.name,
+    }, { root: true });
   },
   setSearch({ commit }, search) {
     commit('SET_SEARCH', search);
@@ -100,6 +119,10 @@ const mutations = {
   UPDATE_CATEGORY(state, category) {
     const categoryIndex = state.categoriesList.findIndex(cat => cat.id === category.id);
     if (categoryIndex !== -1) state.categoriesList.splice(categoryIndex, 1, category);
+  },
+  DELETE_CATEGORY(state, id) {
+    const index = state.categoriesList.findIndex(cat => cat.id === id);
+    state.categoriesList.splice(index, 1);
   },
   SET_SEARCH(state, search) {
     state.search = search;

@@ -8,9 +8,9 @@ module.exports = {
     category: (parent, args, { models }, info) => parent.getCategory(),
   },
   Query: {
-    expense: auth((parent, { id }, { models }, info) => (
+    expense: (parent, { id }, { models }, info) => (
       models.Expense.findByPk(id)
-    )),
+    ),
     expenses: auth((parent, args, { models, user }, info) => (
       models.Expense.findAll({ where: { userId: user.id } })
     )),

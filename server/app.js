@@ -59,5 +59,7 @@ server.applyMiddleware({ app });
 // });
 
 // seed on start
+// const { createTestData } = require('./seeders/testData');
+// createTestData()
 // require('./seeders/testData');
 module.exports = app;

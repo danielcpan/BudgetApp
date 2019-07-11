@@ -26,8 +26,9 @@ export default {
   computed: {
     nameRules() {
       const requiredRule = v => !!v || 'Name is required';
+      const lengthRule = v => (v.length >= 2 && v.length <= 23) || 'Please enter a value between 2 and 23 characters long';
 
-      return [requiredRule];
+      return [requiredRule, lengthRule];
     },
   },  
 };
