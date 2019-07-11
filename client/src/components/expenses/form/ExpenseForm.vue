@@ -94,7 +94,7 @@ export default {
       'createExpense',
       'updateExpense',
     ]),
-    submit() {
+    async submit() {
       if (this.$refs.form.validate()) {
         const expenseToSubmit = {
           id: this.expense.id,
@@ -106,9 +106,9 @@ export default {
         };
         if (this.$route.name === 'New') {
           delete expenseToSubmit.id;
-          this.createExpense(expenseToSubmit);
+          await this.createExpense(expenseToSubmit);
         } else {
-          this.updateExpense(expenseToSubmit);
+          await this.updateExpense(expenseToSubmit);
         }
         this.$router.push('/');
       }

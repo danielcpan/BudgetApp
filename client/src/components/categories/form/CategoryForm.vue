@@ -89,7 +89,7 @@ export default {
       'createCategory',
       'updateCategory',
     ]),
-    submit() {
+    async submit() {
       if (this.$refs.form.validate()) {
         const categoryToSubmit = {
           id: this.category.id,
@@ -100,9 +100,9 @@ export default {
         };
         if (this.$route.name === 'New') {
           delete categoryToSubmit.id;
-          this.createCategory(categoryToSubmit);
+          await this.createCategory(categoryToSubmit);
         } else {
-          this.updateCategory(categoryToSubmit);
+          await this.updateCategory(categoryToSubmit);
         }
         this.$router.push('/');
       }

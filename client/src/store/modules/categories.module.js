@@ -52,7 +52,6 @@ const actions = {
     commit('SET_LOADING', false);
   },
   async createCategory({ commit }, category) {
-    commit('SET_LOADING', true);
     const response = await apolloClient.mutate({
       mutation: CREATE_CATEGORY_MUTATION,
       variables: {
@@ -61,7 +60,8 @@ const actions = {
     });
 
     commit('CREATE_CATEGORY', response.data.createCategory);
-    commit('SET_LOADING', false);
+
+    return 
   },
   async updateCategory({ commit }, category) {
     const response = await apolloClient.mutate({
