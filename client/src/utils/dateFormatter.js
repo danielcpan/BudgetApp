@@ -16,12 +16,9 @@ const monthNames = [
 ];
 
 export const format = (date) => {
-  const dateObj = new Date(date);
-
-  const year = dateObj.getFullYear();
-  const monthNumber = (1 + dateObj.getMonth()).toString().padStart(2, '0');
-  const month = monthNames[monthNumber - 1];
-  const day = dateObj.getDate().toString().padStart(2, '0');
+  const year = date.substr(0,4)
+  const month = monthNames[parseInt(date.substr(5,2)) - 1]
+  const day = date.substr(8,2)
 
   return `${month} ${day}, ${year}`;
 };
