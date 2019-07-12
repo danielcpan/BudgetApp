@@ -11,9 +11,12 @@ module.exports = {
     expense: (parent, { id }, { models }, info) => (
       models.Expense.findByPk(id)
     ),
-    expenses: auth((parent, args, { models, user }, info) => (
-      models.Expense.findAll({ where: { userId: user.id } })
-    )),
+    expenses: auth((parent, { startDate, endDate }, { models, user }, info) => {
+      if (startDate && endDate) {
+        return models.Expense.findAll({ where: { userId: user.id, date: { between : [startDate, endDate]}}})
+      }
+      return models.Expense.findAll({where: { userId: user.id}})
+    }),
   },
   Mutation: {
     createExpense: auth((parent, { input }, { models, user }, info) => (

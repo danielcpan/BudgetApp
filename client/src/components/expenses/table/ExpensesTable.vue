@@ -27,6 +27,9 @@ export default {
     ExpensesTableHeader,
     ExpensesTableBody,
   },
+  data: () => ({
+    
+  }),
   computed: {
     ...mapState({
       user: state => state.users.currentUser,

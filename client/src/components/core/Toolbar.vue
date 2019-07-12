@@ -44,6 +44,9 @@ export default {
       isLoggedIn: state => state.users.isLoggedIn,
     }),
   },
+  mounted() {
+    this.getCurrentUser();
+  },
   methods: {
     ...mapActions('users', ['logout', 'getCurrentUser']),
   },

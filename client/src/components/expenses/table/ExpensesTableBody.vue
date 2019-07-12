@@ -38,7 +38,7 @@
           </v-layout>
         </td>
         <td class="date-col">
-          <div class="expense-name">{{ format(props.item.date) }}</div>
+          <div class="expense-name">{{ format(props.item.date, 'MMMM DD, YYYY') }}</div>
         </td>
         <td class="manage-col">
           <v-layout>
@@ -82,8 +82,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-
-import { format } from '../../../utils/dateFormatter';
+import format from 'date-fns/format'
 
 export default {
   props: ['tableData'],

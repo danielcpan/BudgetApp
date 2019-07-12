@@ -50,11 +50,20 @@ const actions = {
     commit('GET_EXPENSE', response.data.expense);
     commit('SET_LOADING', false);
   },
-  async getExpensesList({ commit }) {
+  async getExpensesList({ commit }, filters) {
     commit('SET_LOADING', true);
+    // const { startDate, endDate } = filters;
+
+    const startDate = "2019-07-01T00:00:00.000Z"
+    const endDate = "2019-08-01T00:00:00.000Z"
+
 
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
+      variables: {
+        startDate,
+        endDate
+      }
     });
 
     commit('SET_LOADING', false);

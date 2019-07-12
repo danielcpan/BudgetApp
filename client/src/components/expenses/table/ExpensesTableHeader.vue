@@ -20,6 +20,7 @@
               label="Search expenses...">
             </search-field>
           </v-flex>
+          <month-field></month-field>
           <v-spacer></v-spacer>
           <v-flex xs5 sm5 md4>
             <button
@@ -38,10 +39,12 @@
 
 <script>
 import { mapActions } from 'vuex';
+import MonthField from '../../general/MonthField.vue';
 import SearchField from '../../general/SearchField.vue';
 
 export default {
   components: {
+    MonthField,
     SearchField,
   },
   props: ['headerValue'],

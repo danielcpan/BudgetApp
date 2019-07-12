@@ -4,12 +4,12 @@ const { auth } = require('../helpers/permissions');
 module.exports = {
   Category: {
     totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(),
-    expenses: (parent, args, { models }, info) => parent.getExpenses(),
-    // expenses: (parent, args, { models }, info) => {
-    //   console.log("test")
-    //   console.log(parent)
-    //   return parent.getExpenses()
-    // },
+    expenses: (parent, { startDate, endDate }, { models }, info) => {
+      if (startDate && endDate) {
+          return parent.getExpenses({ where: { date: { between : [startDate, endDate]}}})  
+      }
+      return parent.getExpenses()
+    }
   },
   Query: {
     category: (parent, { id }, { models }, info) => (
@@ -19,18 +19,7 @@ module.exports = {
       models.Category.findAll({ where: { userId: user.id} })
     )),
     categoriesAll: async (parent, args, { models }, info) => {
-
       return models.Category.findAll()
-      const categories = await models.Category.findAll()
-      // console.log(categories)
-
-      const otherCategory = { name: 'Other', icon: 'far fa-circle', color: '#848886' }
-
-      console.log(categories.concat(otherCategory))
-
-      // const otherExpenses = await models.Expense.findAll({ where: { categoryId: null }, raw: true})
-      // console.log(otherExpenses)
-      return categories.concat(otherCategory)
     },
   },
   Mutation: {

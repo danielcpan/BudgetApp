@@ -22,44 +22,26 @@
           <v-icon>fas fa-calendar-day</v-icon>
         </template>
       </v-text-field>
-      <v-date-picker v-model="date">
-        <v-card-actions>
-          <v-flex pr-5 mr-5>
-            <button 
-              @click="menu = false"
-              type="button" 
-              class="dp-btn dp-btn--secondary dp-btn-size--small"
-            >
-              Cancel
-            </button>
-          </v-flex>
-          <v-flex>
-            <button 
-              @click="menu = false"
-              type="button" 
-              class="dp-btn dp-btn--primary dp-btn-size--small"
-            >
-              Ok
-            </button>
-          </v-flex>
-        </v-card-actions>
+      <v-date-picker 
+        v-model="date" 
+        @change="menu = false">
       </v-date-picker>
     </v-menu>
   </div>
 </template>
 
 <script>
-import { format } from '../../../utils/dateFormatter';
+import format from 'date-fns/format'
 
 export default {
   props: ['value'],
   data: () => ({
-    date: '',
+    date: new Date().toISOString().substr(0, 10),
     menu: false
   }),
   computed: {
     formattedDate() {
-      return format(this.date)
+      return this.date ? format(this.date, 'MMM DD, YYYY') : ''
     },
     dateRules() {
       const requiredRule = v => !!v || 'Date is required';
@@ -68,14 +50,9 @@ export default {
     },    
   },
   mounted() {
-    if (this.value === '') {
-      this.date = new Date().toISOString().substr(0, 10)
-    } else {
+    if (this.value !== '') {
       this.date = new Date(this.value).toISOString().substr(0, 10);
     }
-  },
-  methods: {
-    format,
   },
 };
 </script>
