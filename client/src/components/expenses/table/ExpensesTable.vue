@@ -1,8 +1,7 @@
 <template>
   <div
     id="expenses-table"
-    class="dp-table"
-    v-if="!$store.state.users.loading && !$store.state.expenses.loading">
+    class="dp-table">
     <expenses-table-header
       :headerValue="user.totalExpenses">
     </expenses-table-header>
