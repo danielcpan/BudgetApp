@@ -24,7 +24,7 @@
       </v-text-field>
       <v-date-picker 
         v-model="date" 
-        @change="menu = false">
+        @change="menu = false; $emit('input', date)">
       </v-date-picker>
     </v-menu>
   </div>

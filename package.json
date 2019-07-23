@@ -125,6 +125,5 @@
   },
   "engines": {
     "node": "11.1.0"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

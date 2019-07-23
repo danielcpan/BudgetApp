@@ -24,6 +24,8 @@ const state = () => ({
       color: '',
     },
   },
+  startDate: '2019-08-01T00:00:00.000Z',
+  endDate: '2019-09-01T00:00:00.000Z',
   expensesList: [],
   search: '',
   loading: false,
@@ -52,17 +54,22 @@ const actions = {
   },
   async getExpensesList({ commit }, filters) {
     commit('SET_LOADING', true);
-    // const { startDate, endDate } = filters;
+    console.log("filters: ")
+    console.log(filters)
+    const { startDate, endDate } = filters;
+    let defaultStartDate, defaultEndDate;
 
-    const startDate = "2019-07-01T00:00:00.000Z"
-    const endDate = "2019-08-01T00:00:00.000Z"
-
+    if (!startDate && !endDate) {
+      const date = new Date()
+      defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString()
+      defaultEndDate = new Date(date.getFullYear(), date.getMonth()+1, 0).toISOString()
+    }
 
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
       variables: {
-        startDate,
-        endDate
+        startDate: startDate || defaultStartDate,
+        endDate: endDate || defaultEndDate
       }
     });
 
@@ -111,6 +118,9 @@ const actions = {
   resetModuleState({ commit }) {
     commit('RESET_MODULE_STATE');
   },
+  async updateDateRange({ commit }, dateRange) {
+    commit('UPDATE_DATE_RANGE', dateRange);
+  }
 };
 
 const mutations = {
@@ -144,6 +154,11 @@ const mutations = {
   DELETE_EXPENSE(state, id) {
     const index = state.expensesList.findIndex(exp => exp.id === id);
     state.expensesList.splice(index, 1);
+  },
+  UPDATE_DATE_RANGE(state, dateRange) {
+    const { startDate, endDate} = dateRange;
+    state.startDate = startDate;
+    state.endDate = endDate;
   },
   SET_SEARCH(state, search) {
     state.search = search;
