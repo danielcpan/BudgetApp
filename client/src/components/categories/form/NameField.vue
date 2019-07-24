@@ -30,7 +30,7 @@ export default {
 
       return [requiredRule, lengthRule];
     },
-  },  
+  },
 };
 </script>
 

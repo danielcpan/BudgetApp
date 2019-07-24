@@ -21,15 +21,15 @@ export default {
       type: String,
     },
   },
-  data () {
+  data() {
     return {
       note: this.value,
-    }
+    };
   },
   watch: {
     value() {
       this.note = this.value;
-    }
+    },
   },
   computed: {
     noteRules() {
@@ -37,7 +37,7 @@ export default {
 
       return [requiredRule];
     },
-  },  
+  },
 };
 </script>
 

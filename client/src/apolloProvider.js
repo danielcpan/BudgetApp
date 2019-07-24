@@ -36,7 +36,7 @@ const cleanTypeName = new ApolloLink((operation, forward) => {
     const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
     operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
   }
-  return forward(operation).map((data) => data);
+  return forward(operation).map(data => data);
 });
 
 // Disable Cache temporarily due to caching issues
@@ -57,7 +57,7 @@ export const apolloClient = new ApolloClient({
     authMiddleware,
     authAfterware,
     cleanTypeName,
-    httpLink
+    httpLink,
   ]),
   cache: new InMemoryCache(),
   defaultOptions,

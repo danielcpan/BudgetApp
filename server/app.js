@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -8,9 +8,10 @@ const { makeExecutableSchema } = require('graphql-tools');
 const { fileLoader, mergeTypes, mergeResolvers } = require('merge-graphql-schemas');
 
 const models = require('./models');
+
 const app = express();
 const addUserToContext = require('./middleware/addUserToContext.middleware');
-const { SECRET, SECRET2 } = require('./config/config')
+const { SECRET, SECRET2 } = require('./config/config');
 
 // Middleware
 app.use(cors());

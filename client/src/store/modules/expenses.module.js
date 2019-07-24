@@ -29,29 +29,30 @@ const actions = {
       },
     });
 
-    const { expense } = response.data
+    const { expense } = response.data;
 
     return expense;
   },
   async getExpensesList({ commit }, filters) {
     commit('SET_LOADING', true);
-    console.log("filters: ")
-    console.log(filters)
+    console.log('filters: ');
+    console.log(filters);
     const { startDate, endDate } = filters;
-    let defaultStartDate, defaultEndDate;
+    let defaultStartDate; let
+      defaultEndDate;
 
     if (!startDate && !endDate) {
-      const date = new Date()
-      defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString()
-      defaultEndDate = new Date(date.getFullYear(), date.getMonth()+1, 0).toISOString()
+      const date = new Date();
+      defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString();
+      defaultEndDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString();
     }
 
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
       variables: {
         startDate: startDate || defaultStartDate,
-        endDate: endDate || defaultEndDate
-      }
+        endDate: endDate || defaultEndDate,
+      },
     });
 
     commit('SET_LOADING', false);

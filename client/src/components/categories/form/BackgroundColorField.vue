@@ -45,7 +45,7 @@ export default {
       const requiredRule = v => !!v || 'Color is required';
 
       return [requiredRule];
-    },    
+    },
   },
 };
 </script>

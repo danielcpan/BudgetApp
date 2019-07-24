@@ -75,8 +75,8 @@ export default {
   }),
   computed: {
     ...mapState({
-      errors: state => state.users.errors
-    })
+      errors: state => state.users.errors,
+    }),
   },
   methods: {
     ...mapActions('users', ['login', 'setErrors']),
@@ -91,8 +91,8 @@ export default {
     },
   },
   mounted() {
-    this.setErrors([])
-  }
+    this.setErrors([]);
+  },
 };
 </script>
 

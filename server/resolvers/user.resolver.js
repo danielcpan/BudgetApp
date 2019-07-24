@@ -26,8 +26,8 @@ module.exports = {
     //   models.User.create(input)
     // ),
     createUser: async (parent, { input }, { models }, info) => {
-      const user = await models.User.create(input)
-      createTestData(user)
+      const user = await models.User.create(input);
+      createTestData(user);
       return user;
     },
     updateUser: async (parent, { input }, { models }, info) => {

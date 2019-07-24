@@ -22,9 +22,9 @@
           <v-icon>fas fa-calendar-day</v-icon>
         </template>
       </v-text-field>
-      <v-date-picker 
-        v-model="date" 
-        type="month" 
+      <v-date-picker
+        v-model="date"
+        type="month"
         @change="createDateRange()">
       </v-date-picker>
     </v-menu>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import format from 'date-fns/format'
+import format from 'date-fns/format';
 import { mapActions, mapState } from 'vuex';
 
 export default {
@@ -41,16 +41,16 @@ export default {
     date: new Date().toISOString().substr(0, 7),
     startDate: new Date(),
     endDate: new Date(),
-    menu: false
+    menu: false,
   }),
   computed: {
     formattedDate() {
-        const currentDate = new Date().toISOString().substr(0, 7)
-        console.log("this.date1: " + this.date)
-        console.log("this.date.substr(5,2): " + this.date.substr(5,2))
-        console.log("currentDate: " + currentDate.substr(5,2))
-        if (this.date.substr(5,2) === currentDate.substr(5,2)) return 'This month'
-        return this.date ? format(this.date, 'MMMM YYYY') : ''
+      const currentDate = new Date().toISOString().substr(0, 7);
+      console.log(`this.date1: ${this.date}`);
+      console.log(`this.date.substr(5,2): ${this.date.substr(5, 2)}`);
+      console.log(`currentDate: ${currentDate.substr(5, 2)}`);
+      if (this.date.substr(5, 2) === currentDate.substr(5, 2)) return 'This month';
+      return this.date ? format(this.date, 'MMMM YYYY') : '';
     },
     dateRules() {
       const requiredRule = v => !!v || 'Date is required';
@@ -61,20 +61,20 @@ export default {
   methods: {
     ...mapActions('expenses', ['getExpensesList', 'updateDateRange']),
     createDateRange() {
-      console.log(this.date)
-      const year = this.date.substr(0, 4)
-      const month = this.date.substr(5, 2)
-      console.log("year: " + year)
-      console.log("month: " + month)
+      console.log(this.date);
+      const year = this.date.substr(0, 4);
+      const month = this.date.substr(5, 2);
+      console.log(`year: ${year}`);
+      console.log(`month: ${month}`);
 
-      this.startDate = new Date(year, month-1, 1).toISOString()
-      this.endDate = new Date(year, month, 0).toISOString()
-      console.log("startDate: " + this.startDate)
-      console.log("endDate: " + this.endDate)
+      this.startDate = new Date(year, month - 1, 1).toISOString();
+      this.endDate = new Date(year, month, 0).toISOString();
+      console.log(`startDate: ${this.startDate}`);
+      console.log(`endDate: ${this.endDate}`);
 
       // this.updateDateRange({ startDate: this.startDate, endDate: this.endDate});
 
-      this.getExpensesList({ startDate: this.startDate, endDate: this.endDate })
+      this.getExpensesList({ startDate: this.startDate, endDate: this.endDate });
       // this.getExpensesList();
 
       // // current.setMonth(current.getMonth()+1);
@@ -84,10 +84,10 @@ export default {
       // console.log("startDate: " + this.startDate)
       // console.log("this.endDate: " + this.endDate)
 
-      // this.startDate = 
-      this.menu = false
-    }
-  }
+      // this.startDate =
+      this.menu = false;
+    },
+  },
 };
 </script>
 

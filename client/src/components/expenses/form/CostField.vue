@@ -25,15 +25,15 @@ export default {
       type: String,
     },
   },
-  data () {
+  data() {
     return {
-      cost: this.value,  
-    }
+      cost: this.value,
+    };
   },
   watch: {
     value() {
       this.cost = this.value;
-    }
+    },
   },
   computed: {
     costRules() {

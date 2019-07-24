@@ -68,7 +68,7 @@ export default {
         return this.value;
       },
       set(val) {
-        console.log("val: " + val)
+        console.log(`val: ${val}`);
         const pickedCategory = this.categories.find(cat => cat.id === val);
         this.$emit('input', pickedCategory.id);
       },
@@ -77,7 +77,7 @@ export default {
       const requiredRule = v => !!v || 'Category is required';
 
       return [requiredRule];
-    },    
+    },
   },
   mounted() {
     this.getCategoriesList();

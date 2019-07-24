@@ -1,5 +1,5 @@
 <template>
-  <expense-form 
+  <expense-form
     :header="'Edit Expense'"
     :expenseData="expenseData"
     :submitCallback="submitUpdateExpense">
@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
-import ExpenseForm from './ExpenseForm.vue'
+import ExpenseForm from './ExpenseForm.vue';
 
 export default {
   components: {
@@ -20,7 +20,7 @@ export default {
     // undefined so it can use default prop
     expenseData: undefined,
   }),
-  async beforeMount () {
+  async beforeMount() {
     this.expenseData = await this.getExpense(this.$route.params.id);
   },
   methods: {

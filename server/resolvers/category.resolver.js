@@ -6,21 +6,19 @@ module.exports = {
     totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(),
     expenses: (parent, { startDate, endDate }, { models }, info) => {
       if (startDate && endDate) {
-          return parent.getExpenses({ where: { date: { between : [startDate, endDate]}}})  
+        return parent.getExpenses({ where: { date: { between: [startDate, endDate] } } });
       }
-      return parent.getExpenses()
-    }
+      return parent.getExpenses();
+    },
   },
   Query: {
     category: (parent, { id }, { models }, info) => (
       models.Category.findByPk(id)
     ),
     categories: auth((parent, args, { models, user }, info) => (
-      models.Category.findAll({ where: { userId: user.id} })
+      models.Category.findAll({ where: { userId: user.id } })
     )),
-    categoriesAll: async (parent, args, { models }, info) => {
-      return models.Category.findAll()
-    },
+    categoriesAll: async (parent, args, { models }, info) => models.Category.findAll(),
   },
   Mutation: {
     createCategory: auth((parent, { input }, { models, user }, info) => (
@@ -32,11 +30,11 @@ module.exports = {
     }),
     deleteCategory: async (parent, { id }, { models, user }, info) => {
       const category = await models.Category.findByPk(id, { raw: true });
-      
+
       // Reassign Category's expenses to Other
-      const otherCategory = await models.Category.findOne({ where: { userId: user.id, isDefault: true }})
-      await models.Expense.update({ categoryId: otherCategory.id }, { where: { categoryId: category.id }})
-      return models.Category.destroy({ where: { id, isDefault: false }})
+      const otherCategory = await models.Category.findOne({ where: { userId: user.id, isDefault: true } });
+      await models.Expense.update({ categoryId: otherCategory.id }, { where: { categoryId: category.id } });
+      return models.Category.destroy({ where: { id, isDefault: false } });
     },
   },
 };

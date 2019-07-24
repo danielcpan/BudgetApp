@@ -17,8 +17,8 @@ module.exports.createTestData = async (user) => {
   });
 
   const otherCategory = await factory.create('Category', {
-    name: 'Other', icon: 'far fa-circle', color: '#848886', userId: user.id, isDefault: true
-  })
+    name: 'Other', icon: 'far fa-circle', color: '#848886', userId: user.id, isDefault: true,
+  });
 
   const eatingOutExpenses = await factory.createMany('Expense', 1, { note: 'Example Eating Out Expense', userId: user.id, categoryId: eatingOutCategory.id });
   const rentExpenses = await factory.createMany('Expense', 1, { note: 'Example Rent Expense', userId: user.id, categoryId: rentCategory.id });
@@ -28,5 +28,4 @@ module.exports.createTestData = async (user) => {
   const otherExpenses3 = await factory.createMany('Expense', 1, { note: 'Example Other3 Expense', userId: user.id, categoryId: otherCategory.id });
 };
 
-// createTestData(); 
-
+// createTestData();

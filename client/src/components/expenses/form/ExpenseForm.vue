@@ -55,8 +55,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
 import CostField from './CostField.vue';
 import CategoryField from './CategoryField.vue';
 import DateField from './DateField.vue';
@@ -72,11 +70,11 @@ export default {
   props: {
     header: {
       type: String,
-      required: true
+      required: true,
     },
     submitCallback: {
       type: Function,
-      required: true
+      required: true,
     },
     expenseData: {
       type: Object,
@@ -84,15 +82,15 @@ export default {
         cost: '',
         note: '',
         date: new Date().toISOString(),
-        categoryId: null
-      })
-    }
+        categoryId: null,
+      }),
+    },
   },
-  data () {
+  data() {
     return {
       isValid: true,
       expenseFormData: this.expenseData,
-    }
+    };
   },
   watch: {
     expenseData() {
@@ -102,7 +100,7 @@ export default {
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        return this.submitCallback(this.expenseFormData);
+        this.submitCallback(this.expenseFormData);
       }
     },
   },

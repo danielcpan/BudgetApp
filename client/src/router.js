@@ -6,7 +6,6 @@ import Dashboard from './views/Dashboard.vue';
 import UserForm from './components/users/form/UserForm.vue';
 import UserLoginForm from './components/users/form/UserLoginForm.vue';
 import CategoryForm from './components/categories/form/CategoryForm.vue';
-import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
 import ExpenseAdd from './components/expenses/form/ExpenseAdd.vue';
 import ExpenseEdit from './components/expenses/form/ExpenseEdit.vue';
 import Index from './views/Index.vue';

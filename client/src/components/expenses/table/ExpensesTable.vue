@@ -27,14 +27,14 @@ export default {
     ExpensesTableBody,
   },
   data: () => ({
-    
+
   }),
   computed: {
     ...mapState({
       user: state => state.users.currentUser,
       expenses: state => state.expenses.expensesList,
       startDate: state => state.startDate,
-      endDate: state => state.endDate
+      endDate: state => state.endDate,
     }),
   },
   mounted() {
@@ -44,13 +44,13 @@ export default {
     ...mapActions('users', ['getCurrentUser']),
     ...mapActions('expenses', ['getExpensesList']),
     getDefaultDateRange() {
-      const date = new Date()
-      const defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString()
-      const defaultEndDate = new Date(date.getFullYear(), date.getMonth()+1, 0).toISOString()
-      console.log(defaultStartDate)
-      console.log(defaultEndDate)
-      return { startDate: defaultStartDate, endDate: defaultEndDate}
-    }
+      const date = new Date();
+      const defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString();
+      const defaultEndDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString();
+      console.log(defaultStartDate);
+      console.log(defaultEndDate);
+      return { startDate: defaultStartDate, endDate: defaultEndDate };
+    },
   },
 };
 </script>

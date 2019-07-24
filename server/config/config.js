@@ -5,7 +5,7 @@ module.exports = {
     database: 'budget_app_development',
     host: 'localhost',
     dialect: 'postgres',
-    underscored: true
+    underscored: true,
   },
   test: {
     username: 'postgres',
@@ -13,7 +13,7 @@ module.exports = {
     database: 'budget_app_test',
     host: 'localhost',
     dialect: 'postgres',
-    underscored: true
+    underscored: true,
   },
   production: {
     username: 'postgres',
@@ -21,12 +21,12 @@ module.exports = {
     database: 'database_production',
     host: 'localhost',
     dialect: 'postgres',
-    underscored: true
+    underscored: true,
   },
   PORT: process.env.PORT || 5000,
   SECRET: process.env.SECRET,
   SECRET2: process.env.SECRET2,
   PUBLIC_URL: process.env.PUBLIC_URL,
-  GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT
+  GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
 
-}
+};

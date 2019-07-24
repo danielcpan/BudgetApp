@@ -76,7 +76,7 @@
                       <v-flex xs11 class="manage-menu px-4">Delete Category</v-flex>
                     </v-layout>
                   </v-list-tile-title>
-                </v-list-tile>                
+                </v-list-tile>
               </v-list>
             </v-menu>
           </v-flex>

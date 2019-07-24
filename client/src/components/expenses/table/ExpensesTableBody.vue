@@ -82,7 +82,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import format from 'date-fns/format'
+import format from 'date-fns/format';
 
 export default {
   props: ['tableData'],

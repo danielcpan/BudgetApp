@@ -60,8 +60,6 @@ const actions = {
     });
 
     commit('CREATE_CATEGORY', response.data.createCategory);
-
-    return 
   },
   async updateCategory({ commit }, category) {
     const response = await apolloClient.mutate({
@@ -78,7 +76,7 @@ const actions = {
     await apolloClient.mutate({
       mutation: DELETE_CATEGORY_MUTATION,
       variables: {
-        id: category.id
+        id: category.id,
       },
     });
 

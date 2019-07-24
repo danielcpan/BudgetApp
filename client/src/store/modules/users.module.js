@@ -63,7 +63,7 @@ const actions = {
       mutation: CREATE_USER_MUATION,
       variables: {
         input: user,
-      }, 
+      },
     });
   },
   resetModuleState({ commit }) {

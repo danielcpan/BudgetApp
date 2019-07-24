@@ -22,16 +22,16 @@
           <v-icon>fas fa-calendar-day</v-icon>
         </template>
       </v-text-field>
-      <v-date-picker 
-        v-model="date" 
-        @change="menu = false; $emit('input', date)">
+      <v-date-picker
+        v-model="date"
+        @change="menu = false; $emit('input', new Date().toISOString())">
       </v-date-picker>
     </v-menu>
   </div>
 </template>
 
 <script>
-import format from 'date-fns/format'
+import format from 'date-fns/format';
 
 export default {
   props: {
@@ -39,27 +39,35 @@ export default {
       type: String,
     },
   },
-  data () {
+  data() {
     return {
-      date: this.value,
-      menu: false
-    }
+      date: '',
+      menu: false,
+    };
   },
   watch: {
     value() {
+      console.log('something changed');
       this.date = this.value;
-    }
+    },
   },
   computed: {
     formattedDate() {
-      return this.date ? format(this.date, 'MMM DD, YYYY') : ''
+      return this.date ? format(this.date, 'MMM DD, YYYY') : '';
     },
     dateRules() {
       const requiredRule = v => !!v || 'Date is required';
 
       return [requiredRule];
-    },    
+    },
   },
+  // mounted() {
+  //   if (this.value === '') {
+  //     this.date = new Date().toISOString().substr(0, 10);
+  //   } else {
+  //     this.date = new Date(this.value).toISOString().substr(0, 10);
+  //   }
+  // }
 };
 </script>
 
