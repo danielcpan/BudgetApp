@@ -12,36 +12,16 @@ import {
 } from '../../graphql/expense';
 
 const state = () => ({
-  currentExpense: {
-    id: '',
-    cost: '',
-    note: '',
-    date: '',
-    category: {
-      id: '',
-      name: '',
-      icon: '',
-      color: '',
-    },
-  },
-  startDate: '2019-08-01T00:00:00.000Z',
-  endDate: '2019-09-01T00:00:00.000Z',
   expensesList: [],
   search: '',
   loading: false,
 });
-
-const getters = {
-  currentExpense: state => state.currentExpense,
-};
 
 const actions = {
   clearCurrentExpense({ commit }) {
     commit('CLEAR_CURRENT_EXPENSE');
   },
   async getExpense({ commit }, id) {
-    commit('SET_LOADING', true);
-
     const response = await apolloClient.query({
       query: EXPENSE_QUERY,
       variables: {
@@ -49,8 +29,9 @@ const actions = {
       },
     });
 
-    commit('GET_EXPENSE', response.data.expense);
-    commit('SET_LOADING', false);
+    const { expense } = response.data
+
+    return expense;
   },
   async getExpensesList({ commit }, filters) {
     commit('SET_LOADING', true);
@@ -118,29 +99,9 @@ const actions = {
   resetModuleState({ commit }) {
     commit('RESET_MODULE_STATE');
   },
-  async updateDateRange({ commit }, dateRange) {
-    commit('UPDATE_DATE_RANGE', dateRange);
-  }
 };
 
 const mutations = {
-  CLEAR_CURRENT_EXPENSE(state) {
-    state.currentExpense = {
-      id: '',
-      cost: '',
-      note: '',
-      date: '',
-      category: {
-        id: '',
-        name: '',
-        icon: '',
-        color: '',
-      },
-    };
-  },
-  GET_EXPENSE(state, expense) {
-    state.currentExpense = expense;
-  },
   GET_EXPENSES_LIST(state, expenses) {
     state.expensesList = expenses;
   },
@@ -155,11 +116,6 @@ const mutations = {
     const index = state.expensesList.findIndex(exp => exp.id === id);
     state.expensesList.splice(index, 1);
   },
-  UPDATE_DATE_RANGE(state, dateRange) {
-    const { startDate, endDate} = dateRange;
-    state.startDate = startDate;
-    state.endDate = endDate;
-  },
   SET_SEARCH(state, search) {
     state.search = search;
   },
@@ -167,18 +123,6 @@ const mutations = {
     state.loading = loading;
   },
   RESET_MODULE_STATE(state) {
-    state.currentExpense = {
-      id: '',
-      cost: '',
-      note: '',
-      date: '',
-      category: {
-        id: '',
-        name: '',
-        icon: '',
-        color: '',
-      },
-    };
     state.expensesList = [];
     state.search = '';
   },
@@ -186,7 +130,6 @@ const mutations = {
 
 export default {
   namespaced: true,
-  getters,
   actions,
   state,
   mutations,

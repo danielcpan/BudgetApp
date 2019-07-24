@@ -23,6 +23,8 @@ module.exports = {
       models.Expense.create({ ...input, userId: user.id })
     )),
     updateExpense: auth(async (parent, { input }, { models, user }, info) => {
+      console.log("input")
+      console.log(input)
       await models.Expense.update({ ...input, userId: user.id }, { where: { id: input.id } });
       return models.Expense.findByPk(input.id);
     }),

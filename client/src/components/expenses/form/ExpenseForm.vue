@@ -1,15 +1,12 @@
 <template>
-  <div id="expense-form" class="dp-form" v-if="!$store.state.expenses.loading">
+  <div id="expense-form" class="dp-form">
     <v-container fluid>
       <v-layout row wrap justify-center align-center>
         <v-flex md6>
           <v-card>
             <v-container grid-list-md>
             <v-card-title>
-              <span
-                class="dp-head-1 pb-0">
-                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Expense Details
-              </span>
+              <span class="dp-head-1 pb-0">{{ header }}</span>
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>
@@ -20,16 +17,16 @@
                 lazy-validation>
                 <v-layout row wrap pt-3>
                   <v-flex xs6>
-                    <cost-field v-model="expense.cost"></cost-field>
+                    <cost-field v-model="expenseFormData.cost"></cost-field>
                   </v-flex>
                   <v-flex xs6>
-                    <date-field v-model="expense.date"></date-field>
+                    <date-field v-model="expenseFormData.date"></date-field>
                   </v-flex>
                   <v-flex xs12>
-                    <category-field v-model="expense.category"></category-field>
+                    <category-field v-model="expenseFormData.categoryId"></category-field>
                   </v-flex>
                   <v-flex xs12>
-                    <note-field v-model="expense.note"></note-field>
+                    <note-field v-model="expenseFormData.note"></note-field>
                   </v-flex>
                 </v-layout>
               </v-form>
@@ -72,45 +69,40 @@ export default {
     DateField,
     NoteField,
   },
-  data: () => ({
-    isValid: true,
-  }),
-  computed: {
-    ...mapState({
-      expense: state => state.expenses.currentExpense,
-    }),
-  },
-  created() {
-    if (this.$route.name === 'New') {
-      this.clearCurrentExpense();
-    } else {
-      this.getExpense(this.$route.params.id);
+  props: {
+    header: {
+      type: String,
+      required: true
+    },
+    submitCallback: {
+      type: Function,
+      required: true
+    },
+    expenseData: {
+      type: Object,
+      default: () => ({
+        cost: '',
+        note: '',
+        date: new Date().toISOString(),
+        categoryId: null
+      })
     }
   },
+  data () {
+    return {
+      isValid: true,
+      expenseFormData: this.expenseData,
+    }
+  },
+  watch: {
+    expenseData() {
+      this.expenseFormData = this.expenseData;
+    },
+  },
   methods: {
-    ...mapActions('expenses', [
-      'getExpense',
-      'clearCurrentExpense',
-      'createExpense',
-      'updateExpense',
-    ]),
-    async submit() {
+    submit() {
       if (this.$refs.form.validate()) {
-        const expenseToSubmit = {
-          id: this.expense.id,
-          cost: this.expense.cost,
-          note: this.expense.note,
-          date: this.expense.date || new Date().toISOString().substr(0, 10),
-          categoryId: this.expense.category.id,
-          userId: this.expense.userId,
-        };
-        if (this.$route.name === 'New') {
-          delete expenseToSubmit.id;
-          await this.createExpense(expenseToSubmit);
-        } else {
-          await this.updateExpense(expenseToSubmit);
-        }
-        this.$router.push('/');
+        return this.submitCallback(this.expenseFormData);
       }
     },
   },

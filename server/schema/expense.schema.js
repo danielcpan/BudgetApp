@@ -17,6 +17,7 @@ module.exports = `
     date: Date
     userId: ID!
     user: User!
+    categoryId: ID!
     category: Category!
   }
 

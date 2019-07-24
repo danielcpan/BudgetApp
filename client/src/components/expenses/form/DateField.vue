@@ -34,11 +34,22 @@
 import format from 'date-fns/format'
 
 export default {
-  props: ['value'],
-  data: () => ({
-    date: new Date().toISOString().substr(0, 10),
-    menu: false
-  }),
+  props: {
+    value: {
+      type: String,
+    },
+  },
+  data () {
+    return {
+      date: this.value,
+      menu: false
+    }
+  },
+  watch: {
+    value() {
+      this.date = this.value;
+    }
+  },
   computed: {
     formattedDate() {
       return this.date ? format(this.date, 'MMM DD, YYYY') : ''
@@ -48,11 +59,6 @@ export default {
 
       return [requiredRule];
     },    
-  },
-  mounted() {
-    if (this.value !== '') {
-      this.date = new Date(this.value).toISOString().substr(0, 10);
-    }
   },
 };
 </script>

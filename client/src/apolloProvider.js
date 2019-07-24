@@ -4,21 +4,21 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { HttpLink } from 'apollo-link-http';
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink, from } from 'apollo-link';
 
 Vue.use(VueApollo);
 
-// const httpLink = new HttpLink({ uri: process.env.DATABASE_URL || 'http://localhost:5000/graphql' });
-const httpLink = new HttpLink({ uri: 'http://localhost:5000/graphql' });
+const httpLink = new HttpLink({ uri: process.env.DATABASE_URL || 'http://localhost:5000/graphql' });
+// const httpLink = new HttpLink({ uri: 'http://localhost:5000/graphql' });
 
-const middlewareLink = setContext(() => ({
+const authMiddleware = setContext(() => ({
   headers: {
     'x-token': localStorage.getItem('token'),
     'x-refresh-token': localStorage.getItem('refreshToken'),
   },
 }));
 
-const afterwareLink = new ApolloLink((operation, forward) => forward(operation).map((response) => {
+const authAfterware = new ApolloLink((operation, forward) => forward(operation).map((response) => {
   const { response: { headers } } = operation.getContext();
   if (headers) {
     const token = headers.get('x-token');
@@ -31,7 +31,13 @@ const afterwareLink = new ApolloLink((operation, forward) => forward(operation).
   return response;
 }));
 
-const link = afterwareLink.concat(middlewareLink.concat(httpLink));
+const cleanTypeName = new ApolloLink((operation, forward) => {
+  if (operation.variables) {
+    const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
+    operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
+  }
+  return forward(operation).map((data) => data);
+});
 
 // Disable Cache temporarily due to caching issues
 // For now relying on force refetching
@@ -47,7 +53,12 @@ const defaultOptions = {
 };
 
 export const apolloClient = new ApolloClient({
-  link,
+  link: from([
+    authMiddleware,
+    authAfterware,
+    cleanTypeName,
+    httpLink
+  ]),
   cache: new InMemoryCache(),
   defaultOptions,
 });

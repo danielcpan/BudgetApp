@@ -16,12 +16,20 @@
 <script>
 
 export default {
-  props: ['value'],
-  data: () => ({
-    note: '',
-  }),
-  mounted() {
-    this.note = this.value;
+  props: {
+    value: {
+      type: String,
+    },
+  },
+  data () {
+    return {
+      note: this.value,
+    }
+  },
+  watch: {
+    value() {
+      this.note = this.value;
+    }
   },
   computed: {
     noteRules() {

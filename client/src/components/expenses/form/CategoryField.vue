@@ -54,7 +54,11 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  props: ['value'],
+  props: {
+    value: {
+      type: String,
+    },
+  },
   computed: {
     ...mapState({
       categories: state => state.categories.categoriesList,
@@ -64,12 +68,13 @@ export default {
         return this.value;
       },
       set(val) {
+        console.log("val: " + val)
         const pickedCategory = this.categories.find(cat => cat.id === val);
-        this.$emit('input', pickedCategory);
+        this.$emit('input', pickedCategory.id);
       },
     },
     categoryRules() {
-      const requiredRule = v => !!v.id || 'Category is required';
+      const requiredRule = v => !!v || 'Category is required';
 
       return [requiredRule];
     },    

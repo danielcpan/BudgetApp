@@ -7,6 +7,8 @@ import UserForm from './components/users/form/UserForm.vue';
 import UserLoginForm from './components/users/form/UserLoginForm.vue';
 import CategoryForm from './components/categories/form/CategoryForm.vue';
 import ExpenseForm from './components/expenses/form/ExpenseForm.vue';
+import ExpenseAdd from './components/expenses/form/ExpenseAdd.vue';
+import ExpenseEdit from './components/expenses/form/ExpenseEdit.vue';
 import Index from './views/Index.vue';
 
 Vue.use(Router);
@@ -57,13 +59,13 @@ const router = new Router({
         {
           path: 'new',
           name: 'New',
-          component: ExpenseForm,
+          component: ExpenseAdd,
           meta: { requiresAuth: true },
         },
         {
           path: ':id/edit',
           name: 'Edit',
-          component: ExpenseForm,
+          component: ExpenseEdit,
           meta: { requiresAuth: true },
         },
       ],

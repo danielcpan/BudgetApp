@@ -20,12 +20,20 @@
 <script>
 
 export default {
-  props: ['value'],
-  data: () => ({
-    cost: '',
-  }),
-  mounted() {
-    this.cost = this.value;
+  props: {
+    value: {
+      type: String,
+    },
+  },
+  data () {
+    return {
+      cost: this.value,  
+    }
+  },
+  watch: {
+    value() {
+      this.cost = this.value;
+    }
   },
   computed: {
     costRules() {
