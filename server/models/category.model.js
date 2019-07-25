@@ -27,6 +27,7 @@ module.exports = class Category extends Sequelize.Model {
       },
       isDefault: {
         type: DataTypes.BOOLEAN,
+        // field: 'is_default',
       },
     }, {
       tableName: 'categories',

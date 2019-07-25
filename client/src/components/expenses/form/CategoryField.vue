@@ -68,7 +68,6 @@ export default {
         return this.value;
       },
       set(val) {
-        console.log(`val: ${val}`);
         const pickedCategory = this.categories.find(cat => cat.id === val);
         this.$emit('input', pickedCategory.id);
       },

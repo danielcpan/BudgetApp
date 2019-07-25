@@ -3,6 +3,7 @@
 /* eslint-disable no-param-reassign */
 
 import { apolloClient } from '../../apolloProvider';
+import { buildDateRange } from '../../utils/date.utils';
 
 import {
   CATEGORY_QUERY,
@@ -41,11 +42,17 @@ const actions = {
     commit('GET_CATEGORY', response.data.category);
     commit('SET_LOADING', false);
   },
-  async getCategoriesList({ commit }) {
+  async getCategoriesList({ commit }, dateRange) {
     commit('SET_LOADING', true);
+
+    const { startDate, endDate } = buildDateRange(dateRange);
 
     const response = await apolloClient.query({
       query: CATEGORIES_QUERY,
+      variables: {
+        startDate,
+        endDate,
+      }
     });
 
     commit('GET_CATEGORIES_LIST', response.data.categories);

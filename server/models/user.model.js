@@ -71,13 +71,14 @@ module.exports = class User extends Sequelize.Model {
     });
   }
 
-  async getTotalExpenses() {
-    let totalExpense = 0;
-    const expenses = await this.getExpenses();
+  async getTotalExpenses(startDate, endDate) {
+    let expenses;
+    if (!startDate && !endDate) expenses = await this.getExpenses();
+    else expenses = this.getExpenses({ where: { date: { between: [ startDate, endDate ] }}})
 
-    expenses.forEach((expense) => {
-      totalExpense += parseFloat(expense.cost);
-    });
+    const totalExpense = expenses.reduce((total, expense) => {
+      return total += parseFloat(expense.cost);
+    }, 0);
 
     return totalExpense.toFixed(2);
   }

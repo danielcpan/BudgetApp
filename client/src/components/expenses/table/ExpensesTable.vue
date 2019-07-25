@@ -1,10 +1,9 @@
 <template>
   <div
     id="expenses-table"
-    class="dp-table">
-    <expenses-table-header
-      :headerValue="user.totalExpenses">
-    </expenses-table-header>
+    class="dp-table"
+    >
+    <expenses-table-header :headerValue="getTotalExpense()"></expenses-table-header>
     <v-container pt-0 fluid>
       <v-layout px-4 pb-4>
         <v-flex>
@@ -33,10 +32,17 @@ export default {
     }),
   },
   mounted() {
-    this.getExpensesList({ startDate: null, endDate: null });
+    this.getExpensesList();
   },
   methods: {
     ...mapActions('expenses', ['getExpensesList']),
+    getTotalExpense() {
+      const totalExpense = this.expenses.reduce((total, expense) => {
+        return total += parseFloat(expense.cost)
+      }, 0)
+
+      return totalExpense.toFixed(2)
+    }
   },
 };
 </script>

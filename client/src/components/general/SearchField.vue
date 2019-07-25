@@ -8,6 +8,7 @@
       type="text"
       single-line
       outline
+      hide-details
       class="search-box dp-form"
     ></v-text-field>
   </div>

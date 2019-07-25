@@ -1,28 +1,27 @@
 <template>
-  <v-container pb-0 fluid id="expenses-table-header">
+  <v-container pb-0 fluid grid-list-md id="expenses-table-header">
     <v-layout px-4 row wrap>
-      <v-flex xs12 sm6 md5>
+      <v-flex xs12 sm12 md12 pb-3>
         <v-layout row>
-          <span class="dp-head-1">
+          <div class="dp-head-1">
             Total Expenses:
-            <span class="header-value">
-              $ {{ headerValue }}
-            </span>
-          </span>
+            <span class="header-value">$ {{ headerValue }}</span>
+          </div>
         </v-layout>
       </v-flex>
-      <v-spacer></v-spacer>
-      <v-flex xs12 sm12 md6>
+      <v-flex xs12 sm12 md12>
         <v-layout row wrap justify-end>
-          <v-flex xs6 sm7 md8>
+          <v-flex xs12 sm5 md4>
             <search-field
               v-model="search"
               label="Search expenses...">
             </search-field>
           </v-flex>
-          <month-field></month-field>
           <v-spacer></v-spacer>
-          <v-flex xs5 sm5 md4>
+          <v-flex xs6 sm3 md2>
+            <month-field :submitCallback="submitDateRangeFilter"></month-field>
+          </v-flex>
+          <v-flex xs6 sm3 md2>
             <button
               @click="$router.push({ path: '/expenses/new'})"
               type="button"
@@ -68,11 +67,13 @@ export default {
     this.setSearch('');
   },
   methods: {
-    ...mapActions('expenses', ['setSearch']),
+    ...mapActions('expenses', ['setSearch', 'getExpensesList']),
+    submitDateRangeFilter(dateRange) {
+      return this.getExpensesList(dateRange)
+    }
   },
 };
 </script>
 
 <style>
-
 </style>

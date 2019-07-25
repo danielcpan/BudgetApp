@@ -1,7 +1,7 @@
 module.exports = `
   type Query {
     category(id: ID!): Category!
-    categories: [Category!]!
+    categories(startDate: String, endDate: String): [Category!]!
     categoriesAll: [Category!]!
   }
 

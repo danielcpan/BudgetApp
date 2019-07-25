@@ -1,6 +1,5 @@
 <template>
-  <div id="date-field" class="input-field">
-    <div class="field-title">Date</div>
+  <div id="date-field" class="input-field dp-input">
     <v-menu
       lazy
       :close-on-content-click="false"
@@ -17,6 +16,7 @@
         required
         single-line
         outline
+        class="search-box dp-form"
       >
         <template v-slot:append>
           <v-icon>fas fa-calendar-day</v-icon>
@@ -36,7 +36,12 @@ import format from 'date-fns/format'
 import { mapActions } from 'vuex';
 
 export default {
-  props: ['value'],
+  props: {
+    submitCallback: {
+      type: Function,
+      required: true,
+    },    
+  },
   data: () => ({
     date: new Date().toISOString().substr(0, 7),
     startDate: new Date(),
@@ -46,11 +51,8 @@ export default {
   computed: {
     formattedDate() {
         const currentDate = new Date().toISOString().substr(0, 7)
-        console.log("this.date1: " + this.date)
-        console.log("this.date.substr(5,2): " + this.date.substr(5,2))
-        console.log("currentDate: " + currentDate.substr(5,2))
         if (this.date.substr(5,2) === currentDate.substr(5,2)) return 'This month'
-        return this.date ? format(this.date, 'MMMM YYYY') : ''
+        return this.date ? format(this.date, 'MMM YYYY') : ''
     },
     dateRules() {
       const requiredRule = v => !!v || 'Date is required';
@@ -59,7 +61,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions('expenses', ['getExpensesList', 'updateDateRange']),
     createDateRange() {
       const year = this.date.substr(0, 4)
       const month = this.date.substr(5, 2)
@@ -68,7 +69,9 @@ export default {
       this.endDate = new Date(year, month, 1)
       this.endDate = new Date(this.endDate.getTime()-1000)
 
-      this.getExpensesList({ startDate: this.startDate, endDate: this.endDate })
+      const dateRange = { startDate: this.startDate, endDate: this.endDate }
+
+      this.submitCallback(dateRange)
       this.menu = false
     }
   }

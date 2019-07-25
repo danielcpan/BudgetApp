@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0 */
-const requiresAuth = require('../helpers/permissions');
+// const requiresAuth = require('../helpers/permissions');
 const { auth } = require('../helpers/permissions');
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     expenses: auth((parent, { startDate, endDate }, { models, user }, info) => {
       if (startDate && endDate) {
         return models.Expense.findAll({
-          where: { userId: user.id, date: { between: [startDate, endDate] } },
+          where: { userId: user.id, date: { between: [startDate, endDate] }},
         });
       }
       return models.Expense.findAll({ where: { userId: user.id } });

@@ -2,6 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 import { apolloClient } from '../../apolloProvider';
+import { buildDateRange } from '../../utils/date.utils';
 
 import {
   EXPENSE_QUERY,
@@ -33,24 +34,16 @@ const actions = {
 
     return expense;
   },
-  async getExpensesList({ commit }, filters) {
+  async getExpensesList({ commit }, dateRange) {
     commit('SET_LOADING', true);
 
-    const { startDate, endDate } = filters;
-    let defaultStartDate; 
-    let defaultEndDate;
-
-    if (!startDate && !endDate) {
-      const date = new Date();
-      defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString();
-      defaultEndDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString();
-    }
+    const { startDate, endDate } = buildDateRange(dateRange);
 
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
       variables: {
-        startDate: startDate || defaultStartDate,
-        endDate: endDate || defaultEndDate,
+        startDate,
+        endDate,
       },
     });
 

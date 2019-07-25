@@ -29,7 +29,7 @@ module.exports = `
     email: String!
     password: String!
     userRole: String!
-    totalExpenses: String!
+    totalExpenses(startDate: String, endDate: String): String!
     expenses: [Expense!]!
   }
 

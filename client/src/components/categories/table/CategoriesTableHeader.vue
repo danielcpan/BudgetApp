@@ -1,27 +1,27 @@
 <template>
-  <v-container pb-0 fluid>
+  <v-container pb-0 fluid grid-list-md>
     <v-layout px-4 row wrap>
-      <v-flex xs12 sm6 md5>
+      <v-flex xs12 sm12 md12 pb-3>
         <v-layout row>
-          <span class="dp-head-1">
+          <div class="dp-head-1">
             Total Categories:
-            <span class="total-expense-header-value">
-                ({{ headerValue }})
-            </span>
-          </span>
+            <span class="total-expense-header-value"> ({{ headerValue }}) </span>
+          </div>
         </v-layout>
       </v-flex>
-      <v-spacer></v-spacer>
-      <v-flex xs12 sm12 md6>
+      <v-flex xs12 sm12 md12>
         <v-layout row wrap justify-end>
-          <v-flex xs6 sm7 md8>
+          <v-flex xs12 sm5 md4>
             <search-field
               label="Search categories..."
               v-model="search">
             </search-field>
           </v-flex>
           <v-spacer></v-spacer>
-          <v-flex xs5 sm5 md4>
+          <v-flex xs6 sm3 md2>
+            <month-field :submitCallback="submitDateRangeFilter"></month-field>
+          </v-flex>
+          <v-flex xs6 sm3 md2>
             <button
               @click="$router.push({ path: '/categories/new' })"
               type="button"
@@ -38,13 +38,20 @@
 
 <script>
 import { mapActions } from 'vuex';
+import MonthField from '../../general/MonthField.vue';
 import SearchField from '../../general/SearchField.vue';
 
 export default {
   components: {
+    MonthField,
     SearchField,
   },
-  props: ['headerValue'],
+  props: {
+    headerValue: {
+      type: Number,
+      required: true,
+    },    
+  },
   computed: {
     search: {
       get() {
@@ -59,7 +66,10 @@ export default {
     this.setSearch('');
   },
   methods: {
-    ...mapActions('categories', ['setSearch']),
+    ...mapActions('categories', ['setSearch', 'getCategoriesList']),
+    submitDateRangeFilter(dateRange) {
+      return this.getCategoriesList(dateRange)
+    }
   },
 };
 </script>
