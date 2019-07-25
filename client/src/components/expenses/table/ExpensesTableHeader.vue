@@ -27,8 +27,9 @@
               @click="$router.push({ path: '/expenses/new'})"
               type="button"
               class="dp-btn dp-btn--primary dp-btn-size--medium"
-              style="float: right">
-                Add Expense +
+              style="float: right"
+            >
+              Add Expense +
             </button>
           </v-flex>
         </v-layout>
@@ -47,7 +48,12 @@ export default {
     MonthField,
     SearchField,
   },
-  props: ['headerValue'],
+  props: {
+    headerValue: {
+      type: String,
+      required: true,
+    },    
+  },
   computed: {
     search: {
       get() {

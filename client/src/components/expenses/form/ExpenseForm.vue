@@ -81,7 +81,7 @@ export default {
       default: () => ({
         cost: '',
         note: '',
-        date: new Date().toISOString(),
+        date: new Date().toLocaleDateString(),
         categoryId: null,
       }),
     },

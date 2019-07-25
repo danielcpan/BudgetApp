@@ -26,31 +26,17 @@ export default {
     ExpensesTableHeader,
     ExpensesTableBody,
   },
-  data: () => ({
-
-  }),
   computed: {
     ...mapState({
       user: state => state.users.currentUser,
       expenses: state => state.expenses.expensesList,
-      startDate: state => state.startDate,
-      endDate: state => state.endDate,
     }),
   },
   mounted() {
-    this.getExpensesList({ startDate: this.startDate, endDate: this.endDate });
+    this.getExpensesList({ startDate: null, endDate: null });
   },
   methods: {
-    ...mapActions('users', ['getCurrentUser']),
     ...mapActions('expenses', ['getExpensesList']),
-    getDefaultDateRange() {
-      const date = new Date();
-      const defaultStartDate = new Date(date.getFullYear(), date.getMonth(), 1).toISOString();
-      const defaultEndDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString();
-      console.log(defaultStartDate);
-      console.log(defaultEndDate);
-      return { startDate: defaultStartDate, endDate: defaultEndDate };
-    },
   },
 };
 </script>

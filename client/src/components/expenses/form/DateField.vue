@@ -24,7 +24,7 @@
       </v-text-field>
       <v-date-picker
         v-model="date"
-        @change="menu = false; $emit('input', new Date().toISOString())">
+        @change="menu = false; $emit('input', format(date, 'MM/DD/YYYY'))">
       </v-date-picker>
     </v-menu>
   </div>
@@ -41,14 +41,13 @@ export default {
   },
   data() {
     return {
-      date: '',
+      date: new Date(this.value).toISOString().substr(0, 10),
       menu: false,
     };
   },
   watch: {
     value() {
-      console.log('something changed');
-      this.date = this.value;
+      this.date = new Date(this.value).toISOString().substr(0, 10);
     },
   },
   computed: {
@@ -61,13 +60,9 @@ export default {
       return [requiredRule];
     },
   },
-  // mounted() {
-  //   if (this.value === '') {
-  //     this.date = new Date().toISOString().substr(0, 10);
-  //   } else {
-  //     this.date = new Date(this.value).toISOString().substr(0, 10);
-  //   }
-  // }
+  methods: {
+    format,
+  }
 };
 </script>
 

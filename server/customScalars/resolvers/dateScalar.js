@@ -1,12 +1,13 @@
 const { GraphQLScalarType } = require('graphql');
 const { GraphQLError } = require('graphql/error');
 const { Kind } = require('graphql/language');
+const format = require('date-fns/format');
 
 module.exports = {
   Date: new GraphQLScalarType({
     name: 'Date',
     description: 'Use JavaScript Date object for date/time fields.',
-
+    // Value sent to client
     serialize(value) {
       let v = value;
 
@@ -29,9 +30,9 @@ module.exports = {
         throw new TypeError(`Value is not a valid Date: ${v}`);
       }
 
-      return v.toJSON();
+      return format(v, 'MM/DD/YYYY');
     },
-
+    // Value from client
     parseValue(value) {
       const date = new Date(value);
 

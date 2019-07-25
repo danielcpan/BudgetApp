@@ -1,10 +1,8 @@
 <template>
-  <div id="expense-form" class="dp-form">
-    <expense-form
-      :header="'Add a New Expense'"
-      :submitCallback="submitCreateExpense">
-    </expense-form>
-  </div>
+  <expense-form
+    :header="'Add a New Expense'"
+    :submitCallback="submitCreateExpense">
+  </expense-form>
 </template>
 
 <script>
@@ -19,7 +17,6 @@ export default {
   methods: {
     ...mapActions('expenses', ['createExpense']),
     async submitCreateExpense(expense) {
-      console.log('got here');
       await this.createExpense(expense);
       this.$router.push('/');
     },

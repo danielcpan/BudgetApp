@@ -35,11 +35,10 @@ const actions = {
   },
   async getExpensesList({ commit }, filters) {
     commit('SET_LOADING', true);
-    console.log('filters: ');
-    console.log(filters);
+
     const { startDate, endDate } = filters;
-    let defaultStartDate; let
-      defaultEndDate;
+    let defaultStartDate; 
+    let defaultEndDate;
 
     if (!startDate && !endDate) {
       const date = new Date();

@@ -11,7 +11,8 @@
     <template v-slot:items="props">
       <tr
         @mouseover="showIndex = props.index"
-        @mouseleave="showIndex = null">
+        @mouseleave="showIndex = null"
+      >
         <td class="name-col">
           <v-layout row wrap>
           <v-flex xs11>
@@ -98,6 +99,7 @@ export default {
       },
     ],
     pagination: {
+      sortBy: 'date',
       rowsPerPage: 10,
     },
   }),
@@ -114,5 +116,4 @@ export default {
 </script>
 
 <style>
-
 </style>
