@@ -17,7 +17,7 @@ module.exports = `
     icon: String!
     color: String!
     isDefault: Boolean!
-    totalExpenses: String!
+    totalExpenses(startDate: String, endDate: String): String!
     expenses(startDate: String, endDate: String): [Expense!]!
     userId: ID!
   }

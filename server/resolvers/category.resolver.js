@@ -3,13 +3,11 @@ const { auth } = require('../helpers/permissions');
 
 module.exports = {
   Category: {
-    totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(),
+    totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(args),
     expenses: (parent, { startDate, endDate }, { models }, info) => {
       if (startDate && endDate) {
-        console.log("calling in between month range")
         return parent.getExpenses({ where: { date: { between: [startDate, endDate] }}});
       }
-      console.log("getting all")
       return parent.getExpenses();
     },
   },
@@ -17,15 +15,7 @@ module.exports = {
     category: (parent, { id }, { models }, info) => (
       models.Category.findByPk(id)
     ),
-    // categories: auth((parent, args, { models, user }, info) => (
-    //   models.Category.findAll({ where: { userId: user.id } })
-    // )),
     categories: auth((parent, { startDate, endDate }, { models, user }, info) => {
-      console.log("Here")
-      // startDate = startDate.substr(0,10)
-      // endDate = endDate.substr(0,10)
-      console.log("startDate: " + startDate)
-      console.log("endDate: " + endDate)
       if (startDate && endDate) {
         return models.Category.findAll({
           where: { userId: user.id, created_at: { between: [startDate, endDate] }},

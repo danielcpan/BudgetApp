@@ -7,7 +7,7 @@ export default gql`
     icon
     color
     isDefault
-    totalExpenses
+    totalExpenses(startDate: $startDate, endDate: $endDate)
     expenses(startDate: $startDate, endDate: $endDate) {
       note
       cost
