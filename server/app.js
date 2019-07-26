@@ -53,7 +53,7 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 if (process.env.DATABASE_URL) {
-  console.log("using build fo heroku");
+  console.log('using build fo heroku');
   app.use(express.static('dist'));
 
   app.get('*', (req, res) => {

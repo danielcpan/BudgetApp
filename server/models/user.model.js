@@ -73,7 +73,7 @@ module.exports = class User extends Sequelize.Model {
 
   async getTotalExpenses(dateRange) {
     const { startDate, endDate } = dateRange || {};
-    
+
     let expenses;
 
     if (startDate && endDate) {
