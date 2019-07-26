@@ -65,8 +65,7 @@ export default {
       const month = this.date.substr(5, 2);
 
       this.startDate = new Date(year, month - 1, 1);
-      this.endDate = new Date(year, month, 1);
-      this.endDate = new Date(this.endDate.getTime() - 1000);
+      this.endDate = new Date(year, month, 0);
 
       const dateRange = { startDate: this.startDate, endDate: this.endDate };
 
