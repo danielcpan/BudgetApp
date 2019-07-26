@@ -67,10 +67,6 @@ export default {
       this.startDate = new Date(year, month - 1, 1).toISOString();
       this.endDate = new Date(year, month, 0).toISOString();
 
-      console.log("startDate: " + this.startDate)
-      console.log("endDate: " + this.endDate)
-      // console.log("dasdasd")
-
       const dateRange = { startDate: this.startDate, endDate: this.endDate };
 
       this.submitCallback(dateRange);

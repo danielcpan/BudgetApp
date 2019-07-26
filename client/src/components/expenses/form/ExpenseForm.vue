@@ -101,7 +101,6 @@ export default {
     submit() {
       if (this.$refs.form.validate()) {
         this.expenseFormData.date = new Date(this.expenseFormData.date).toISOString()
-        // console.log(this.expenseFormData)
         this.submitCallback(this.expenseFormData);
       }
     },
