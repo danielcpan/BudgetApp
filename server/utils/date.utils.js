@@ -1,8 +1,8 @@
 module.exports.buildDateRange = (dateRange) => {
   let { startDate, endDate } = dateRange || {};
 
-  startDate = new Date(startDate).toISOString()
-  endDate = new Date(endDate).toISOString()
+  startDate = new Date(startDate).toISOString();
+  endDate = new Date(endDate).toISOString();
 
   if (!dateRange) {
     const date = new Date();

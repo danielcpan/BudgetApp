@@ -42,31 +42,39 @@
 <script>
 
 export default {
-  props: ['value'],
-  data: () => ({
-    iconsList: [
-      'fa-utensils',
-      'fa-home',
-      'fa-plug',
-      'fa-wrench',
-      'fa-briefcase-medical',
-      'fa-gifts',
-      'fa-shopping-cart',
-      'fa-graduation-cap',
-      'fa-hamburger',
-      'fa-gas-pump',
-      'fa-basketball-ball',
-      'fa-church',
-      'fa-wine-bottle',
-      'fa-dog',
-      'fa-birthday-cake',
-      'fa-mountain',
-      'fa-plane-departure',
-    ],
-    icon: 'fa-utensils',
-  }),
-  mounted() {
-    this.icon = this.value;
+  props: {
+    value: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      iconsList: [
+        'fa-utensils',
+        'fa-home',
+        'fa-plug',
+        'fa-wrench',
+        'fa-briefcase-medical',
+        'fa-gifts',
+        'fa-shopping-cart',
+        'fa-graduation-cap',
+        'fa-hamburger',
+        'fa-gas-pump',
+        'fa-basketball-ball',
+        'fa-church',
+        'fa-wine-bottle',
+        'fa-dog',
+        'fa-birthday-cake',
+        'fa-mountain',
+        'fa-plane-departure',
+      ],
+      icon: this.value,
+    };
+  },
+  watch: {
+    value() {
+      this.icon = this.value;
+    },
   },
   computed: {
     iconRules() {
