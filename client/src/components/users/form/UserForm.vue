@@ -1,5 +1,5 @@
 <template>
-   <div id="user-form" class="dp-form" v-if="!$store.state.categories.loading">
+   <div id="user-form" class="dp-form">
     <v-container fluid>
       <v-layout row wrap justify-center align-center>
         <v-flex md6>

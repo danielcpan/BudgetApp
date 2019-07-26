@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import CategoryFragment from './CategoryFragment';
 
 export default gql`
-  mutation updateCategory($input: CategoryInput!, $startDate: String, $endDate: String) {
+  mutation updateCategory($input: CategoryInput!, $dateRange: DateRangeInput) {
     updateCategory(input: $input) {
       ...Category
     }

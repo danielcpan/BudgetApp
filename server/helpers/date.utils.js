@@ -1,4 +1,4 @@
-export function buildDateRange(dateRange) {
+module.exports.buildDateRange = (dateRange) => {
   let startDate, endDate
 
   if (!dateRange) {

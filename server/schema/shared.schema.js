@@ -4,7 +4,7 @@ module.exports = `
     message: String
   }
 
-  input DateRange {
+  input DateRangeInput {
     startDate: Date!
     endDate: Date!
   }

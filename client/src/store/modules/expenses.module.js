@@ -2,7 +2,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 import { apolloClient } from '../../apolloProvider';
-import { buildDateRange } from '../../utils/date.utils';
 
 import {
   EXPENSE_QUERY,
@@ -15,7 +14,6 @@ import {
 const state = () => ({
   expensesList: [],
   search: '',
-  loading: false,
 });
 
 const actions = {
@@ -35,19 +33,13 @@ const actions = {
     return expense;
   },
   async getExpensesList({ commit }, dateRange) {
-    commit('SET_LOADING', true);
-
-    const { startDate, endDate } = buildDateRange(dateRange);
-
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
       variables: {
-        startDate,
-        endDate,
+        dateRange
       },
     });
 
-    commit('SET_LOADING', false);
     commit('GET_EXPENSES_LIST', response.data.expenses);
   },
   async createExpense({ commit }, expense) {
@@ -111,9 +103,6 @@ const mutations = {
   },
   SET_SEARCH(state, search) {
     state.search = search;
-  },
-  SET_LOADING(state, loading) {
-    state.loading = loading;
   },
   RESET_MODULE_STATE(state) {
     state.expensesList = [];

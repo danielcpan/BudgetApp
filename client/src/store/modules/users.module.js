@@ -20,19 +20,15 @@ const state = () => ({
   },
   errors: [],
   isLoggedIn: !!localStorage.getItem('token'),
-  loading: false,
 });
 
 const actions = {
   async getCurrentUser({ commit }) {
-    commit('SET_LOADING', true);
-
     const response = await apolloClient.query({
       query: CURRENT_USER_QUERY,
     });
 
     commit('SET_CURRENT_USER', response.data.currentUser);
-    commit('SET_LOADING', false);
   },
   async login({ commit }, credentials) {
     const response = await apolloClient.mutate({
@@ -84,9 +80,6 @@ const mutations = {
   },
   SET_CURRENT_USER(state, user) {
     state.currentUser = user;
-  },
-  SET_LOADING(state, loading) {
-    state.loading = loading;
   },
   RESET_MODULE_STATE(state) {
     state.currentUser = {

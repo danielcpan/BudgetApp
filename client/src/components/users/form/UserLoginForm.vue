@@ -1,14 +1,12 @@
 <template>
-   <div id="category-form" class="dp-form" v-if="!$store.state.categories.loading">
+   <div id="category-form" class="dp-form">
     <v-container fluid>
       <v-layout row wrap justify-center align-center>
         <v-flex md6>
           <v-card>
             <v-container grid-list-md>
             <v-card-title>
-              <span class="dp-head-1 pb-0">
-                {{ $route.name }}
-              </span>
+              <span class="dp-head-1 pb-0">{{ $route.name }}</span>
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>

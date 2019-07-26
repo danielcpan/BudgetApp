@@ -3,7 +3,6 @@
 /* eslint-disable no-param-reassign */
 
 import { apolloClient } from '../../apolloProvider';
-import { buildDateRange } from '../../utils/date.utils';
 
 import {
   CATEGORY_QUERY,
@@ -16,7 +15,6 @@ import {
 const state = () => ({
   categoriesList: [],
   search: '',
-  loading: false,
 });
 
 const actions = {
@@ -36,20 +34,14 @@ const actions = {
     return category
   },
   async getCategoriesList({ commit }, dateRange) {
-    commit('SET_LOADING', true);
-
-    const { startDate, endDate } = buildDateRange(dateRange);
-
     const response = await apolloClient.query({
       query: CATEGORIES_QUERY,
       variables: {
-        startDate,
-        endDate,
+        dateRange
       }
     });
 
     commit('GET_CATEGORIES_LIST', response.data.categories);
-    commit('SET_LOADING', false);
   },
   async createCategory({ commit }, category) {
     const response = await apolloClient.mutate({
@@ -112,9 +104,6 @@ const mutations = {
   },
   SET_SEARCH(state, search) {
     state.search = search;
-  },
-  SET_LOADING(state, loading) {
-    state.loading = loading;
   },
   RESET_MODULE_STATE(state) {
     state.categoriesList = [];

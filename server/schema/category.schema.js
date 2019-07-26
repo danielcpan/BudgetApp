@@ -1,13 +1,13 @@
 module.exports = `
   type Query {
     category(id: ID!): Category!
-    categories(startDate: String, endDate: String): [Category!]!
+    categories(dateRange: DateRangeInput): [Category!]!
     categoriesAll: [Category!]!
   }
 
   type Mutation {
-    createCategory(input: CategoryInput!, startDate: String, endDate: String): Category!
-    updateCategory(input: CategoryInput!, startDate: String, endDate: String): Category!
+    createCategory(input: CategoryInput!, dateRange: DateRangeInput): Category!
+    updateCategory(input: CategoryInput!, dateRange: DateRangeInput): Category!
     deleteCategory(id: ID!): Boolean!
   }
 
@@ -17,8 +17,8 @@ module.exports = `
     icon: String!
     color: String!
     isDefault: Boolean!
-    totalExpenses(startDate: String, endDate: String): String!
-    expenses(startDate: String, endDate: String): [Expense!]!
+    totalExpenses(dateRange: DateRangeInput): String!
+    expenses(dateRange: DateRangeInput): [Expense!]!
     userId: ID!
   }
 
