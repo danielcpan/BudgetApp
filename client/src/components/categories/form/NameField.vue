@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       name: this.value,
-    }
+    };
   },
   watch: {
     value() {

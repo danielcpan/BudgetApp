@@ -50,7 +50,7 @@ export default {
     headerValue: {
       type: Number,
       required: true,
-    },    
+    },
   },
   computed: {
     search: {
@@ -68,8 +68,8 @@ export default {
   methods: {
     ...mapActions('categories', ['setSearch', 'getCategoriesList']),
     submitDateRangeFilter(dateRange) {
-      return this.getCategoriesList(dateRange)
-    }
+      return this.getCategoriesList(dateRange);
+    },
   },
 };
 </script>

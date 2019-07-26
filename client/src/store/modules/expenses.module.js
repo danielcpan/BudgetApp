@@ -20,7 +20,7 @@ const actions = {
   clearCurrentExpense({ commit }) {
     commit('CLEAR_CURRENT_EXPENSE');
   },
-  async getExpense({ commit }, id) {
+  async getExpense({ commit }, id) { // eslint-disable-line no-unused-vars
     const response = await apolloClient.query({
       query: EXPENSE_QUERY,
       variables: {
@@ -36,7 +36,7 @@ const actions = {
     const response = await apolloClient.query({
       query: EXPENSES_QUERY,
       variables: {
-        dateRange
+        dateRange,
       },
     });
 

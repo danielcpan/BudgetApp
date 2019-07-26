@@ -22,9 +22,9 @@
           <v-icon>fas fa-calendar-day</v-icon>
         </template>
       </v-text-field>
-      <v-date-picker 
-        v-model="date" 
-        type="month" 
+      <v-date-picker
+        v-model="date"
+        type="month"
         @change="createDateRange()">
       </v-date-picker>
     </v-menu>
@@ -32,27 +32,26 @@
 </template>
 
 <script>
-import format from 'date-fns/format'
-import { mapActions } from 'vuex';
+import format from 'date-fns/format';
 
 export default {
   props: {
     submitCallback: {
       type: Function,
       required: true,
-    },    
+    },
   },
   data: () => ({
     date: new Date().toISOString().substr(0, 7),
     startDate: new Date(),
     endDate: new Date(),
-    menu: false
+    menu: false,
   }),
   computed: {
     formattedDate() {
-        const currentDate = new Date().toISOString().substr(0, 7)
-        if (this.date.substr(5,2) === currentDate.substr(5,2)) return 'This month'
-        return this.date ? format(this.date, 'MMM YYYY') : ''
+      const currentDate = new Date().toISOString().substr(0, 7);
+      if (this.date.substr(5, 2) === currentDate.substr(5, 2)) return 'This month';
+      return this.date ? format(this.date, 'MMM YYYY') : '';
     },
     dateRules() {
       const requiredRule = v => !!v || 'Date is required';
@@ -62,19 +61,19 @@ export default {
   },
   methods: {
     createDateRange() {
-      const year = this.date.substr(0, 4)
-      const month = this.date.substr(5, 2)
+      const year = this.date.substr(0, 4);
+      const month = this.date.substr(5, 2);
 
-      this.startDate = new Date(year, month-1, 1)
-      this.endDate = new Date(year, month, 1)
-      this.endDate = new Date(this.endDate.getTime()-1000)
+      this.startDate = new Date(year, month - 1, 1);
+      this.endDate = new Date(year, month, 1);
+      this.endDate = new Date(this.endDate.getTime() - 1000);
 
-      const dateRange = { startDate: this.startDate, endDate: this.endDate }
+      const dateRange = { startDate: this.startDate, endDate: this.endDate };
 
-      this.submitCallback(dateRange)
-      this.menu = false
-    }
-  }
+      this.submitCallback(dateRange);
+      this.menu = false;
+    },
+  },
 };
 </script>
 

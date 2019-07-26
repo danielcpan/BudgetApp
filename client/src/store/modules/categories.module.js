@@ -21,7 +21,7 @@ const actions = {
   clearCurrentCategory({ commit }) {
     commit('CLEAR_CURRENT_CATEGORY');
   },
-  async getCategory({ commit }, id) {
+  async getCategory({ commit }, id) { // eslint-disable-line no-unused-vars
     const response = await apolloClient.query({
       query: CATEGORY_QUERY,
       variables: {
@@ -29,16 +29,16 @@ const actions = {
       },
     });
 
-    const { category } = response.data
+    const { category } = response.data;
 
-    return category
+    return category;
   },
   async getCategoriesList({ commit }, dateRange) {
     const response = await apolloClient.query({
       query: CATEGORIES_QUERY,
       variables: {
-        dateRange
-      }
+        dateRange,
+      },
     });
 
     commit('GET_CATEGORIES_LIST', response.data.categories);

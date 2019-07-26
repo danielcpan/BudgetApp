@@ -74,11 +74,9 @@ module.exports = class User extends Sequelize.Model {
   async getTotalExpenses(startDate, endDate) {
     let expenses;
     if (!startDate && !endDate) expenses = await this.getExpenses();
-    else expenses = this.getExpenses({ where: { date: { between: [ startDate, endDate ] }}})
+    else expenses = this.getExpenses({ where: { date: { between: [startDate, endDate] } } });
 
-    const totalExpense = expenses.reduce((total, expense) => {
-      return total += parseFloat(expense.cost);
-    }, 0);
+    const totalExpense = expenses.reduce((total, expense) => total + parseFloat(expense.cost), 0);
 
     return totalExpense.toFixed(2);
   }

@@ -51,7 +51,7 @@ export default {
     headerValue: {
       type: String,
       required: true,
-    },    
+    },
   },
   computed: {
     search: {
@@ -69,8 +69,8 @@ export default {
   methods: {
     ...mapActions('expenses', ['setSearch', 'getExpensesList']),
     submitDateRangeFilter(dateRange) {
-      return this.getExpensesList(dateRange)
-    }
+      return this.getExpensesList(dateRange);
+    },
   },
 };
 </script>

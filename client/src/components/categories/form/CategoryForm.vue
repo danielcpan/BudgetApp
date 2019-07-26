@@ -23,7 +23,8 @@
                     <icon-field v-model="categoryFormData.icon"></icon-field>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <background-color-field v-model="categoryFormData.color"></background-color-field>
+                    <background-color-field v-model="categoryFormData.color">
+                    </background-color-field>
                   </v-flex>
                 </v-layout>
               </v-form>
@@ -79,17 +80,17 @@ export default {
         color: '#000000',
       }),
     },
-  },  
+  },
   data() {
     return {
-      isValid: true,  
-      categoryFormData: this.categoryData
-    }
+      isValid: true,
+      categoryFormData: this.categoryData,
+    };
   },
   watch: {
     categoryData() {
-      this.categoryFormData = this.categoryData
-    }
+      this.categoryFormData = this.categoryData;
+    },
   },
   methods: {
     submit() {

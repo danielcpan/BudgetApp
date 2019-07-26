@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
 const { auth } = require('../utils/permissions.utils');
-const { buildDateRange } = require('../utils/date.utils')
+const { buildDateRange } = require('../utils/date.utils');
 
 module.exports = {
   Expense: {
@@ -13,10 +13,10 @@ module.exports = {
     ),
     expenses: auth((parent, { dateRange }, { models, user }, info) => {
       if (dateRange) {
-        const { startDate, endDate } = buildDateRange(dateRange)
+        const { startDate, endDate } = buildDateRange(dateRange);
 
         return models.Expense.findAll({
-          where: { userId: user.id, date: { between: [startDate, endDate] }},
+          where: { userId: user.id, date: { between: [startDate, endDate] } },
         });
       }
       return models.Expense.findAll({ where: { userId: user.id } });

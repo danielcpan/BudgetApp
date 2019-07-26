@@ -37,12 +37,12 @@ export default {
   methods: {
     ...mapActions('expenses', ['getExpensesList']),
     getTotalExpense() {
-      const totalExpense = this.expenses.reduce((total, expense) => {
-        return total += parseFloat(expense.cost)
-      }, 0)
+      const totalExpense = this.expenses.reduce((total, expense) => (
+        total + parseFloat(expense.cost)
+      ), 0);
 
-      return totalExpense.toFixed(2)
-    }
+      return totalExpense.toFixed(2);
+    },
   },
 };
 </script>

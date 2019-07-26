@@ -34,7 +34,7 @@ const authAfterware = new ApolloLink((operation, forward) => forward(operation).
 const cleanTypeName = new ApolloLink((operation, forward) => {
   if (operation.variables) {
     const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
-    operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
+    operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename); // eslint-disable-line no-param-reassign, max-len
   }
   return forward(operation).map(data => data);
 });
