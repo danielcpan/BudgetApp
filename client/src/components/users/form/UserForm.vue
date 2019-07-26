@@ -88,8 +88,8 @@ export default {
         await this.createUser(this.userFormData);
         await this.login({
           email: this.userFormData.email,
-          password: this.userFormData.password
-        })
+          password: this.userFormData.password,
+        });
         this.$router.push('/');
       }
     },

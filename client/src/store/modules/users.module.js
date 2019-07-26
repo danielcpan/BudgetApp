@@ -28,9 +28,9 @@ const actions = {
       query: CURRENT_USER_QUERY,
     });
 
-    const { currentUser } = response.data
+    const { currentUser } = response.data;
 
-    if (!currentUser) dispatch('logout')
+    if (!currentUser) dispatch('logout');
 
     commit('SET_CURRENT_USER', response.data.currentUser);
   },
