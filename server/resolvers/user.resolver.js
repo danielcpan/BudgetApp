@@ -4,8 +4,8 @@ const { createTestData } = require('../seeders/testData');
 
 module.exports = {
   User: {
-    totalExpenses: (parent, { startDate, endDate }, { models }, info) => (
-      parent.getTotalExpenses(startDate, endDate)
+    totalExpenses: (parent, { dateRange }, { models }, info) => (
+      parent.getTotalExpenses(dateRange)
     ),
     expenses: (parent, args, { models }, info) => parent.getExpenses(),
   },

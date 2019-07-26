@@ -18,9 +18,6 @@ const state = () => ({
 });
 
 const actions = {
-  clearCurrentCategory({ commit }) {
-    commit('CLEAR_CURRENT_CATEGORY');
-  },
   async getCategory({ commit }, id) { // eslint-disable-line no-unused-vars
     const response = await apolloClient.query({
       query: CATEGORY_QUERY,

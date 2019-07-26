@@ -17,9 +17,6 @@ const state = () => ({
 });
 
 const actions = {
-  clearCurrentExpense({ commit }) {
-    commit('CLEAR_CURRENT_EXPENSE');
-  },
   async getExpense({ commit }, id) { // eslint-disable-line no-unused-vars
     const response = await apolloClient.query({
       query: EXPENSE_QUERY,

@@ -52,12 +52,14 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-// Uncomment Below for heroku build
-// app.use(express.static('dist'));
+if (process.env.DATABASE_URL) {
+  console.log("using build fo heroku");
+  app.use(express.static('dist'));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
-// });
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
+  });
+}
 
 // seed on start
 // const { createTestData } = require('./seeders/testData');
