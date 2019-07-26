@@ -20,17 +20,17 @@
                   lazy-validation>
                   <v-layout row wrap pt-3>
                     <v-flex xs12 sm6>
-                      <name-field v-model="user.firstName" titleType="First"></name-field>
+                      <name-field v-model="userFormData.firstName" titleType="First"></name-field>
                     </v-flex>
                     <v-flex xs12 sm6>
-                      <name-field v-model="user.lastName" titleType="Last"></name-field>
+                      <name-field v-model="userFormData.lastName" titleType="Last"></name-field>
                     </v-flex>
                     <v-flex xs12 sm6>
-                      <email-field v-model="user.email" :validate="true"></email-field>
+                      <email-field v-model="userFormData.email" :validate="true"></email-field>
                     </v-flex>
                     <v-flex xs12 sm6>
                       <password-field
-                        v-model="user.password"
+                        v-model="userFormData.password"
                         :revealOption="true">
                       </password-field>
                     </v-flex>
@@ -49,7 +49,7 @@
                   @click="submit()"
                   type="button"
                   class="dp-btn dp-btn--primary dp-btn-size--medium">
-                    {{ $route.name === 'Sign Up' ? 'Create ' : 'Update' }} my account
+                    {{ $route.name === 'Sign Up' ? 'Create and sign into' : 'Update' }} my account
                 </button>
               </v-card-actions>
             </v-container>
@@ -73,7 +73,7 @@ export default {
     PasswordField,
   },
   data: () => ({
-    user: {
+    userFormData: {
       firstName: '',
       lastName: '',
       email: '',
@@ -82,11 +82,15 @@ export default {
     isValid: true,
   }),
   methods: {
-    ...mapActions('users', ['createUser']),
-    submit() {
+    ...mapActions('users', ['createUser', 'login']),
+    async submit() {
       if (this.$refs.form.validate()) {
-        this.createUser(this.user);
-        this.$router.push('/login');
+        await this.createUser(this.userFormData);
+        await this.login({
+          email: this.userFormData.email,
+          password: this.userFormData.password
+        })
+        this.$router.push('/');
       }
     },
   },

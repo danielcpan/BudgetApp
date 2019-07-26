@@ -23,10 +23,14 @@ const state = () => ({
 });
 
 const actions = {
-  async getCurrentUser({ commit }) {
+  async getCurrentUser({ commit, dispatch }) {
     const response = await apolloClient.query({
       query: CURRENT_USER_QUERY,
     });
+
+    const { currentUser } = response.data
+
+    if (!currentUser) dispatch('logout')
 
     commit('SET_CURRENT_USER', response.data.currentUser);
   },

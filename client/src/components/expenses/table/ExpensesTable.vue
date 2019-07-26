@@ -16,6 +16,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { buildDefaultDateRange } from '../../../utils/date.utils';
 
 import ExpensesTableHeader from './ExpensesTableHeader.vue';
 import ExpensesTableBody from './ExpensesTableBody.vue';
@@ -32,10 +33,11 @@ export default {
     }),
   },
   mounted() {
-    this.getExpensesList();
+    this.getExpensesList(this.buildDefaultDateRange());
   },
   methods: {
     ...mapActions('expenses', ['getExpensesList']),
+    buildDefaultDateRange,
     getTotalExpense() {
       const totalExpense = this.expenses.reduce((total, expense) => (
         total + parseFloat(expense.cost)

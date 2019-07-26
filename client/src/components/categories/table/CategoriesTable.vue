@@ -16,6 +16,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { buildDefaultDateRange } from '../../../utils/date.utils';
 
 import CatagoriesTableHeader from './CategoriesTableHeader.vue';
 import CategoriesTableBody from './CategoriesTableBody.vue';
@@ -32,10 +33,11 @@ export default {
     }),
   },
   mounted() {
-    this.getCategoriesList();
+    this.getCategoriesList(this.buildDefaultDateRange());
   },
   methods: {
     ...mapActions('categories', ['getCategoriesList']),
+    buildDefaultDateRange,
     getPercentOfTotal(category) {
       return ((category.totalExpenses / this.user.totalExpenses) * 100).toFixed(2);
     },

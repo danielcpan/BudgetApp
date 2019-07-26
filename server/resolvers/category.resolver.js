@@ -4,7 +4,7 @@ const { buildDateRange } = require('../utils/date.utils');
 
 module.exports = {
   Category: {
-    totalExpenses: (parent, args, { models }, info) => parent.getTotalExpenses(args),
+    totalExpenses: (parent, { dateRange }, { models }, info) => parent.getTotalExpenses(dateRange),
     expenses: (parent, { dateRange }, { models }, info) => {
       if (dateRange) {
         const { startDate, endDate } = buildDateRange(dateRange);
@@ -19,13 +19,6 @@ module.exports = {
       models.Category.findByPk(id)
     ),
     categories: auth((parent, { dateRange }, { models, user }, info) => {
-      if (dateRange) {
-        const { startDate, endDate } = buildDateRange(dateRange);
-
-        return models.Category.findAll({
-          where: { userId: user.id, created_at: { between: [startDate, endDate] } },
-        });
-      }
       return models.Category.findAll({ where: { userId: user.id } });
     }),
     categoriesAll: async (parent, args, { models }, info) => models.Category.findAll(),
@@ -36,8 +29,8 @@ module.exports = {
     )),
     updateCategory: auth(async (parent, { input }, { models, user }, info) => {
       await models.Category.update(
-        { ...input, userId: user.id },
-        { where: { id: input.id, isDefault: false } },
+        { ...input, userId: user.id }, 
+        { where: { id: input.id, isDefault: false }}
       );
       return models.Category.findByPk(input.id);
     }),
@@ -46,11 +39,11 @@ module.exports = {
 
       // Reassign Category's expenses to Other
       const otherCategory = await models.Category.findOne(
-        { where: { userId: user.id, isDefault: true } },
+        { where: { userId: user.id, isDefault: true }}
       );
       await models.Expense.update(
-        { categoryId: otherCategory.id },
-        { where: { categoryId: category.id } },
+        { categoryId: otherCategory.id }, 
+        { where: { categoryId: category.id }}
       );
       return models.Category.destroy({ where: { id, isDefault: false } });
     },
