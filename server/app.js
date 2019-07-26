@@ -24,9 +24,9 @@ const { customScalarTypeDefs, customScalarResolvers } = require('./customScalars
 
 // if (process.env.NODE_ENV === 'development') {
 // Sync the database models
-// models.sequelize.sync({
-//   force: true,
-// });
+models.sequelize.sync({
+  force: true,
+});
 // }
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
