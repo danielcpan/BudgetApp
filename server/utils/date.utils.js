@@ -1,7 +1,10 @@
 module.exports.buildDateRange = (dateRange) => {
   let { startDate, endDate } = dateRange || {};
 
-  console.log("insdie build date range")
+  startDate = new Date(startDate).toISOString()
+  endDate = new Date(endDate).toISOString()
+
+  console.log("insdie build date range 111")
   console.log("startDate: " + startDate)
   console.log("endDate: " + endDate)
 
