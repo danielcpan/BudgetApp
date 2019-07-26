@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
-const { auth } = require('../helpers/permissions');
-const { buildDateRange } = require('../helpers/date.utils')
+const { auth } = require('../utils/permissions.utils');
+const { buildDateRange } = require('../utils/date.utils')
 
 module.exports = {
   Category: {

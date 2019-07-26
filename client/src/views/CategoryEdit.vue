@@ -9,7 +9,7 @@
 <script>
 import { mapActions } from 'vuex';
 
-import CategoryForm from './CategoryForm.vue';
+import CategoryForm from '../components/categories/form/CategoryForm.vue';
 
 export default {
   components: {
@@ -26,8 +26,6 @@ export default {
   methods: {
     ...mapActions('categories', ['getCategory', 'updateCategory']),
     async submitUpdateCategory(category) {
-      console.log("category1: ")
-      console.log(category)
       await this.updateCategory(category);
       this.$router.push('/');
     },

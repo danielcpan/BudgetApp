@@ -63,7 +63,7 @@ const actions = {
 
     commit('UPDATE_CATEGORY', response.data.updateCategory);
   },
-  async deleteCategory({ commit }, category) {
+  async deleteCategory({ commit, dispatch }, category) {
     await apolloClient.mutate({
       mutation: DELETE_CATEGORY_MUTATION,
       variables: {
@@ -72,9 +72,9 @@ const actions = {
     });
 
     commit('DELETE_CATEGORY', category.id);
-    this.dispatch('expenses/getExpensesList', { root: true });
-    this.dispatch('users/getCurrentUser', { root: true });
-    this.dispatch('snackbar/setAndDisplaySnackbar', {
+    dispatch('expenses/getExpensesList', null, { root: true });
+    dispatch('users/getCurrentUser', null, { root: true });
+    dispatch('snackbar/setAndDisplaySnackbar', {
       header: 'Deleted Category: ',
       body: category.name,
     }, { root: true });

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { refreshTokens } = require('../helpers/auth');
+const { refreshTokens } = require('../utils/auth.utils');
 const models = require('../models');
 const { SECRET, SECRET2 } = require('../config/config');
 

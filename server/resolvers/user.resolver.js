@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0 */
-const { tryLogin } = require('../helpers/auth');
+const { tryLogin } = require('../utils/auth.utils');
 const { createTestData } = require('../seeders/testData');
 
 module.exports = {

@@ -8,7 +8,7 @@
 <script>
 import { mapActions } from 'vuex';
 
-import CategoryForm from './CategoryForm.vue';
+import CategoryForm from '../components/categories/form/CategoryForm.vue';
 
 export default {
   components: {

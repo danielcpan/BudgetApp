@@ -5,11 +5,10 @@ import decode from 'jwt-decode';
 import Dashboard from './views/Dashboard.vue';
 import UserForm from './components/users/form/UserForm.vue';
 import UserLoginForm from './components/users/form/UserLoginForm.vue';
-// import CategoryForm from './components/categories/form/CategoryForm.vue';
-import CategoryAdd from './components/categories/form/CategoryAdd.vue';
-import CategoryEdit from './components/categories/form/CategoryEdit.vue';
-import ExpenseAdd from './components/expenses/form/ExpenseAdd.vue';
-import ExpenseEdit from './components/expenses/form/ExpenseEdit.vue';
+import CategoryAdd from './views/CategoryAdd.vue';
+import CategoryEdit from './views/CategoryEdit.vue';
+import ExpenseAdd from './views/ExpenseAdd.vue';
+import ExpenseEdit from './views/ExpenseEdit.vue';
 import Index from './views/Index.vue';
 
 Vue.use(Router);

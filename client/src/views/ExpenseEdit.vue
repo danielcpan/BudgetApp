@@ -9,7 +9,7 @@
 <script>
 import { mapActions } from 'vuex';
 
-import ExpenseForm from './ExpenseForm.vue';
+import ExpenseForm from '../components/expenses/form/ExpenseForm.vue';
 
 export default {
   components: {
