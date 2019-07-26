@@ -15,6 +15,10 @@ module.exports = {
       if (dateRange) {
         const { startDate, endDate } = buildDateRange(dateRange);
 
+        console.log("inside resolver")
+        console.log("startDate: " + startDate)
+        console.log("endDate: " + endDate)
+
         return models.Expense.findAll({
           where: { userId: user.id, date: { between: [startDate, endDate] } },
         });

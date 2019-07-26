@@ -28,5 +28,4 @@ module.exports = {
   SECRET2: process.env.SECRET2,
   PUBLIC_URL: process.env.PUBLIC_URL,
   GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
-
 };
