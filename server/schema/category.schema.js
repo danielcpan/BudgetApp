@@ -6,8 +6,8 @@ module.exports = `
   }
 
   type Mutation {
-    createCategory(input: CategoryInput!): Category!
-    updateCategory(input: CategoryInput!): Category!
+    createCategory(input: CategoryInput!, startDate: String, endDate: String): Category!
+    updateCategory(input: CategoryInput!, startDate: String, endDate: String): Category!
     deleteCategory(id: ID!): Boolean!
   }
 

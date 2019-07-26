@@ -30,6 +30,7 @@ module.exports = {
       models.Category.create({ ...input, userId: user.id, isDefault: false })
     )),
     updateCategory: auth(async (parent, { input }, { models, user }, info) => {
+      console.log("got here")
       await models.Category.update({ ...input, userId: user.id }, { where: { id: input.id, isDefault: false } });
       return models.Category.findByPk(input.id);
     }),

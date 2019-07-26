@@ -14,12 +14,6 @@ import {
 } from '../../graphql/category';
 
 const state = () => ({
-  currentCategory: {
-    id: '',
-    name: '',
-    icon: 'fa-utensils',
-    color: '#000000',
-  },
   categoriesList: [],
   search: '',
   loading: false,
@@ -30,8 +24,6 @@ const actions = {
     commit('CLEAR_CURRENT_CATEGORY');
   },
   async getCategory({ commit }, id) {
-    commit('SET_LOADING', true);
-
     const response = await apolloClient.query({
       query: CATEGORY_QUERY,
       variables: {
@@ -39,8 +31,9 @@ const actions = {
       },
     });
 
-    commit('GET_CATEGORY', response.data.category);
-    commit('SET_LOADING', false);
+    const { category } = response.data
+
+    return category
   },
   async getCategoriesList({ commit }, dateRange) {
     commit('SET_LOADING', true);
@@ -77,7 +70,6 @@ const actions = {
     });
 
     commit('UPDATE_CATEGORY', response.data.updateCategory);
-    this.dispatch('expenses/getExpensesList', { root: true });
   },
   async deleteCategory({ commit }, category) {
     await apolloClient.mutate({
@@ -104,17 +96,6 @@ const actions = {
 };
 
 const mutations = {
-  CLEAR_CURRENT_CATEGORY(state) {
-    state.currentCategory = {
-      id: '',
-      name: '',
-      icon: 'fa-utensils',
-      color: '#000000',
-    };
-  },
-  GET_CATEGORY(state, category) {
-    state.currentCategory = category;
-  },
   GET_CATEGORIES_LIST(state, categories) {
     state.categoriesList = categories;
   },
@@ -136,12 +117,6 @@ const mutations = {
     state.loading = loading;
   },
   RESET_MODULE_STATE(state) {
-    state.currentCategory = {
-      id: '',
-      name: '',
-      icon: 'fa-utensils',
-      color: '#000000',
-    };
     state.categoriesList = [];
     state.search = '';
   },

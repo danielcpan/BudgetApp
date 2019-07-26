@@ -79,7 +79,8 @@ export default {
     },
   },
   mounted() {
-    this.getCategoriesList();
+    // Temporary Solution
+    this.getCategoriesList({ startDate: new Date('2019/06/01'), endDate: new Date() });
   },
   methods: {
     ...mapActions('categories', ['getCategoriesList']),

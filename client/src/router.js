@@ -5,7 +5,9 @@ import decode from 'jwt-decode';
 import Dashboard from './views/Dashboard.vue';
 import UserForm from './components/users/form/UserForm.vue';
 import UserLoginForm from './components/users/form/UserLoginForm.vue';
-import CategoryForm from './components/categories/form/CategoryForm.vue';
+// import CategoryForm from './components/categories/form/CategoryForm.vue';
+import CategoryAdd from './components/categories/form/CategoryAdd.vue';
+import CategoryEdit from './components/categories/form/CategoryEdit.vue';
 import ExpenseAdd from './components/expenses/form/ExpenseAdd.vue';
 import ExpenseEdit from './components/expenses/form/ExpenseEdit.vue';
 import Index from './views/Index.vue';
@@ -39,13 +41,13 @@ const router = new Router({
         {
           path: 'new',
           name: 'New',
-          component: CategoryForm,
+          component: CategoryAdd,
           meta: { requiresAuth: true },
         },
         {
           path: ':id/edit',
           name: 'Edit',
-          component: CategoryForm,
+          component: CategoryEdit,
           meta: { requiresAuth: true },
         },
       ],

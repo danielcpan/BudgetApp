@@ -1,15 +1,12 @@
 <template>
-   <div id="category-form" class="dp-form" v-if="!$store.state.categories.loading">
+   <div id="category-form" class="dp-form">
     <v-container fluid>
       <v-layout row wrap justify-center align-center>
         <v-flex md6>
           <v-card>
             <v-container grid-list-md>
             <v-card-title>
-              <span
-                class="dp-head-1 pb-0">
-                  {{ $route.name === 'New' ? 'Add' : 'Edit' }} Category Details
-              </span>
+              <span class="dp-head-1 pb-0">{{ header }}</span>
             </v-card-title>
             <v-card-text class="pt-0">
               <v-divider></v-divider>
@@ -20,13 +17,13 @@
                 lazy-validation>
                 <v-layout row wrap pt-3>
                   <v-flex xs12>
-                    <name-field v-model="category.name"></name-field>
+                    <name-field v-model="categoryFormData.name"></name-field>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <icon-field v-model="category.icon"></icon-field>
+                    <icon-field v-model="categoryFormData.icon"></icon-field>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <background-color-field v-model="category.color"></background-color-field>
+                    <background-color-field v-model="categoryFormData.color"></background-color-field>
                   </v-flex>
                 </v-layout>
               </v-form>
@@ -55,8 +52,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
 import NameField from './NameField.vue';
 import IconField from './IconField.vue';
 import BackgroundColorField from './BackgroundColorField.vue';
@@ -67,44 +62,39 @@ export default {
     IconField,
     BackgroundColorField,
   },
-  data: () => ({
-    isValid: true,
-  }),
-  computed: {
-    ...mapState({
-      category: state => state.categories.currentCategory,
-    }),
+  props: {
+    header: {
+      type: String,
+      required: true,
+    },
+    submitCallback: {
+      type: Function,
+      required: true,
+    },
+    categoryData: {
+      type: Object,
+      default: () => ({
+        name: '',
+        icon: 'fa-utensils',
+        color: '#000000',
+      }),
+    },
+  },  
+  data() {
+    return {
+      isValid: true,  
+      categoryFormData: this.categoryData
+    }
   },
-  created() {
-    if (this.$route.name === 'New') {
-      this.clearCurrentCategory();
-    } else {
-      this.getCategory(this.$route.params.id);
+  watch: {
+    categoryData() {
+      this.categoryFormData = this.categoryData
     }
   },
   methods: {
-    ...mapActions('categories', [
-      'getCategory',
-      'clearCurrentCategory',
-      'createCategory',
-      'updateCategory',
-    ]),
-    async submit() {
+    submit() {
       if (this.$refs.form.validate()) {
-        const categoryToSubmit = {
-          id: this.category.id,
-          name: this.category.name,
-          icon: this.category.icon,
-          color: this.category.color,
-          userId: this.category.userId,
-        };
-        if (this.$route.name === 'New') {
-          delete categoryToSubmit.id;
-          await this.createCategory(categoryToSubmit);
-        } else {
-          await this.updateCategory(categoryToSubmit);
-        }
-        this.$router.push('/');
+        this.submitCallback(this.categoryFormData);
       }
     },
   },

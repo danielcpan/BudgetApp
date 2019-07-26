@@ -3,4 +3,9 @@ module.exports = `
     path: String!
     message: String
   }
+
+  input DateRange {
+    startDate: Date!
+    endDate: Date!
+  }
 `;

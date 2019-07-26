@@ -28,7 +28,11 @@ export default {
   components: {
     Swatches,
   },
-  props: ['value'],
+  props: {
+    value: {
+      type: String,
+    },
+  },
   data: () => ({
     swatchColor: '',
   }),
