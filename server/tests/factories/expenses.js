@@ -7,7 +7,7 @@ module.exports = factory.define('Expense', models.Expense, (buildOptions = {}) =
   const attrs = {
     cost: () => faker.finance.amount(0, 200),
     note: () => faker.lorem.sentence(),
-    date: () => format(faker.date.recent(30), 'YYYY-MM-DD 00:00:00'),
+    date: () => format(faker.date.recent(30), 'YYYY-MM-DD'),
     categoryId: factory.assoc('Category', 'id'),
     userId: factory.assoc('User', 'id'),
   };

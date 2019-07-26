@@ -64,8 +64,12 @@ export default {
       const year = this.date.substr(0, 4);
       const month = this.date.substr(5, 2);
 
-      this.startDate = new Date(year, month - 1, 1);
-      this.endDate = new Date(year, month, 0);
+      this.startDate = new Date(year, month - 1, 1).toISOString();
+      this.endDate = new Date(year, month, 0).toISOString();
+
+      console.log("startDate: " + this.startDate)
+      console.log("endDate: " + this.endDate)
+      // console.log("dasdasd")
 
       const dateRange = { startDate: this.startDate, endDate: this.endDate };
 
