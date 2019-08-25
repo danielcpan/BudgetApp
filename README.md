@@ -6,7 +6,7 @@ Check out the app! https://budget-app-daniel-pan.herokuapp.com/
 Known Issues: Mutations do not refetch correct on Mobile Safari.
 Found a bug? Let me know! Always willing to learn more by fixing mistakes!
 
-## Budget App using the following technologies:
+## Budget App uses the following technologies:
 
 ### BackEnd: 
 
